@@ -1,5 +1,8 @@
 import java.util.*;
 
+/**
+ * 字母异位词
+ */
 public class Hot2 {
     public List<List<String>> groupAnagrams(String[] strs) {
 
