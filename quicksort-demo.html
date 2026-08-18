@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>快速排序 · 特工"找内鬼"记忆动画</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 20px;
+    font-family: "PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    background: linear-gradient(160deg,#0f2027,#203a43,#2c5364);
+    color: #eaf2f8; min-height: 100vh;
+  }
+  h1 { text-align:center; font-size: 26px; margin: 0 0 4px; letter-spacing:1px; }
+  h1 span { color:#ffd54f; }
+  .subtitle { text-align:center; color:#9fb6c7; font-size:13px; margin-bottom:16px; }
+  .tipbox {
+    max-width: 900px; margin: 0 auto 16px;
+    background: rgba(255,183,77,.12); border:1px solid rgba(255,183,77,.55);
+    color: #ffe0b2; border-radius: 10px; padding: 10px 16px; font-size: 14px; line-height: 1.7;
+  }
+  .tipbox b { color:#ffd54f; }
+  .card-wrap {
+    max-width: 900px; margin: 0 auto;
+    background: rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius: 14px; padding: 18px 20px 14px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  }
+  .stage {
+    position: relative;
+    height: 210px;
+    overflow-x: auto; overflow-y: hidden;
+    border-radius: 10px;
+    background: rgba(0,0,0,.22);
+    border: 1px dashed rgba(255,255,255,.15);
+  }
+  .row { position:absolute; top:30px; left:0; width:100%; height:70px; }
+  .regionbar {
+    position: absolute; top: 30px; left:0; height: 62px;
+    border: 3px dashed #ffd54f; border-radius: 8px;
+    background: rgba(255,213,79,.10);
+    transition: left .3s, width .3s; z-index: 1;
+    display: none;
+  }
+  .card {
+    position: absolute; top: 0; width: 60px; height: 56px;
+    font-size: 25px; font-weight: 700;
+    display:flex; align-items:center; justify-content:center;
+    border-radius: 10px; z-index: 2;
+    color:#123; background:#f4f7fa;
+    box-shadow: 0 3px 8px rgba(0,0,0,.35);
+    transition: background .35s, color .35s, box-shadow .35s;
+    will-change: transform;
+    user-select:none;
+  }
+  .card.idle { background:#eef4fa; }
+  .card.region { background:#d7ecff; box-shadow: inset 0 0 0 2px #5aa7e6, 0 3px 8px rgba(0,0,0,.3); }
+  .card.pivot {
+    background: linear-gradient(160deg,#ffe27a,#ffb300);
+    color:#5a3d00; outline: 3px solid #ffd54f; outline-offset:2px;
+  }
+  .card.foundsmall { background:#ff6b6b; color:#fff; animation: pulse .7s ease 2; }
+  .card.foundbig   { background:#54a0ff; color:#fff; animation: pulse .7s ease 2; }
+  @keyframes pulse { 0%,100%{scale:1} 50%{scale:1.22} }
+  .card.swapping { background:#ff9f43; color:#fff; animation: flash .6s ease 2; }
+  @keyframes flash { 0%,100%{background:#ff9f43} 50%{background:#fafafa} }
+  .card.settled { background:linear-gradient(160deg,#2ecc71,#27ae60); color:#fff; }
+  .crown {
+    position:absolute; top:0; left:-999px; width:60px; text-align:center;
+    font-size: 20px; z-index:3; filter: drop-shadow(0 2px 3px rgba(0,0,0,.5));
+    transition: left .3s; animation: crownBob 1s ease-in-out infinite;
+  }
+  @keyframes crownBob { 0%,100%{translate:0 0} 50%{translate:0 -6px} }
+  .tag {
+    position:absolute; top:104px; left:-999px; z-index:3;
+    font-size: 13px; font-weight: 700; padding: 4px 9px;
+    border-radius: 20px; white-space: nowrap; color:#fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,.4); transition: left .35s, transform .25s;
+  }
+  .tag.j { background:#e74c3c; }
+  .tag.i { background:#2980b9; }
+  .tag.active { transform: scale(1.12); animation: wobble .8s ease infinite; }
+  @keyframes wobble { 0%,100%{transform:rotate(0) scale(1.08)} 50%{transform:rotate(-3deg) scale(1.15)} }
+  .msg {
+    margin-top: 14px; min-height: 58px; line-height: 1.8;
+    background:rgba(0,0,0,.28); border:1px solid rgba(255,255,255,.12);
+    border-radius: 10px; padding: 12px 16px; font-size: 16px;
+  }
+  .msg .chip {
+    display:inline-block; background:#ffd54f; color:#5a3d00;
+    font-size: 12px; font-weight:700; padding: 1px 9px; border-radius: 12px;
+    margin-right: 8px; vertical-align: middle;
+  }
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content:center;
+    margin-top: 16px;
+  }
+  button {
+    background:#2c3e50; color:#fff; border:1px solid #46627a;
+    padding: 8px 18px; font-size: 15px; border-radius: 8px; cursor:pointer;
+    transition: background .2s, transform .1s;
+  }
+  button:hover { background:#3d5a75; }
+  button:active { transform: scale(.96); }
+  button.primary { background:#16a085; border-color:#1abc9c; }
+  button.primary:hover { background:#1abc9c; }
+  select,label.speed { font-size:14px; color:#cfe0ee; }
+  select { padding:6px 8px; border-radius:8px; background:#1b2a38; color:#fff; border:1px solid #46627a; }
+  .legend {
+    margin-top: 14px; display:flex; flex-wrap:wrap; gap: 8px 18px;
+    font-size: 13px; color:#c3d5e4;
+  }
+  .legend b { margin-right:4px; }
+  .dot { display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:4px; vertical-align:-1px; }
+  .footer { text-align:center; margin-top:16px; font-size:13px; color:#8aa6ba; }
+</style>
+</head>
+<body>
+  <h1>快速排序 · <span>特工"找内鬼"</span>记忆动画</h1>
+  <div class="subtitle">左右指针记不住？把 i、j 想象成两个特工，Pivot 是长官 👮</div>
+  <div class="tipbox">⚠️ 八大坑：<b>必须右指针特工 j 先走！</b>（特工j先往左找人，特工i再往右走）<br>为什么？因为相遇点时长官要坐下去，那位置必须坐得下"小兵"。若让特工i先走，相遇点可能站着"大将"，长官坐进去后左边就混进内鬼了！</div>
+
+  <div class="card-wrap">
+    <div class="stage">
+      <div class="regionbar" id="regionBar"></div>
+      <div class="row" id="row"></div>
+      <div class="crown" id="crown">👑 长官</div>
+      <div class="tag j" id="tagJ">🕵️ 特工j · 左派 ◀ 专抓小的</div>
+      <div class="tag i" id="tagI">▶ 专抓大的 · 右派特工i 🕵️</div>
+    </div>
+
+    <div class="msg" id="msg"></div>
+
+    <div class="controls">
+      <button id="btnPlay" class="primary">▶ 播放</button>
+      <button id="btnPrev">⏮ 上一步</button>
+      <button id="btnNext">⏭ 下一步</button>
+      <button id="btnReset">🔄 重新开始</button>
+      <label class="speed">速度 <select id="speed">
+        <option value="1600">慢</option>
+        <option value="800">中</option>
+        <option value="400" selected>快</option>
+        <option value="180">极快</option>
+      </select></label>
+      <span class="legend" style="margin:0 4px;font-size:12px">进度 <b id="progress">0 / 0</b></span>
+    </div>
+
+    <div class="legend">
+      <span><span class="dot" style="background:#ffd54f"></span><b>👑 长官 = 基准数 Pivot</b> 挑最左边当标杆，最后坐到交接位</span>
+      <span><span class="dot" style="background:#e74c3c"></span><b>特工j(右指针·左派)</b> 从右往左，揪出<比长官小>的内鬼</span>
+      <span><span class="dot" style="background:#2980b9"></span><b>特工i(左指针·右派)</b> 从左往右，揪出<比长官大>的内鬼</span>
+      <span><span class="dot" style="background:#2ecc71"></span><b>已归队</b> 位置锁定</span>
+      <span><span class="dot" style="background:#ffd54f;border:2px dashed #fff"></span><b>虚线框</b> 本轮排查范围</span>
+    </div>
+
+    <div class="footer">口诀：<b>j 找小、i 找大，抓到就换；两人相遇，长官坐下——左边全是小兵，右边全是大将。</b></div>
+  </div>
+
+<script>
+(function () {
+  const NUMBERS = [5, 3, 7, 2, 8, 1, 4, 6];
+  const CARD_W = 60, GAP = 10, STRIDE = CARD_W + GAP, OFF = 8;
+
+  // ---------- 生成动画帧 ----------
+  let frames = [];
+  function generate() {
+    frames = [];
+    const values = NUMBERS.slice();
+    const ids = values.map((_, i) => i);
+    const settled = [];
+    let round = 0;
+
+    function pushState(msg, o = {}) {
+      frames.push(Object.assign({
+        ids: ids.slice(), values: values.slice(),
+        settled: settled.slice(),
+        region: null, pivot: null, i: null, j: null,
+        active: null, found: null, swap: null, round: round, msg: msg
+      }, o));
+    }
+
+    pushState('全体集合！长官搬来一箱数字，命令按「升序」排好队。记住坑：<strong>每轮都必须特工j（右指针）先走！</strong>');
+
+    function part(low, high) {
+      if (low > high) return;
+      if (low === high) {
+        if (!settled.includes(low)) {
+          settled.push(low);
+          pushState(`位置 ${low} 只有一个人，直接归队锁定 ✔`);
+        }
+        return;
+      }
+      round++;
+      const pivot = values[low];
+      pushState(`第 ${round} 轮排查开始 ✋ 范围 [${low}..${high}]。长官 <strong>${pivot}</strong> 站到<b>最左边</b>当标杆（基准数）！`, { pivot: low, region: [low, high] });
+
+      let i = low, j = high;
+      while (i < j) {
+        while (i < j && values[j] >= pivot) {
+          j--;
+          pushState(`特工j 往左侦察 ←，看到 ${values[j]}：比长官<b>不小</b>，不是内鬼，放行。`, { i, j, pivot: low, region: [low, high], active: 'j' });
+        }
+        if (i < j) {
+          pushState(`特工j 停手！抓到内鬼 <strong>${values[j]}</strong>（比长官${pivot}小）🟥`, { i, j, pivot: low, region: [low, high], active: 'j', found: j });
+        }
+        if (i === j) break;
+
+        while (i < j && values[i] <= pivot) {
+          i++;
+          pushState(`特工i 往右侦察 →，看到 ${values[i]}：比长官<b>不大</b>，不是内鬼，放行。`, { i, j, pivot: low, region: [low, high], active: 'i' });
+        }
+        if (i === j) break;
+        pushState(`特工i 停手！抓到内鬼 <strong>${values[i]}</strong>（比长官${pivot}大）🟦`, { i, j, pivot: low, region: [low, high], active: 'i', found: i });
+
+        const a = values[i], b = values[j];
+        [values[i], values[j]] = [values[j], values[i]];
+        [ids[i], ids[j]] = [ids[j], ids[i]];
+        pushState(`两位特工交换手里的内鬼：<strong>${a}</strong> ↔ <strong>${b}</strong>。继续排查…`, { i, j, swap: [i, j], region: [low, high] });
+      }
+
+      [values[low], values[i]] = [values[i], values[low]];
+      [ids[low], ids[i]] = [ids[i], ids[low]];
+      settled.push(i);
+      pushState(`两位特工相遇（i=j=<strong>${i}</strong>）！全员排查完毕，长官 <strong>${pivot}</strong> 坐到这个位置坐下 👑。左边全是<b>小兵</b>，右边全是<b>大将</b> ✔`, { pivot: i, region: [low, high] });
+
+      part(low, i - 1);
+      part(i + 1, high);
+    }
+
+    part(0, values.length - 1);
+    pushState('🎉 全部归队，队列按升序排好了！记住：<b>j 找小、i 找大，抓到就换；相遇后长官坐中间。</b>');
+  }
+
+  // ---------- DOM 与播放 ----------
+  const row = document.getElementById('row');
+  const msg = document.getElementById('msg');
+  const regionBar = document.getElementById('regionBar');
+  const crown = document.getElementById('crown');
+  const tagJ = document.getElementById('tagJ');
+  const tagI = document.getElementById('tagI');
+  const progress = document.getElementById('progress');
+  const speedSel = document.getElementById('speed');
+
+  const elById = {};
+  const lastLeft = new Map();
+  let cur = 0, playing = false, timer = null;
+
+  function cardClass(pos) {
+    const f = frames[cur];
+    if (f.settled.includes(pos)) return 'settled';
+    if (f.pivot === pos) return 'pivot';
+    if (f.found === pos) return f.active === 'i' ? 'foundbig' : 'foundsmall';
+    if (f.swap && (f.swap[0] === pos || f.swap[1] === pos)) return 'swapping';
+    if (f.region && pos >= f.region[0] && pos <= f.region[1]) return 'region';
+    return 'idle';
+  }
+
+  function makeCard(id) {
+    const el = document.createElement('div');
+    el.className = 'card idle';
+    el.dataset.id = id;
+    el.textContent = NUMBERS[id];
+    elById[id] = el;
+    row.appendChild(el);
+    return el;
+  }
+
+  function render() {
+    const f = frames[cur];
+
+    for (let p = 0; p < f.ids.length; p++) {
+      const id = f.ids[p];
+      let el = elById[id] || makeCard(id);
+      const nl = p * STRIDE + OFF;
+      if (lastLeft.has(id)) {
+        const ol = lastLeft.get(id);
+        if (ol !== nl) {
+          el.style.transition = 'none';
+          el.style.transform = `translateX(${ol}px)`;
+          void el.offsetWidth;
+          el.style.transition = 'transform .55s cubic-bezier(.25,.8,.3,1.1)';
+          el.style.transform = `translateX(${nl}px)`;
+        }
+      } else {
+        el.style.transition = 'none';
+        el.style.transform = `translateX(${nl}px)`;
+      }
+      lastLeft.set(id, nl);
+      el.className = 'card ' + cardClass(p);
+      row.appendChild(el);
+    }
+
+    if (f.region) {
+      regionBar.style.display = 'block';
+      regionBar.style.left = (f.region[0] * STRIDE + OFF - 6) + 'px';
+      regionBar.style.width = ((f.region[1] - f.region[0] + 1) * STRIDE - 6) + 'px';
+    } else {
+      regionBar.style.display = 'none';
+    }
+
+    crown.style.left = (f.pivot == null ? -999 : f.pivot * STRIDE + OFF) + 'px';
+    crown.style.display = f.pivot == null ? 'none' : 'block';
+
+    tagJ.style.left = (f.j == null ? -999 : f.j * STRIDE + OFF) + 'px';
+    tagI.style.left = (f.i == null ? -999 : f.i * STRIDE + OFF) + 'px';
+    tagJ.classList.toggle('active', f.active === 'j');
+    tagI.classList.toggle('active', f.active === 'i');
+
+    msg.innerHTML = (f.round > 0 ? `<span class="chip">第 ${f.round} 轮</span>` : '') + f.msg;
+    progress.textContent = (cur + 1) + ' / ' + frames.length;
+  }
+
+  function step(by) {
+    const target = cur + by;
+    if (target < 0 || target >= frames.length) return;
+    cur = target;
+    render();
+  }
+
+  function stop() { playing = false; if (timer) { clearTimeout(timer); timer = null; } document.getElementById('btnPlay').textContent = '▶ 播放'; }
+
+  function play() {
+    playing = true;
+    document.getElementById('btnPlay').textContent = '⏸ 暂停';
+    tick();
+  }
+
+  function tick() {
+    if (!playing) return;
+    if (cur >= frames.length - 1) { stop(); return; }
+    cur++;
+    render();
+    timer = setTimeout(tick, Number(speedSel.value));
+  }
+
+  document.getElementById('btnPlay').addEventListener('click', function () {
+    if (playing) { stop(); }
+    else {
+      if (cur >= frames.length - 1) { cur = 0; render(); }
+      play();
+    }
+  });
+  document.getElementById('btnNext').addEventListener('click', function () { stop(); step(1); });
+  document.getElementById('btnPrev').addEventListener('click', function () { stop(); step(-1); });
+  document.getElementById('btnReset').addEventListener('click', function () {
+    stop(); cur = 0; lastLeft.clear(); render(); play();
+  });
+  speedSel.addEventListener('change', function () { if (playing) { clearTimeout(timer); tick(); } });
+
+  generate();
+  render();
+})();
+</script>
+</body>
+</html>
