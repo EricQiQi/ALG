@@ -53,10 +53,10 @@ public class QuickSort {
         return i;
     }
 
-    private static void swap(int[] arr, int left, int pivot) {
-        int temp = arr[left];
-        arr[left] = arr[pivot];
-        arr[pivot] = temp;
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
 

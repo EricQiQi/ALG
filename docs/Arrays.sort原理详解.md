@@ -66,7 +66,7 @@ Java 的 `Arrays.sort()` 是**分而治之**思想的典型应用。它会根据
 
 ## 三、在字母异位词题目中的实际执行过程
 
-回到 hash.Hot2 这道题，`s = "eat"` 时：
+回到 S1_hash.Hot2 这道题，`s = "eat"` 时：
 
 ```java
 char[] arr = s.toCharArray();   // arr = ['e', 'a', 't']
