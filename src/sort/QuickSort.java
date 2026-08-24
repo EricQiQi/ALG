@@ -28,11 +28,14 @@ public class QuickSort {
 
     public static int partition(int[] arr, int left, int right){
         // 基准可以随机，也可以指定
+        int pivotIndex = left + new Random().nextInt(right-left+1);
 //        int pivotIndex = left;
-        int pivotIndex = new Random().nextInt(right-left+1) + left;
+
         swap(arr, left, pivotIndex);
 
         int pivot = arr[left];
+
+        // 不能写成 i= left+1，这样扫描不到基准值，交换错误【基准值必须参与比较，并放在正确的位置才可以】
         int i=left;
         int j=right;
 
@@ -43,12 +46,13 @@ public class QuickSort {
             while(i<j && arr[i]<=pivot){
                 i++;
             }
+            // 容易遗漏判断
             if (i<j){
                 swap(arr, i, j);
             }
         }
 
-        // 将基准元素放到正确的位置
+        // 将元素放到正确的位置
         swap(arr, left, i);
         return i;
     }
