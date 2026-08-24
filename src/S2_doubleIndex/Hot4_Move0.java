@@ -13,10 +13,14 @@ public class Hot4_Move0 {
         int s = 0;
         for(int i=0; i<nums.length; i++){
             if (nums[i] != 0){
-                // 快、慢指针不相等时才交换
-                if (s != i){
-                    nums[s++] = nums[i];
-                }
+                // 写法1
+                nums[s++] = nums[i];
+
+                // 方法2：快、慢指针不相等时才交换
+//                if (s != i) {
+//                    nums[s] = nums[i];
+//                }
+//                s++;
             }
         }
         while(s<nums.length){
@@ -24,15 +28,10 @@ public class Hot4_Move0 {
         }
     }
 
-    private void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
-
     public static void main(String[] args) {
         Hot4_Move0 move0 = new Hot4_Move0();
-        int[] nums = {0,1,0,3,12};
+//        int[] nums = {0,1,0,3,12};
+        int[] nums = {1};
         move0.moveZeroes(nums);
         for (int num : nums){
             System.out.print(num + " ");

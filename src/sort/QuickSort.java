@@ -29,7 +29,7 @@ public class QuickSort {
     public static int partition(int[] arr, int left, int right){
         // 基准可以随机，也可以指定
 //        int pivotIndex = left;
-        int pivotIndex = new Random().nextInt(right-left+1);
+        int pivotIndex = new Random().nextInt(right-left+1) + left;
         swap(arr, left, pivotIndex);
 
         int pivot = arr[left];

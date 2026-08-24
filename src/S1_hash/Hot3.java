@@ -20,13 +20,14 @@ public class Hot3 {
         }
 
         int maxLen = 0;
+        // 遍历set集合
         for(Integer num : set){
             // 找起点
             if(!set.contains(num-1)){
                 int count = 1;
-
-                while(set.contains(num+1)){
-                    num += 1;
+                int start = num;
+                while(set.contains(start+1)){
+                    start += 1;
                     count += 1;
                 }
                 maxLen = Math.max(maxLen, count);
