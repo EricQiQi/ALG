@@ -8,53 +8,41 @@ import java.util.Random;
  */
 public class QuickSort {
 
-    public static void quickSort(int[] arr){
-        if (arr == null || arr.length == 0){
-            return;
-        }
-        quickSort(arr, 0, arr.length-1);
+    public static void quickSort(int[] arr) {
+        if (arr == null || arr.length == 0) return;
+
+        quickSort(arr, 0, arr.length - 1);
     }
 
-    public static void quickSort(int[] arr, int low, int high){
-        // 递归终止条件
-        if (low >= high){
-            return;
-        }
-        // 分区，找到基准元素
-        int pivotIndex = partition(arr, low, high);
-        quickSort(arr, low, pivotIndex-1);
-        quickSort(arr, pivotIndex+1, high);
+    public static void quickSort(int[] arr, int left, int right) {
+        if (left >= right) return;
+
+        int pivotIndex = partition(arr, left, right);
+        quickSort(arr, left, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, right);
     }
 
-    public static int partition(int[] arr, int left, int right){
-        // 基准可以随机，也可以指定
-        int pivotIndex = left + new Random().nextInt(right-left+1);
-//        int pivotIndex = left;
-
+    public static int partition(int[] arr, int left, int right) {
+        int pivotIndex = left + new Random().nextInt(right - left + 1);
         swap(arr, left, pivotIndex);
-
         int pivot = arr[left];
+        int l = left;
+        int r = right;
 
-        // 不能写成 i= left+1，这样扫描不到基准值，交换错误【基准值必须参与比较，并放在正确的位置才可以】
-        int i=left;
-        int j=right;
-
-        while(i<j){
-            while(i<j && arr[j]>=pivot){
-                j--;
+        while (l < r) {
+            while (l < r && arr[r] >= pivot) {
+                r--;
             }
-            while(i<j && arr[i]<=pivot){
-                i++;
+            while (l < r && arr[l] <= pivot) {
+                l++;
             }
-            // 容易遗漏判断
-            if (i<j){
-                swap(arr, i, j);
+            if (l < r) {
+                swap(arr, l, r);
             }
         }
-
-        // 将元素放到正确的位置
-        swap(arr, left, i);
-        return i;
+        // 基准归位
+        swap(arr, l, left);
+        return l;
     }
 
     private static void swap(int[] arr, int i, int j) {
@@ -67,6 +55,6 @@ public class QuickSort {
     public static void main(String[] args) {
         int[] arr = {3, 6, 8, 10, 1, 2, 1};
         quickSort(arr, 0, arr.length - 1);
-        System.out.println("排序后"+ Arrays.toString(arr));
+        System.out.println("排序后" + Arrays.toString(arr));
     }
 }
