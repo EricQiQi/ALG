@@ -44,31 +44,39 @@
 
 ## 💻 极简代码实现
 
-```python
-def trap(height):
-    if not height: return 0
-    
-    # 1. 左右探子初始位置（两头出发）
-    left, right = 0, len(height) - 1
-    
-    # 2. 左右两边看过的最高墙记录
-    left_max, right_max = 0, 0
-    ans = 0 
-    
-    while left < right:
-        # 实时更新最高墙记录
-        left_max = max(left_max, height[left])
-        right_max = max(right_max, height[right])
+```java
+public class Solution {
+    public int trap(int[] height) {
+        if (height == null || height.length == 0) return 0;
         
-        # 3. 核心PK：谁的记录矮，谁的瓶颈就锁死了，先算谁
-        if left_max < right_max:
-            ans += left_max - height[left]  # 水位被左边锁死，算左边
-            left += 1                       # 左探子右移
-        else:
-            ans += right_max - height[right] # 水位被右边锁死，算右边
-            right -= 1                       # 右探子左移
+        // 1. 左右探子初始位置（两头出发）
+        int left = 0;
+        int right = height.length - 1;
+        
+        // 2. 左右两边看过的最高墙记录
+        int leftMax = 0;
+        int rightMax = 0;
+        int ans = 0; // 总雨水量
+        
+        while (left < right) {
+            // 实时更新最高墙记录
+            leftMax = Math.max(leftMax, height[left]);
+            rightMax = Math.max(rightMax, height[right]);
             
-    return ans
+            // 3. 核心PK：谁的记录矮，谁的瓶颈就锁死了，先算谁
+            if (leftMax < rightMax) {
+                ans += leftMax - height[left];  // 水位被左边锁死，算左边
+                left++;                         // 左探子右移
+            } else {
+                ans += rightMax - height[right]; // 水位被右边锁死，算右边
+                right--;                         // 右探子左移
+            }
+        }
+        
+        return ans;
+    }
+}
+
 ```
 
 ---
@@ -77,3 +85,88 @@ def trap(height):
 
 * **🚀 空间极省**：不需要像动态规划（DP）那样创建数组去存一堆最高值，只用了几个变量，空间复杂度 **$O(1)$**。
 * **⏱️ 时间极快**：两个指针从两头出发，相遇即结束，刚好把数组扫一遍，时间复杂度 **$O(n)$**。
+
+
+# 🧱 动态规划接雨水：大白话彻底学懂版
+
+动态规划（DP）的思路，用大白话总结就是：**“空间换时间，提前把两边的‘挡水大坝’全部建好。”**
+
+双指针是两个探子“边走边看”，而动态规划则是**“上帝视角，通盘规划”**。
+
+---
+
+## 🏗️ 核心原理：两座大坝
+
+回到木桶效应：某根柱子能接多少水，取决于它**左边最高的墙**和**右边最高的墙**里的**较小值**。
+
+动态规划的策略是：既然每一根柱子都要问一遍“我左边最高是谁？”和“我右边最高是谁？”，那我们干脆在开工前，**雇两队施工队，把每个位置左边和右边的“最高大坝”提前建好，存到账本（数组）里。**
+
+* **左大坝数组（`left_max`）**：从左往右盖。记录每一个位置，它及它左边所有墙里最高的那个。
+* **右大坝数组（`right_max`）**：从右往左盖。记录每一个位置，它及它右边所有墙里最高的那个。
+
+---
+
+## 🛠️ 怎么“盖大坝”？（状态转移方程）
+
+别看“状态转移方程”听起来高级，大白话就是**“和邻居比大小”**：
+
+* **盖左大坝**：从左往右走。
+  你当前位置的左边最高大坝，取决于**“你前一个位置的左大坝”**和**“你现在的柱子高度”**谁更大。
+  👉 `left_max[i] = max(left_max[i-1], height[i])`
+
+* **盖右大坝**：从右往左走。
+  你当前位置的右边最高大坝，取决于**“你右边那个位置的右大坝”**和**“你现在的柱子高度”**谁更大。
+  👉 `right_max[i] = max(right_max[i+1], height[i])`
+
+大坝盖好了，账本记满了。最后我们只需要遍历一次每根柱子，**查一下账本**，直接用 `min(左大坝, 右大坝) - 自己的高度`，就能算出每一格的雨水。
+
+---
+
+## 💻 Java 代码实现
+
+```java
+public class SolutionDP {
+    public int trap(int[] height) {
+        if (height == null || height.length == 0) return 0;
+        int n = height.length;
+        
+        // 1. 记账本：初始化两个大坝数组
+        int[] leftMax = new int[n];
+        int[] rightMax = new int[n];
+        
+        // 2. 施工队一：从左往右盖“左大坝”
+        leftMax[0] = height[0];
+        for (int i = 1; i < n; i++) {
+            leftMax[i] = Math.max(leftMax[i - 1], height[i]);
+        }
+        
+        // 3. 施工队二：从右往左盖“右大坝”
+        rightMax[n - 1] = height[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            rightMax[i] = Math.max(rightMax[i + 1], height[i]);
+        }
+        
+        // 4. 查账本算水：每一格对照两座大坝的矮者，减去自身高度
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            ans += Math.min(leftMax[i], rightMax[i]) - height[i];
+        }
+        
+        return ans;
+    }
+}
+```
+
+---
+
+## 📊 两种解法的降维对比
+
+| 维度 | 动态规划 (DP) 🧱 | 双指针 (Two Pointers) 🏃 |
+| :--- | :--- | :--- |
+| **核心思路** | 先通盘算好所有的墙，再**查表计算**。 | 两个指针两头对撞，**谁矮谁当场算**。 |
+| **时间复杂度**| $O(n)$ （数组一共扫了 3 遍） | $O(n)$ （数组刚好扫了 1 遍） |
+| **空间复杂度**| **$O(n)$** （需要两个大数组记账） | **$O(1)$** （只需要几个变量） |
+| **直观程度** | 极其直观，非常符合人类直觉。 | 比较巧妙，需要脑子转个弯。 |
+
+**为什么双指针更优？**
+因为双指针在移动的过程中，利用 `left_max < right_max` 的逻辑，**当场就猜出了**哪个大坝是短板，从而省去了动态规划中“用两个数组提前盖大坝”的步骤，成功把空间复杂度从 $O(n)$ 降到了 $O(1)$。
