@@ -6,12 +6,12 @@ package s4_substring;
 public class Hot11_maxSlidingWindow {
 
     /**
-     * DP动态规划
+     * DP动态规划，非常好
      * @param nums
      * @param k
      * @return
      */
-    public static int[] maxSlidingWindow(int[] nums, int k) {
+    public static int[] maxSlidingWindow_1(int[] nums, int k) {
         if (nums == null || nums.length == 0 || k <= 0) return new int[0];
         int n = nums.length;
         int[] res = new int[n - k + 1];
@@ -48,6 +48,21 @@ public class Hot11_maxSlidingWindow {
     }
 
     /**
+     * 单调队列解法
+     * @param nums
+     * @param k
+     * @return
+     */
+    public static int[] maxSlidingWindow_2(int[] nums, int k){
+        if (nums == null || nums.length == 0 || k <= 0) return new int[0];
+        int[] res = new int[nums.length - k + 1];
+
+
+
+        return res;
+    }
+
+    /**
      * 错误解法：时间超过限制了，而且容易出bug
      * @param nums
      * @param k
@@ -79,7 +94,7 @@ public class Hot11_maxSlidingWindow {
     public static void main(String[] args) {
         int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
 //        int[] nums = {3, 1, -1, -3, 5, 3, 6, 7};
-        int[] res = maxSlidingWindow(nums, 3);
+        int[] res = maxSlidingWindow_1(nums, 3);
 //        int[] nums = {1, -1};
 //        int[] res = maxSlidingWindow(nums, 1);
 //        int[] nums = {1};
