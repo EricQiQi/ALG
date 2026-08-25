@@ -99,7 +99,7 @@ public class Hot9_findAnagrams {
 
             // 判断窗口是否要收缩
             while (remain == 0) {
-                // 记录结果
+                // 【可变部分】记录字母异味词的起始位置
                 if (right - left + 1 == p.length()) {
                     res.add(left);
                 }
