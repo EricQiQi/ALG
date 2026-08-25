@@ -36,6 +36,7 @@ public class QuickSort {
             while (l < r && arr[l] <= pivot) {
                 l++;
             }
+            // 注意比较
             if (l < r) {
                 swap(arr, l, r);
             }
