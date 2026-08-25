@@ -1,5 +1,9 @@
 package s4_substring;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * 滑动窗口的最大值
  */
@@ -7,6 +11,7 @@ public class Hot11_maxSlidingWindow {
 
     /**
      * DP动态规划，非常好
+     *
      * @param nums
      * @param k
      * @return
@@ -49,21 +54,46 @@ public class Hot11_maxSlidingWindow {
 
     /**
      * 单调队列解法
+     *
      * @param nums
      * @param k
      * @return
      */
-    public static int[] maxSlidingWindow_2(int[] nums, int k){
+    public static int[] maxSlidingWindow_2(int[] nums, int k) {
         if (nums == null || nums.length == 0 || k <= 0) return new int[0];
-        int[] res = new int[nums.length - k + 1];
 
+        int n = nums.length;
+        int[] ans = new int[n - k + 1]; // 结果数组
+        int r = 0; // 结果数组指针
 
+        // 核心武器：双端队列，用来维护“单调递减”的下标
+        Deque<Integer> deque = new ArrayDeque<>();
 
-        return res;
+        for (int right = 0; right < n; right++) {
+            // 1. 【新人入队】：只要队尾的人比当前新人矮，通通踢走，清理门户
+            while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[right]) {
+                deque.pollLast();
+            }
+
+            // 2. 新人安全入队尾
+            deque.addLast(right);
+
+            // 3. 【老大退役】：如果队头大哥的下标已经过期（滑出窗口左边界），清理门户
+            if (deque.peekFirst() < right - k + 1) {
+                deque.pollFirst();
+            }
+
+            // 4. 窗口正式成型（走了至少 k-1 步），队头就是无敌最大值
+            if (right >= k - 1) {
+                ans[r++] = nums[deque.peekFirst()];
+            }
+        }
+        return ans;
     }
 
     /**
      * 错误解法：时间超过限制了，而且容易出bug
+     *
      * @param nums
      * @param k
      * @return
@@ -93,14 +123,20 @@ public class Hot11_maxSlidingWindow {
 
     public static void main(String[] args) {
         int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
-//        int[] nums = {3, 1, -1, -3, 5, 3, 6, 7};
         int[] res = maxSlidingWindow_1(nums, 3);
-//        int[] nums = {1, -1};
-//        int[] res = maxSlidingWindow(nums, 1);
-//        int[] nums = {1};
-//        int[] res = maxSlidingWindow(nums, 1);
+        int[] res1 = maxSlidingWindow_2(nums, 3);
+
+        printRes(res);
+        System.out.println();
+        printRes(res1);
+
+    }
+
+    private static void printRes(int[] res) {
         for (int i : res) {
             System.out.print(i + " ");
         }
     }
+
+
 }
