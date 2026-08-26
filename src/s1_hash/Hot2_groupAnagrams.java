@@ -1,4 +1,4 @@
-package S1_hash;
+package s1_hash;
 
 import java.util.*;
 

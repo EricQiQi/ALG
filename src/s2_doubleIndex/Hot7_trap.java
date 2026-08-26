@@ -1,4 +1,4 @@
-package S2_doubleIndex;
+package s2_doubleIndex;
 
 /**
  * 接雨水
