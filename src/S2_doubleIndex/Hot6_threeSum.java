@@ -3,6 +3,8 @@ package S2_doubleIndex;
 import java.util.*;
 
 /**
+ * 三数之和
+ *
  * 给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k] == 0 。
  * 请你返回所有和为 0 且不重复的三元组。
  * <p>
@@ -33,7 +35,7 @@ import java.util.*;
  * 3 <= nums.length <= 3000
  * -105 <= nums[i] <= 105
  */
-public class Hot6_ThreeSum {
+public class Hot6_threeSum {
 
     /**
      * HashSet解法
@@ -104,7 +106,7 @@ public class Hot6_ThreeSum {
 
 
     public static void main(String[] args) {
-        Hot6_ThreeSum hot6_threeSum = new Hot6_ThreeSum();
+        Hot6_threeSum hot6_threeSum = new Hot6_threeSum();
 //        int[] nums = {-1,0,1,2,-1,-4};
         int[] nums = {0, 0, 0};
         System.out.println(hot6_threeSum.threeSum_1(nums));

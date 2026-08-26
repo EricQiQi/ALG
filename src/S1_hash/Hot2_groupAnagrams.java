@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 字母异位词
  */
-public class Hot2 {
+public class Hot2_groupAnagrams {
     public List<List<String>> groupAnagrams(String[] strs) {
 
         Map<String, List<String>> map = new HashMap<>();
@@ -21,7 +21,7 @@ public class Hot2 {
 
     }
     public static void main(String[] args) {
-        Hot2 hot2 = new Hot2();
+        Hot2_groupAnagrams hot2 = new Hot2_groupAnagrams();
         List<List<String>> lists = hot2.groupAnagrams(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"});
         System.out.println(lists);
     }

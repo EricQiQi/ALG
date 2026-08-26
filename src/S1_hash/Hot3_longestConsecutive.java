@@ -9,7 +9,7 @@ import java.util.Set;
  * 长度比较：取最大长度
  * 一个元素最多被访问两次，一次在外层for循环，一次在内层while循环，所以第二个 for + while 的总操作次数加起来仍然是 (O(n))。
  */
-public class Hot3 {
+public class Hot3_longestConsecutive {
     public int longestConsecutive(int[] nums) {
         if (nums == null || nums.length == 0){
             return 0;
@@ -20,7 +20,7 @@ public class Hot3 {
         }
 
         int maxLen = 0;
-        // 遍历set集合
+        // 注意：！！！遍历set集合
         for(Integer num : set){
             // 找起点
             if(!set.contains(num-1)){
@@ -37,7 +37,7 @@ public class Hot3 {
     }
 
     public static void main(String[] args) {
-        Hot3 hot3 = new Hot3();
+        Hot3_longestConsecutive hot3 = new Hot3_longestConsecutive();
         int[] nums = {100, 4, 200, 1, 3, 2};
         System.out.println(hot3.longestConsecutive(nums));
     }

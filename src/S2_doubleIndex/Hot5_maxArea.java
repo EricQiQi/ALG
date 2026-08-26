@@ -12,7 +12,7 @@ package S2_doubleIndex;
  * 说明：你不能倾斜容器。
  *
  */
-public class Hot5_MaxArea {
+public class Hot5_maxArea {
     public int maxArea(int[] height) {
         int i=0;
         int j=height.length-1;
@@ -34,7 +34,7 @@ public class Hot5_MaxArea {
     }
 
     public static void main(String[] args) {
-        Hot5_MaxArea hot5_maxArea = new Hot5_MaxArea();
+        Hot5_maxArea hot5_maxArea = new Hot5_maxArea();
         int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
         System.out.println(hot5_maxArea.maxArea(height));
     }

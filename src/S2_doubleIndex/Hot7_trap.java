@@ -3,7 +3,7 @@ package S2_doubleIndex;
 /**
  * 接雨水
  */
-public class Hot7_Trap {
+public class Hot7_trap {
 
     /**
      * 双指针解法

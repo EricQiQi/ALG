@@ -39,4 +39,6 @@ public class Hot10_subarraySum {
     public static void main(String[] args) {
         System.out.println(subarraySum(new int[]{1, 2, 3}, 3));
     }
+
+
 }

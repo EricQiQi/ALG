@@ -5,7 +5,7 @@ package S2_doubleIndex;
  * 慢指针：s，一步一步向后走
  * 快指针：r，只找不为0的，和s指向的元素交换
  */
-public class Hot4_Move0 {
+public class Hot4_moveZeroes {
     public void moveZeroes(int[] nums) {
         if (nums == null || nums.length == 0){
             return;
@@ -29,7 +29,7 @@ public class Hot4_Move0 {
     }
 
     public static void main(String[] args) {
-        Hot4_Move0 move0 = new Hot4_Move0();
+        Hot4_moveZeroes move0 = new Hot4_moveZeroes();
 //        int[] nums = {0,1,0,3,12};
         int[] nums = {1};
         move0.moveZeroes(nums);
