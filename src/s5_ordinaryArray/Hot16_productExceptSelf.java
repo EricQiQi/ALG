@@ -15,6 +15,8 @@ public class Hot16_productExceptSelf {
 
     /**
      * 前缀积解法
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)，题目免责一个输出数组，但是还用了另外两个数组，所以是 O(n)
      * @param nums
      * @return
      */
@@ -22,10 +24,14 @@ public class Hot16_productExceptSelf {
         int[] res = new int[nums.length];
         int[] left = new int[nums.length];
         int[] right = new int[nums.length];
+
+        // left[0] 表示 nums[0] 左边的所有元素的乘积，因为 nums[0] 没有左边的元素，所以 left[0] 为 1
         left[0] = 1;
         for (int i = 1; i < nums.length; i++) {
             left[i] = left[i - 1] * nums[i - 1];
         }
+
+        // right[n-1] 表示 nums[n-1] 右边的所有元素的乘积，因为 nums[n-1] 没有右边的元素，所以 right[n-1] 为 1
         right[nums.length - 1] = 1;
         for (int i = nums.length - 2; i >= 0; i--) {
             right[i] = right[i + 1] * nums[i + 1];
@@ -38,8 +44,11 @@ public class Hot16_productExceptSelf {
 
 
     /**
+     * 双指针解法
+     * 原理：双指针同步遍历，一个从左往右，一个从右往左，同步更新结果数组。
+     *
      * 时间复杂度：O(n)
-     * 空间复杂度：O(n)
+     * 空间复杂度：O(1)，题目免责一个输出数组，所以是 O(1)
      * @param nums
      * @return
      */
