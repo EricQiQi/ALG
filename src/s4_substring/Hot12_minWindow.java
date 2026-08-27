@@ -2,6 +2,7 @@ package s4_substring;
 
 /**
  * 76. 最小覆盖子串
+ * 和 Hot8-找到字符串中所有字母异位词 使用一样的解题框架
  */
 public class Hot12_minWindow {
 

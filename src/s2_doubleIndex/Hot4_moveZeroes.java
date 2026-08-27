@@ -12,11 +12,12 @@ public class Hot4_moveZeroes {
         }
         int s = 0;
         for(int i=0; i<nums.length; i++){
+            // 快指针找到不为0的元素
             if (nums[i] != 0){
                 // 写法1
                 nums[s++] = nums[i];
 
-                // 方法2：快、慢指针不相等时才交换
+                // 方法2：快、慢指针不相等时才赋值
 //                if (s != i) {
 //                    nums[s] = nums[i];
 //                }

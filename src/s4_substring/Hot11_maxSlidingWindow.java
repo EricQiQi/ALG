@@ -84,41 +84,11 @@ public class Hot11_maxSlidingWindow {
             }
 
             // 4. 窗口正式成型（走了至少 k-1 步），队头就是无敌最大值
-            if (right >= k - 1) {
+            if (right - k + 1 >= 0) {
                 ans[r++] = nums[deque.peekFirst()];
             }
         }
         return ans;
-    }
-
-    /**
-     * 错误解法：时间超过限制了，而且容易出bug
-     *
-     * @param nums
-     * @param k
-     * @return
-     */
-    public static int[] maxSlidingWindow_error1(int[] nums, int k) {
-        if (nums == null || nums.length == 0) return new int[0];
-        int[] res = new int[nums.length - k + 1];
-
-        int left = 0;
-        int max = nums[0];
-
-        for (int right = 0; right < nums.length; right++) {
-            max = Math.max(max, nums[right]);
-            if (right - left + 1 == k) {
-                res[left] = max;
-                left++;
-                if (left < nums.length) {
-                    max = nums[left];
-                    for (int i = left; i <= right; i++) {
-                        max = Math.max(max, nums[i]);
-                    }
-                }
-            }
-        }
-        return res;
     }
 
     public static void main(String[] args) {

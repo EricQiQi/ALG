@@ -8,6 +8,12 @@ import java.util.Map;
  */
 public class Hot10_subarraySum {
 
+    /**
+     * 前缀和 + 逆向查账
+     * @param nums
+     * @param k
+     * @return
+     */
     public static int subarraySum(int[] nums, int k) {
         if (nums == null || nums.length == 0) return 0;
 

@@ -11,6 +11,58 @@ import java.util.Map;
 public class Hot9_findAnagrams {
 
     /**
+     * 推荐使用！！！！！！
+     * 全能轻量级数组框架
+     * @param s
+     * @param p
+     * @return
+     */
+    public static List<Integer> findAnagrams_2(String s, String p) {
+        if (s == null || p == null || s.length() < p.length()) return new ArrayList<>();
+
+        // 账单：count记录需要的目标字符数量
+        int[] count = new int[128];
+        for (char c : p.toCharArray()) {
+            count[c]++;
+        }
+        // 剩余要寻找的字符数量
+        int remain = p.length();
+
+        // 记录结果
+        List<Integer> res = new ArrayList<>();
+
+        // 左探子
+        int left = 0;
+        // 右探子疯狂移动
+        for (int right = 0; right < s.length(); right++) {
+            char rchar = s.charAt(right);
+            // 账单中存在目标字符，则剩余要寻找的字符数量-1
+            if (count[rchar] > 0) {
+                remain--;
+            }
+            // 账单更新
+            count[rchar]--;
+
+            // 判断窗口是否要收缩
+            while (remain == 0) {
+                // 【可变部分】记录字母异位词的起始位置
+                if (right - left + 1 == p.length()) {
+                    res.add(left);
+                }
+
+                // 账单增加，remain增加，left右移
+                char lchar = s.charAt(left);
+                count[lchar]++;
+                if (count[lchar] > 0) {
+                    remain++;
+                }
+                left++;
+            }
+        }
+        return res;
+    }
+
+    /**
      * 双Map，一个need，一个window，判断window是否满足need
      * @param s
      * @param p
@@ -61,58 +113,6 @@ public class Hot9_findAnagrams {
             }
         }
 
-        return res;
-    }
-
-    /**
-     * 推荐使用！！！！！！
-     * 全能轻量级数组框架
-     * @param s
-     * @param p
-     * @return
-     */
-    public static List<Integer> findAnagrams_2(String s, String p) {
-        if (s == null || p == null || s.length() < p.length()) return new ArrayList<>();
-
-        // 账单：count记录需要的目标字符数量
-        int[] count = new int[128];
-        for (char c : p.toCharArray()) {
-            count[c]++;
-        }
-        // 剩余要寻找的字符数量
-        int remain = p.length();
-
-        // 记录结果
-        List<Integer> res = new ArrayList<>();
-
-        // 左探子
-        int left = 0;
-        // 右探子疯狂移动
-        for (int right = 0; right < s.length(); right++) {
-            char rchar = s.charAt(right);
-            // 账单中存在目标字符，则剩余要寻找的字符数量-1
-            if (count[rchar] > 0) {
-                remain--;
-            }
-            // 账单更新
-            count[rchar]--;
-
-            // 判断窗口是否要收缩
-            while (remain == 0) {
-                // 【可变部分】记录字母异味词的起始位置
-                if (right - left + 1 == p.length()) {
-                    res.add(left);
-                }
-
-                // 账单增加，remain增加，left右移
-                char lchar = s.charAt(left);
-                count[lchar]++;
-                if (count[lchar] > 0) {
-                    remain++;
-                }
-                left++;
-            }
-        }
         return res;
     }
 

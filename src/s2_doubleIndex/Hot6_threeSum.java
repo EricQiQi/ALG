@@ -71,6 +71,11 @@ public class Hot6_threeSum {
     }
 
 
+    /**
+     * 双指针解法
+     * @param nums
+     * @return
+     */
     public List<List<Integer>> threeSum_2(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> result = new ArrayList<>();

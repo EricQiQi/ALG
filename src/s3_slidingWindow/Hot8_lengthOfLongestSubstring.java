@@ -23,6 +23,7 @@ public class Hot8_lengthOfLongestSubstring {
 
         for (int right = 0; right < s.length(); right++) {
             char ch = s.charAt(right);
+            // 先移动左指针
             if (map.containsKey(ch)) {
                 left = Math.max(left, map.get(ch) + 1);
             }
@@ -44,7 +45,7 @@ public class Hot8_lengthOfLongestSubstring {
         int maxLen = 0;
         for (int right = 0; right < s.length(); right++) {
             char ch = s.charAt(right);
-            // 先更新贪吃蛇的尾部
+            // 先移动左指针
             left = Math.max(left, index[ch]);
             // 记录当前位置
             index[ch] = right + 1;
