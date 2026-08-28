@@ -16,7 +16,9 @@ public class Hot13_maxSubArray {
     public static int maxSubArray_1(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
 
+        // maxSum必须初始为nums[0]，因为nums[i]可能为负数
         int maxSum = nums[0];
+
         int preSum = 0;
         for (int i = 0; i < nums.length; i++) {
             // 如果preSum < 0，说明preSum对当前元素nums[i]的贡献是负的，所以应该舍弃，从0开始重新计算

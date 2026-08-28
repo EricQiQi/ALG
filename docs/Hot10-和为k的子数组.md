@@ -72,54 +72,19 @@ public class SolutionCommon {
 *   **时间复杂度**：$O(N)$，哈希表查账是 $O(1)$，只扫一遍。
 *   **空间复杂度**：$O(N)$，最坏情况下哈希表要存 $N$ 个不同的前缀和。
 
----
+### ⚠️ 易错点：查账表达式别写反了
 
-## 🏆 第二重境界：究极数组优化版（数据范围受限时的性能战神）
+很容易顺手写成 `map.containsKey(k - nums[i])`，这是把**前缀和查账**和**两数之和**的套路搞混了：
 
-**适用场景**：如果面试官在提示（Constraints）中写明了**数组元素总和或前缀和的范围是有限的**（例如前缀和绝对值不超过 1,000,000）。
+| | 正确写法 | 错误写法 |
+| :--- | :--- | :--- |
+| 表达式 | `map.containsKey(preSum - k)` | `map.containsKey(k - nums[i])` |
+| 含义 | 在历史**前缀和**里找 `preSum - k` | 在历史**元素值**里找 `k - nums[i]` |
 
-我们可以干掉臃肿的 `HashMap`，直接用一个 **`int[]` 数组作为账本**，利用物理内存寻址实现真正的绝对 $O(1)$。在力扣上可以将运行时间从 25ms 暴击到 **2ms（击败 100%）**。
-
-### 💻 Java 代码实现
-```java
-public class SolutionBestArray {
-    public int subarraySum(int[] nums, int k) {
-        if (nums == null || nums.length == 0) return 0;
-        
-        // 假设通过题目条件，得知前缀和的绝对值不超过 100 万
-        int OFFSET = 1000000; 
-        // 数组大小需要覆盖 [-100万, +100万] 的范围，所以乘 2
-        int[] countMap = new int[OFFSET * 2 + 1]; 
-        
-        // 💡 相当于旧解法里的 map.put(0, 1)，加上偏移量防止负数索引越界
-        countMap[0 + OFFSET] = 1; 
-
-        int preSum = 0;
-        int count = 0;
-
-        for (int num : nums) {
-            preSum += num;
-            
-            // 逆向查账：计算目标前缀和并加上偏移量
-            int target = preSum - k + OFFSET;
-            
-            // 越界安全检查（若题目给出了严格的范围，此处的 if 判断在底层非常快）
-            if (target >= 0 && target < countMap.length) {
-                count += countMap[target];
-            }
-            
-            // 登记：当前前缀和出现的次数加 1
-            countMap[preSum + OFFSET]++;
-        }
-
-        return count;
-    }
-}
-```
-*   **优点**：干掉了 Java 的 `Integer` 自动装箱和哈希冲突计算，性能飙升 10 倍。
-*   **缺点**：如果前缀和范围不可控（比如高达几亿），会导致**内存溢出（MLE）**。
+**记忆口诀**：map 的 key 空间是**前缀和**，所以查的也必须是前缀和，永远用 `preSum - k`，跟 `nums[i]` 无关。
 
 ---
+
 
 ## ⚡ 附加彩蛋：如果面试官突然追加限制“全是正数”？
 
