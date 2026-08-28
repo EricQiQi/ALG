@@ -21,6 +21,7 @@ public class Hot7_trap {
         int res = 0;
 
         while(left < right){
+            // Math.max容易搞不清楚!!!
             leftmax = Math.max(leftmax, height[left]);
             rightmax = Math.max(rightmax, height[right]);
 

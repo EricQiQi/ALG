@@ -20,21 +20,21 @@ public class Hot9_findAnagrams {
     public static List<Integer> findAnagrams_2(String s, String p) {
         if (s == null || p == null || s.length() < p.length()) return new ArrayList<>();
 
-        // 账单：count记录需要的目标字符数量
+        // 1-建立账单：count记录需要的目标字符数量
         int[] count = new int[128];
         for (char c : p.toCharArray()) {
             count[c]++;
         }
-        // 剩余要寻找的字符数量
+        // 2-剩余要寻找的字符数量
         int remain = p.length();
 
         // 记录结果
         List<Integer> res = new ArrayList<>();
 
-        // 左探子
+        // 3-双指针
         int left = 0;
-        // 右探子疯狂移动
         for (int right = 0; right < s.length(); right++) {
+            // 4-右探子移动,找目标字符,减少账单
             char rchar = s.charAt(right);
             // 账单中存在目标字符，则剩余要寻找的字符数量-1
             if (count[rchar] > 0) {
@@ -43,14 +43,14 @@ public class Hot9_findAnagrams {
             // 账单更新
             count[rchar]--;
 
-            // 判断窗口是否要收缩
+            // 5.判断窗口是否要收缩
             while (remain == 0) {
-                // 【可变部分】记录字母异位词的起始位置
+                // 6.达到目标条件,记录结果
                 if (right - left + 1 == p.length()) {
                     res.add(left);
                 }
 
-                // 账单增加，remain增加，left右移
+                // 7.恢复账单,左探子右移:把找到的字母异位词又遍历一遍,目的就是恢复账单和remain
                 char lchar = s.charAt(left);
                 count[lchar]++;
                 if (count[lchar] > 0) {

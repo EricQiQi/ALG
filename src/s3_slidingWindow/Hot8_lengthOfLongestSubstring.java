@@ -45,10 +45,12 @@ public class Hot8_lengthOfLongestSubstring {
         int maxLen = 0;
         for (int right = 0; right < s.length(); right++) {
             char ch = s.charAt(right);
-            // 先移动左指针
-            left = Math.max(left, index[ch]);
-            // 记录当前位置
-            index[ch] = right + 1;
+            // if：如果这个字符之前出现过，并且它上次出现的位置在左指针的【右边】
+            if (index[ch] > left) {
+                left = index[ch]; // 强行把左指针跳过去，缩紧窗口
+            }
+
+            index[ch] = right + 1; // 存入当前下标 + 1 得把原来的 0 覆盖掉,不然计算长度会出错
             maxLen = Math.max(maxLen, right - left + 1);
         }
         return maxLen;

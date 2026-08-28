@@ -6,51 +6,45 @@ package s4_substring;
  */
 public class Hot12_minWindow {
 
-    public static String minWindow(String s, String t){
-        if (s == null || t == null || s.length() < t.length()) return "";
-
+    public static String minWindow(String s, String t) {
+        // 1.建立账单
         int[] count = new int[128];
-        int remain = t.length();
-
-        for (char ch : t.toCharArray()){
+        for (char ch : t.toCharArray()) {
             count[ch]++;
         }
+        int remain = t.length();
 
-        // 记录最小覆盖字串的起始位置及长度
-        int minLen = Integer.MAX_VALUE; // 记录最小覆盖字串的长度，初始值为最大可能的 int 值
-        int start = 0; // 记录最小覆盖字串的起始位置
+        // 2.最小长度
+        int minLen = Integer.MAX_VALUE;
+        // 3.子串的起始位置
+        int start = 0;
 
-        // 左探子
-        int left=0;
-        // 右探子疯狂移动
-        for(int right=0; right<s.length(); right++){
-            char rchar = s.charAt(right);
-            // 如果rchar在账单中，则remain--
-            if (count[rchar] > 0){
+        int left = 0;
+        for (int right = 0; right < s.length(); right++) {
+            // 4.右探子移动，销账单
+            char rch = s.charAt(right);
+            if (count[rch] > 0) {
                 remain--;
             }
-            count[rchar]--;
+            count[rch]--;
 
-            // 收缩窗口
-            while(remain == 0){
-                // 【可变部分】比较长度，记录最小覆盖字串的起始位置
-                int len = right-left+1;
-                if (len < minLen){
-                    minLen = len;
+            while (remain == 0) {
+                // 5.达到条件,更新
+                if (right - left + 1 < minLen) {
+                    minLen = right - left + 1;
                     start = left;
                 }
 
-                // 左探子往右移动
-                char lchar = s.charAt(left);
-                count[lchar]++;
-                if (count[lchar] > 0){
+                // 6.左探子移动，恢复账单
+                char lch = s.charAt(left);
+                count[lch]++;
+                if (count[lch] > 0) {
                     remain++;
                 }
                 left++;
             }
         }
-
-        return minLen==Integer.MAX_VALUE ? "" : s.substring(start, start+minLen);
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
     }
 
     public static void main(String[] args) {

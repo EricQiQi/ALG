@@ -20,7 +20,9 @@ public class Hot5_maxArea {
         while(i < j){
             // 取高
             int h = Math.min(height[i], height[j]);
-            res = Math.max(res, h*(j-i));
+            // 注意 底的取值 !!!
+            int len = j-i;
+            res = Math.max(res, h*len);
 
             // 找到短板，移动短板的指针
             if(height[i] < height[j]){
