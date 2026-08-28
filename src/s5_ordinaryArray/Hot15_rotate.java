@@ -29,6 +29,7 @@ public class Hot15_rotate {
      */
     public static void rotate_2(int[] nums, int k) {
         int n = nums.length;
+        // 必须要有这一步,如果 k = 1000,实际 nums=[1]
         k = k % n;
 
         // 1.翻转整个数组
