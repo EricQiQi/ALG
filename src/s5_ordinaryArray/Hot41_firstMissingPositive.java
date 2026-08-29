@@ -62,10 +62,11 @@ public class Hot41_firstMissingPositive {
         // 打标
         for(int i=0; i<n; i++){
             // 值 转换成 下标   注意必须要用 Math.abs,因为69行会取反
-            int index = Math.abs(nums[i]);
-            if(index <= n){
+            int num = Math.abs(nums[i]);
+            if(num <= n){
+                // 因为第一步，把负数和0都变成了n+1，所以数组中的值都是>0的
                 // 对应下标的值 标记为负数
-                nums[index - 1] = -Math.abs(nums[index - 1]);
+                nums[num - 1] = -Math.abs(nums[num - 1]);
             }
         }
 
