@@ -5,14 +5,6 @@ package s7_linkTable;
  * 编写一个程序，找到两个单链表的交点。
  */
 public class Hot160_getIntersectionNode {
-    public class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
 
     /**
      * 方法1： 长度差对齐法
@@ -94,18 +86,18 @@ public class Hot160_getIntersectionNode {
         // listA: 1 -> 2 ->
         //                 3 -> 4 -> 5
         // listB:   9 -> 10 ->
-        ListNode common1 = hot160.new ListNode(3);
-        ListNode common2 = hot160.new ListNode(4);
-        ListNode common3 = hot160.new ListNode(5);
+        ListNode common1 = new ListNode(3);
+        ListNode common2 = new ListNode(4);
+        ListNode common3 = new ListNode(5);
         common1.next = common2;
         common2.next = common3;
     
-        ListNode headA = hot160.new ListNode(1);
-        headA.next = hot160.new ListNode(2);
+        ListNode headA = new ListNode(1);
+        headA.next = new ListNode(2);
         headA.next.next = common1;
     
-        ListNode headB = hot160.new ListNode(9);
-        headB.next = hot160.new ListNode(10);
+        ListNode headB = new ListNode(9);
+        headB.next = new ListNode(10);
         headB.next.next = common1;
     
         ListNode result = hot160.getIntersectionNode_1(headA, headB);
@@ -114,12 +106,12 @@ public class Hot160_getIntersectionNode {
         // 构造两个不相交的链表：
         // listC: 1 -> 2 -> 3
         // listD: 4 -> 5
-        ListNode headC = hot160.new ListNode(1);
-        headC.next = hot160.new ListNode(2);
-        headC.next.next = hot160.new ListNode(3);
+        ListNode headC = new ListNode(1);
+        headC.next = new ListNode(2);
+        headC.next.next = new ListNode(3);
     
-        ListNode headD = hot160.new ListNode(4);
-        headD.next = hot160.new ListNode(5);
+        ListNode headD = new ListNode(4);
+        headD.next = new ListNode(5);
     
         ListNode result2 = hot160.getIntersectionNode_1(headC, headD);
         System.out.println(result2 != null ? "交点值为: " + result2.val : "无交点");
