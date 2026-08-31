@@ -14,7 +14,16 @@ public class Hot160_getIntersectionNode {
         }
     }
 
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    /**
+     * 方法1： 长度差对齐法
+     * 原理：先统计两条链表长度，长链表指针先走 gap 步对齐尾部，再同步前进，第一个引用相同的节点就是交点
+     * 时间复杂度 O(m+n)
+     * 空间复杂度 O(1)
+     * @param headA
+     * @param headB
+     * @return
+     */
+    public ListNode getIntersectionNode_1(ListNode headA, ListNode headB) {
         ListNode tempA= headA;
         ListNode tempB = headB;
 
@@ -57,6 +66,27 @@ public class Hot160_getIntersectionNode {
         return null;
     }
 
+    /**
+     * 方法2： 双指针法
+     * 原理：两个指针分别遍历两条链表，当一个指针遍历完一条链表时，切换到另一条链表的头节点继续遍历
+     * 时间复杂度 O(m+n)
+     * 空间复杂度 O(1)
+     * @param headA
+     * @param headB
+     * @return
+     */
+    public ListNode getIntersectionNode_2(ListNode headA, ListNode headB) {
+        ListNode tempA = headA;
+        ListNode tempB = headB;
+
+        while (tempA != tempB) {
+            // 注意                   是headB不能写成tempB
+            tempA = (tempA == null) ? headB : tempA.next;
+            tempB = (tempB == null) ? headA : tempB.next;
+        }
+        return tempA;
+    }
+
     public static void main(String[] args) {
         Hot160_getIntersectionNode hot160 = new Hot160_getIntersectionNode();
     
@@ -78,7 +108,7 @@ public class Hot160_getIntersectionNode {
         headB.next = hot160.new ListNode(10);
         headB.next.next = common1;
     
-        ListNode result = hot160.getIntersectionNode(headA, headB);
+        ListNode result = hot160.getIntersectionNode_1(headA, headB);
         System.out.println(result != null ? "交点值为: " + result.val : "无交点");
     
         // 构造两个不相交的链表：
@@ -91,7 +121,7 @@ public class Hot160_getIntersectionNode {
         ListNode headD = hot160.new ListNode(4);
         headD.next = hot160.new ListNode(5);
     
-        ListNode result2 = hot160.getIntersectionNode(headC, headD);
+        ListNode result2 = hot160.getIntersectionNode_1(headC, headD);
         System.out.println(result2 != null ? "交点值为: " + result2.val : "无交点");
     }
 }
