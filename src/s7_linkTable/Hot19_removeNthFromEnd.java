@@ -7,14 +7,24 @@ package s7_linkTable;
  */
 public class Hot19_removeNthFromEnd {
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
+    /**
+     * 方法1：先计算链表长度，再删除倒数第n个结点
+     * 时间复杂度 O(L)
+     * 空间复杂度 O(1)
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNthFromEnd_1(ListNode head, int n) {
         ListNode temp = head;
-        // 注意len初始是1
-        int len = 1;
-        while(temp != null && temp.next != null){
-            temp = temp.next;
+        int len = 0;
+        while(temp != null){
             len++;
+            temp = temp.next;
         }
+
+        // 要删的就是头节点，直接返回下一个
+        if (len == n) return head.next;
 
         temp = head;
         int index = 0;
@@ -25,13 +35,38 @@ public class Hot19_removeNthFromEnd {
             index++;
         }
 
+        temp.next = temp.next.next;
 
-        if(len > 1 && len-n > 0){
-            temp.next = temp.next.next;
-        }else{
-            head = head.next != null ? head.next : null;
+        return head;
+    }
+
+    /**
+     * 方法2：双指针（快慢指针，一次遍历）
+     * 原理：fast 先走 n 步，与 slow 拉开 n 个节点的距离；
+     *       然后两个指针同速前进，fast 走到末尾时，slow 正好停在待删节点的前一个
+     * 时间复杂度 O(L)
+     * 空间复杂度 O(1)
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNthFromEnd_2(ListNode head, int n) {
+        ListNode fast = head;
+        ListNode slow = head;
+        // 1. 快指针先走 n 步，与慢指针拉开 n 个节点的距离
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
         }
-
+        // 2. fast 已经走出链表（走了 n 步就到 null），说明要删的就是头节点，直接返回下一个
+        if (fast == null) return head.next;
+        // 3. 两指针同速前进，fast 走到最后一个节点时（fast.next == null），
+        //    slow 正好在倒数第 n+1 个节点（待删节点的前一个）
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        // 4. 跨过待删节点
+        slow.next = slow.next.next;
         return head;
     }
 
@@ -42,7 +77,7 @@ public class Hot19_removeNthFromEnd {
         head.next.next = new ListNode(3);
         head.next.next.next = new ListNode(4);
         head.next.next.next.next = new ListNode(5);
-        ListNode result = hot19.removeNthFromEnd(head, 2);
+        ListNode result = hot19.removeNthFromEnd_2(head, 2);
         while (result != null) {
             System.out.print(result.val + " ");
             result = result.next;
