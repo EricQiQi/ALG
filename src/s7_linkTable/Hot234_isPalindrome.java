@@ -2,6 +2,11 @@ package s7_linkTable;
 
 /**
  * 234. 回文链表
+ * 给你一个单链表的头节点 head ，请你判断是否为回文链表。如果是，返回 true ；否则，返回 false 。
+ * <p>
+ * 1->2->2->1 -> true
+ * 1->2->3->2->1 -> true
+ * 1->2->3->4->5 -> false
  */
 public class Hot234_isPalindrome {
 

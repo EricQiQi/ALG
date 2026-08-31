@@ -2,6 +2,8 @@ package s7_linkTable;
 
 /**
  * 141. 环形链表
+ * 给定 head 节点，返回链表中第一个入环节点。如果链表中没有环，则返回 null。
+ *
  */
 public class Hot141_hasCycle {
 
