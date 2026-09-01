@@ -16,7 +16,7 @@ public class Hot146_LRUCache {
     }
 
     public int get(int key) {
-
+        return -1;
     }
 
     public void put(int key, int value) {
