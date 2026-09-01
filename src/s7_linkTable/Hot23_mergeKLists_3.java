@@ -8,46 +8,22 @@ package s7_linkTable;
  * 将它们合并到一个有序链表中得到。
  * 1->1->2->3->4->4->5->6
  */
-public class Hot23_mergeKLists {
+public class Hot23_mergeKLists_3 {
 
     /**
-     * 方法1：顺序合并
-     * 时间复杂度：O(kn)
-     * 空间复杂度：O(1)
-     * @param lists
+     * 方法3：优先队列（最小堆）
+     * 时间复杂度：O(kn log k)
+     * 空间复杂度：O(k)
      * @return
      */
     public ListNode mergeKLists(ListNode[] lists) {
-        ListNode ans = null;
-        for(int i=0; i<lists.length; i++){
-            ans = mergeTwoLists(ans, lists[i]);
-        }
-        return ans;
+
     }
 
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if (l1 == null || l2 == null) {
-            return l1 == null ? l2 : l1;
-        }
 
-        ListNode dummy = new ListNode(0);
-        ListNode curr = dummy;
-        while (l1 != null && l2 != null) {
-            if (l1.val < l2.val) {
-                curr.next = l1;
-                l1 = l1.next;
-            } else {
-                curr.next = l2;
-                l2 = l2.next;
-            }
-            curr = curr.next;
-        }
-        curr.next = l1 == null ? l2 : l1;
-        return dummy.next;
-    }
 
     public static void main(String[] args) {
-        Hot23_mergeKLists solution = new Hot23_mergeKLists();
+        Hot23_mergeKLists_3 solution = new Hot23_mergeKLists_3();
     
         // 构建测试用例：[[1,4,5],[1,3,4],[2,6]]
         ListNode list1 = new ListNode(1);
