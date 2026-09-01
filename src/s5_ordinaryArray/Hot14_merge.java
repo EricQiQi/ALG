@@ -14,7 +14,7 @@ public class Hot14_merge {
     public static int[][] merge(int[][] intervals) {
         if (intervals == null || intervals.length == 0) return intervals;
 
-        // 1.排序
+        // 1.排序.md
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
 
         // 创建List，存储合并后的区间
