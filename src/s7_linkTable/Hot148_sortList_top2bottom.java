@@ -5,7 +5,7 @@ package s7_linkTable;
  * 题目：给你链表的头节点 head，将其升序排列并返回排序后的链表。
  * 要求：O(n log n) 时间复杂度，O(1) 空间复杂度（进阶）
  */
-public class Hot148_sortList {
+public class Hot148_sortList_top2bottom {
 
     /**
      * 归并排序
@@ -60,7 +60,7 @@ public class Hot148_sortList {
     }
 
     public static void main(String[] args) {
-        Hot148_sortList solution = new Hot148_sortList();
+        Hot148_sortList_top2bottom solution = new Hot148_sortList_top2bottom();
 
         // 测试用例：4 -> 2 -> 1 -> 3
         ListNode head = new ListNode(4);
