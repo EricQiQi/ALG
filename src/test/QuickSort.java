@@ -7,7 +7,6 @@ public class QuickSort {
 
     public static void quickSort(int[] arr){
         if(arr == null || arr.length == 0) return;
-
         quickSort(arr, 0, arr.length-1);
     }
 
@@ -22,27 +21,25 @@ public class QuickSort {
     public static int partition(int[] arr, int left, int right){
         int pivotIndex = left + new Random().nextInt(right-left+1);
         swap(arr, left, pivotIndex);
-
         int pivot = arr[left];
+
         int l = left;
         int r = right;
-
         while(l < r){
-            while(l <r && arr[r] >= pivot){
+            while(l < r && arr[r] >= pivot){
                 r--;
             }
-            while(l <r && arr[l] <= pivot){
+            while (l<r && arr[l] <= pivot){
                 l++;
             }
-
-            if(l<r){
+            if(l < r){
                 swap(arr, l, r);
             }
         }
-
         swap(arr, left, l);
         return l;
     }
+
 
     public static void swap(int[] arr, int left, int right){
         int temp = arr[left];
