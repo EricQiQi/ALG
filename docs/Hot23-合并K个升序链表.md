@@ -1,108 +1,73 @@
-# 合并 K 个升序链表（Merge K Sorted Lists）
+# 合并K个升序链表（Merge K Sorted Lists）
 
 ## 题目描述
 
-给你一个链表数组，每个链表都已按**升序**排列。请将所有链表合并到一个升序链表中，返回合并后的链表。
+给你一个链表数组，每个链表都已按**升序**排列，将所有链表合并到一个升序链表中。
 
-示例：
 ```
-输入：lists = [[1,4,5],[1,3,4],[2,6]]
+输入：lists = [[1,4,5], [1,3,4], [2,6]]
 输出：[1,1,2,3,4,4,5,6]
-
-解释：
-  L1: 1 → 4 → 5
-  L2: 1 → 3 → 4
-  L3: 2 → 6
-  合并：1 → 1 → 2 → 3 → 4 → 4 → 5 → 6
 ```
 
 ---
 
-## 核心思路
+## 三种方法对比
 
-三种解法围绕同一个问题：**怎么高效找到 k 个链表中的最小值？**
-
-| 解法 | 怎么找最小值 | 时间 | 空间 |
-|------|-------------|------|------|
-| 顺序合并 | 每次线性扫描已合并结果 | O(k²n) | O(1) |
-| 分治合并 | 二分后两两合并（归并思想） | O(kn log k) | O(log k) |
-| 优先队列 | 最小堆，堆顶即最小值 | O(kn log k) | O(k) |
+| | 方法1 顺序合并 | 方法2 分治 | 方法3 优先队列 |
+|--|-------------|----------|-------------|
+| 思路 | 一个一个合并 | 两两配对，二分递归 | 最小堆取最小 |
+| 时间 | O(k²n) | O(kn log k) | O(kn log k) |
+| 空间 | O(1) | O(log k) 递归栈 | O(k) 堆 |
+| 推荐度 | 思路直观但慢 | **推荐** | **推荐** |
 
 ---
 
-## 解法一：顺序合并
+## 方法1：顺序合并
 
-### 原理图解
+### 思路
 
-```text
+把第一个链表当结果，依次和后面的链表两两合并。
+
+```
 ans = null
-第1轮：ans = merge(null, L1)        = [1 → 4 → 5]
-第2轮：ans = merge([1→4→5], L2)     = [1 → 1 → 3 → 4 → 4 → 5]
-第3轮：ans = merge([1→1→3→4→4→5], L3) = [1 → 1 → 2 → 3 → 4 → 4 → 5 → 6]
+ans = merge(null, [1,4,5])     → [1,4,5]
+ans = merge([1,4,5], [1,3,4])  → [1,1,3,4,4,5]
+ans = merge([1,1,3,4,4,5], [2,6]) → [1,1,2,3,4,4,5,6]
 ```
 
-逐个将链表合并到 `ans` 上，第 i 轮合并时 `ans` 的长度是 i×n，所以总比较次数 = n + 2n + 3n + ... + kn = O(k²n)。
-
-### 代码实现
+### 代码
 
 ```java
 public ListNode mergeKLists(ListNode[] lists) {
     ListNode ans = null;
-    for (int i = 0; i < lists.length; i++) {
-        ans = mergeTwoLists(ans, lists[i]);
+    for (ListNode list : lists) {
+        ans = mergeTwoLists(ans, list);
     }
     return ans;
 }
-
-public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-    if (l1 == null || l2 == null) {
-        return l1 == null ? l2 : l1;
-    }
-    ListNode dummy = new ListNode(0);
-    ListNode curr = dummy;
-    while (l1 != null && l2 != null) {
-        if (l1.val < l2.val) {
-            curr.next = l1;
-            l1 = l1.next;
-        } else {
-            curr.next = l2;
-            l2 = l2.next;
-        }
-        curr = curr.next;
-    }
-    curr.next = l1 == null ? l2 : l1;
-    return dummy.next;
-}
 ```
 
-### 复杂度
-
-| 类型 | 复杂度 | 说明 |
-|------|--------|------|
-| 时间 | O(k²n) | 第 i 轮合并 O(in)，共 k 轮 |
-| 空间 | O(1) | 只用了几个指针 |
+> 问题：每次合并 ans 都在变长，第 i 次合并要遍历 i*n 个节点，总时间 O(k²n)。
 
 ---
 
-## 解法二：分治合并
+## 方法2：分治合并（推荐）
 
-### 原理图解
+### 思路
 
-```text
-lists = [L1, L2, L3, L4]
+**和归并排序一样的思路：k 个链表二分递归，两两合并。**
 
-第1层递归：
-  merge(0,3)
-  ├── merge(0,1) → merge(L1, L2)
-  └── merge(2,3) → merge(L3, L4)
-
-第2层递归：
-  merge(合并结果) → 最终合并成一个有序链表
+```
+第0轮：[1,4,5]  [1,3,4]  [2,6]
+         \      /           |
+第1轮：  [1,1,3,4,4,5]   [2,6]
+           \              /
+第2轮：   [1,1,2,3,4,4,5,6]
 ```
 
-类似归并排序：把 k 个链表二分成两半，递归合并后再合并结果。每层合并总量 O(kn)，共 log k 层。
+每层合并的总节点数都是 kn（只是分成更少的组），共 log k 层 → O(kn log k)。
 
-### 代码实现
+### 代码
 
 ```java
 public ListNode mergeKLists(ListNode[] lists) {
@@ -110,15 +75,9 @@ public ListNode mergeKLists(ListNode[] lists) {
 }
 
 public ListNode merge(ListNode[] lists, int left, int right) {
-    // 递归终止：只有一个链表，直接返回
-    if (left == right) {
-        return lists[left];
-    }
-    // 边界情况：空区间
-    if (left > right) {
-        return null;
-    }
-    // 二分：将区间分成两半
+    if (left == right) return lists[left];
+    if (left > right) return null;
+
     int mid = (left + right) / 2;
     ListNode leftList = merge(lists, left, mid);
     ListNode rightList = merge(lists, mid + 1, right);
@@ -126,97 +85,87 @@ public ListNode merge(ListNode[] lists, int left, int right) {
 }
 ```
 
-### 复杂度
-
-| 类型 | 复杂度 | 说明 |
-|------|--------|------|
-| 时间 | O(kn log k) | 每层合并 O(kn)，共 log k 层 |
-| 空间 | O(log k) | 递归栈 |
-
 ---
 
-## 解法三：优先队列（最小堆）
+## 方法3：优先队列（最小堆）
 
-### 原理图解
+### 思路
 
-```text
-初始化堆：[L1头=1, L2头=1, L3头=2]
+**维护一个大小为 k 的最小堆，堆顶永远是当前最小值。**
 
-第1轮：poll 1(L1) → 结果: [1]     → 将 L1.next=4 入堆 → 堆: [1(L2), 2(L3), 4(L1)]
-第2轮：poll 1(L2) → 结果: [1,1]   → 将 L2.next=3 入堆 → 堆: [2(L3), 3(L2), 4(L1)]
-第3轮：poll 2(L3) → 结果: [1,1,2] → 将 L3.next=6 入堆 → 堆: [3(L2), 4(L1), 6(L3)]
-...
+```
+初始堆：[1(来自list1), 1(来自list2), 2(来自list3)]
+
+poll 1(list1) → 接上 → list1的下一个4入堆
+堆：[1(list2), 2(list3), 4(list1)]
+
+poll 1(list2) → 接上 → list2的下一个3入堆
+堆：[2(list3), 3(list2), 4(list1)]
+
+...直到堆空
 ```
 
-堆里始终维护 k 个链表的"当前最小节点"，每次取堆顶接到结果末尾，再把它的 next 入堆。
-
-### 代码实现
+### 代码
 
 ```java
 public ListNode mergeKLists(ListNode[] lists) {
     ListNode dummy = new ListNode(0);
     ListNode curr = dummy;
 
-    // 最小堆：按节点值排序，堆顶始终是最小值节点
     PriorityQueue<ListNode> pq = new PriorityQueue<>(
-            (a, b) -> (a.val - b.val));
+        (a, b) -> a.val - b.val);
 
-    // 初始化：将 k 个链表的头节点（非 null）加入堆中
+    // 初始化：k 个链表的头节点入堆
     for (ListNode list : lists) {
-        if (list != null) {
-            pq.add(list);
-        }
+        if (list != null) pq.add(list);
     }
 
-    // 每次取出最小值节点，接到结果链表末尾
     while (!pq.isEmpty()) {
-        ListNode node = pq.poll();      // 取出当前最小
-        curr.next = node;               // 接到结果链表
+        ListNode node = pq.poll();    // 取最小
+        curr.next = node;             // 接到结果
         if (node.next != null) {
-            pq.add(node.next);          // 该节点的下一个入堆
+            pq.add(node.next);        // 下一个入堆
         }
-        curr = curr.next;               // 结果指针后移
+        curr = curr.next;
     }
     return dummy.next;
 }
 ```
 
-### 复杂度
-
-| 类型 | 复杂度 | 说明 |
-|------|--------|------|
-| 时间 | O(kn log k) | 共 kn 个节点，每次 poll/add O(log k) |
-| 空间 | O(k) | 堆中最多同时存 k 个节点 |
-
 ---
 
-## 三种解法对比
+## 公共模板：合并两个有序链表
 
-| 维度 | 顺序合并 | 分治合并 | 优先队列 |
-|------|---------|---------|---------|
-| 时间 | **O(k²n)** | O(kn log k) | O(kn log k) |
-| 空间 | O(1) | O(log k) | O(k) |
-| 代码量 | 最短 | 中等 | 中等 |
-| 核心思想 | 暴力逐个合并 | 归并排序思想 | 堆维护最小值 |
+三种方法底层都用到了这个：
 
-**为什么顺序合并最慢？** 第 i 轮合并时 ans 已经有 i×n 个节点，每次合并都要遍历整个 ans。分治和堆通过"分而治之"或"堆结构"避免了重复遍历。
+```java
+ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    ListNode dummy = new ListNode(0), curr = dummy;
+    while (l1 != null && l2 != null) {
+        curr.next = (l1.val < l2.val) ? l1 : l2;
+        if (l1.val < l2.val) l1 = l1.next; else l2 = l2.next;
+        curr = curr.next;
+    }
+    curr.next = (l1 != null) ? l1 : l2;
+    return dummy.next;
+}
+```
 
 ---
 
 ## 易错点
 
-1. **顺序合并的复杂度陷阱**：看似每轮合并是 O(n)，但 ans 在不断增长，实际是 O(in)，总复杂度 O(k²n)
-2. **分治合并的 `left > right` 判断**：空数组 `lists = []` 时，`left=0, right=-1`，不处理会越界
-3. **优先队列的 null 判断**：`lists` 中可能有 null 链表，入堆前必须判空
-4. **优先队列的比较器**：`(a, b) -> (a.val - b.val)` 按节点值排序，不是按节点引用
+1. **顺序合并的时间复杂度**：不是 O(kn) 而是 O(k²n)，因为 ans 在变长
+2. **分治的终止条件**：`left == right` 返回 `lists[left]`（只剩一个链表），`left > right` 返回 null（空区间）
+3. **优先队列初始化**：只加入非 null 的头节点，`if (list != null)` 不能漏
+4. **优先队列取出后要补入下一个**：`node.next != null` 时 `pq.add(node.next)`，否则堆会越来越小提前结束
 
 ---
 
 ## 记忆口诀
 
 ```
-合并K表三招破：
-顺序逐个接，简单但慢 O(k²n)
-分治二分拆，归并思想 O(kn log k)
-最小堆取头，堆顶永远最小值
+合并K个链表三种招：
+顺序合并最朴素，分治二分最快，
+优先队列堆顶取，每次最小接上去。
 ```

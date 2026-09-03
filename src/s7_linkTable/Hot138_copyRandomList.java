@@ -123,6 +123,10 @@ public class Hot138_copyRandomList {
         cachedMap.clear();
         Node copy2 = copyRandomList_2(node1);
         printList(copy2);
+
+        // 方法3：迭代法
+        Node copy3 = copyRandomList_3(node1);
+        printList(copy3);
     }
 
     private static void printList(Node head) {
