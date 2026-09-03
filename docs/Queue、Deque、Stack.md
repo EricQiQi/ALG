@@ -42,12 +42,12 @@ Deque（双端队列）：两端都能进出
 
 | 操作 | 头部 | 尾部 |
 |------|------|------|
-| 插入 | `offerFirst(e)` / `push(e)` | `offerLast(e)` / `add(e)` |
-| 删除 | `pollFirst()` / `pop()` | `pollLast()` |
-| 查看 | `peekFirst()` | `peekLast()` |
+| 插入 | `offerFirst(e)` / `push(e)` | `offerLast(e)` / `offer(e)` / `add(e)` |
+| 删除 | `pollFirst()` / `poll()` / `pop()` | `pollLast()` |
+| 查看 | `peekFirst()` / `peek()` | `peekLast()` |
 
 > **当 Stack 用**：`push / pop / peek`（操作头部）
-> **当 Queue 用**：`offerLast / pollFirst / peekFirst`（尾部进、头部出）
+> **当 Queue 用**：`offer / poll / peek`（尾部进、头部出，等价于 `offerLast / pollFirst / peekFirst`）
 
 ---
 
