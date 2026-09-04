@@ -4,12 +4,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 最长连续序列
+ * 3.最长连续序列
  * 起点判定：当前数的前一个数（num-1）不存在于集合中，则当前数是起点
  * 长度比较：取最大长度
  * 一个元素最多被访问两次，一次在外层for循环，一次在内层while循环，所以第二个 for + while 的总操作次数加起来仍然是 (O(n))。
  */
 public class Hot3_longestConsecutive {
+
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     */
     public int longestConsecutive(int[] nums) {
         if (nums == null || nums.length == 0){
             return 0;

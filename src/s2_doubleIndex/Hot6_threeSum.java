@@ -3,11 +3,10 @@ package s2_doubleIndex;
 import java.util.*;
 
 /**
- * 三数之和
+ * 6.三数之和
+ * 请你返回所有和为 0 且不重复的三元组。
  *
  * 给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k] == 0 。
- * 请你返回所有和为 0 且不重复的三元组。
- * <p>
  * 注意：答案中不可以包含重复的三元组。
  * <p>
  * 示例 1：
@@ -38,17 +37,15 @@ import java.util.*;
 public class Hot6_threeSum {
 
     /**
-     * HashSet解法
+     * 方法1：HashSet解法
      * 最外层可以剪枝去重；
      * 内层相当于两数之和，将数放到set中，判断set中是否存在target-nums[j]，内层不能通过if (j > i + 1 && nums[j] == nums[j - 1]) continue;去重
-     * @param nums
-     * @return
+     *
+     * 时间复杂度：O(n^2)
+     * 空间复杂度：O(n)
      */
     public List<List<Integer>> threeSum_1(int[] nums) {
-        if (nums[0] > 0) return new ArrayList<>();
-
         Arrays.sort(nums);
-
         Set<List<Integer>> result = new HashSet<>();
         for (int i = 0; i < nums.length - 2; i++) {
             // 剪枝
@@ -72,9 +69,10 @@ public class Hot6_threeSum {
 
 
     /**
-     * 双指针解法
-     * @param nums
-     * @return
+     * 方法2：双指针解法
+     *
+     * 时间复杂度：O(n^2)
+     * 空间复杂度：O(1)
      */
     public List<List<Integer>> threeSum_2(int[] nums) {
         Arrays.sort(nums);
@@ -84,8 +82,6 @@ public class Hot6_threeSum {
             if (nums[i] > 0) break;
             // a去重
             if (i > 0 && nums[i] == nums[i - 1]) continue;
-
-            int target = 0 - nums[i];
 
             int left = i + 1;
             int right = nums.length - 1;
@@ -112,9 +108,10 @@ public class Hot6_threeSum {
 
     public static void main(String[] args) {
         Hot6_threeSum hot6_threeSum = new Hot6_threeSum();
-//        int[] nums = {-1,0,1,2,-1,-4};
-        int[] nums = {0, 0, 0};
+        int[] nums = {-1,0,1,2,-1,-4};
+//        int[] nums = {0, 0, 0};
         System.out.println(hot6_threeSum.threeSum_1(nums));
+        System.out.println(hot6_threeSum.threeSum_2(nums));
     }
 
 }

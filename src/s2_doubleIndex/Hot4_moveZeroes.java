@@ -1,11 +1,21 @@
 package s2_doubleIndex;
 
 /**
- * 移动0
+ * 4.移动 0
+ * <p>
+ * 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+ * <p>
+ * 请注意 ，必须在不复制数组的情况下原地对数组进行操作。
+ *
  * 慢指针：s，一步一步向后走
  * 快指针：r，只找不为0的，和s指向的元素交换
  */
 public class Hot4_moveZeroes {
+
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     */
     public void moveZeroes(int[] nums) {
         if (nums == null || nums.length == 0){
             return;

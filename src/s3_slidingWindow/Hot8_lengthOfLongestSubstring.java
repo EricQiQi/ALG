@@ -4,15 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 无重复字符的最长子串
+ * 8.无重复字符的最长子串
  */
 public class Hot8_lengthOfLongestSubstring {
 
     /**
      * 滑动窗口—1：hashMap解法
-     *
-     * @param s
-     * @return
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
      */
     public static int lengthOfLongestSubstring_1(String s) {
         Map<Character, Integer> map = new HashMap<>();
@@ -35,8 +34,8 @@ public class Hot8_lengthOfLongestSubstring {
 
     /**
      * 滑动窗口—2：数组解法
-     * @param s
-     * @return
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
      */
     public static int lengthOfLongestSubstring_2(String s) {
         int[] index = new int[128]; // 对应Ascii码的全部

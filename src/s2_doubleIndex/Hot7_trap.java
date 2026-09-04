@@ -1,14 +1,15 @@
 package s2_doubleIndex;
 
 /**
- * 接雨水
+ * 7.接雨水
+ *
  */
 public class Hot7_trap {
 
     /**
-     * 双指针解法
-     * @param height
-     * @return
+     * 方法1：双指针解法
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
      */
     public static int trap_1(int[] height){
         if (height == null || height.length == 0) return 0;
@@ -40,9 +41,9 @@ public class Hot7_trap {
     }
 
     /**
-     * DP 动态规划
-     * @param height
-     * @return
+     * 方法2：DP 动态规划
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
      */
     public static int trap_2(int[] height){
         if(height == null || height.length == 0) return 0;
