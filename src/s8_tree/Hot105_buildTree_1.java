@@ -1,7 +1,5 @@
 package s8_tree;
 
-import org.omg.CORBA.INTERNAL;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
@@ -12,7 +10,7 @@ import java.util.Map;
  * 根据一棵树的前序遍历与中序遍历构造二叉树。
  * 
  */
-public class Hot105_buildTree {
+public class Hot105_buildTree_1 {
 
     private Map<Integer, Integer> indexMap;
 
@@ -75,7 +73,7 @@ public class Hot105_buildTree {
         int[] preorder = {3, 9, 20, 15, 7};
         int[] inorder = {9, 3, 15, 20, 7};
 
-        TreeNode root = new Hot105_buildTree().buildTree(preorder, inorder);
+        TreeNode root = new Hot105_buildTree_1().buildTree(preorder, inorder);
 
         // 层序遍历验证结果
         if (root == null) {
