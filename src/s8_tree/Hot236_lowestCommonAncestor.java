@@ -37,7 +37,6 @@ public class Hot236_lowestCommonAncestor {
         //      6  2 0  8
         //        / \
         //       7   4
-
         TreeNode root = new TreeNode(3);
         TreeNode node5 = new TreeNode(5);
         TreeNode node1 = new TreeNode(1);
