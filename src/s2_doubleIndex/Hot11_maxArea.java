@@ -9,7 +9,7 @@ package s2_doubleIndex;
  * 返回容器可以储存的最大水量。
  *
  */
-public class Hot5_maxArea {
+public class Hot11_maxArea {
 
     /**
      * 时间复杂度：O(n)
@@ -38,8 +38,8 @@ public class Hot5_maxArea {
     }
 
     public static void main(String[] args) {
-        Hot5_maxArea hot5_maxArea = new Hot5_maxArea();
+        Hot11_maxArea hot11_maxArea = new Hot11_maxArea();
         int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
-        System.out.println(hot5_maxArea.maxArea(height));
+        System.out.println(hot11_maxArea.maxArea(height));
     }
 }

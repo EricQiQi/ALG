@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 8.无重复字符的最长子串
+ * 3.无重复字符的最长子串
  */
-public class Hot8_lengthOfLongestSubstring {
+public class Hot3_lengthOfLongestSubstring {
 
     /**
      * 滑动窗口—1：hashMap解法

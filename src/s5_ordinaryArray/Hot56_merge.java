@@ -9,7 +9,7 @@ import java.util.List;
  * 56.合并区间（Medium）
  *  本题目，数组列数为2，即每个子数组有2个元素
  */
-public class Hot14_merge {
+public class Hot56_merge {
 
     public static int[][] merge(int[][] intervals) {
         if (intervals == null || intervals.length == 0) return intervals;

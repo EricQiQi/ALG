@@ -6,7 +6,7 @@ package s5_ordinaryArray;
  * ！！！和 Hot10-和为k的子数组 题目区别：本题目和是未知的
  * ！！！和 Hot11-滑动窗口的最大值 题目区别：本题目中窗口是未知的
  */
-public class Hot13_maxSubArray {
+public class Hot53_maxSubArray {
 
     /**
      * 贪心算法

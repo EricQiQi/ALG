@@ -3,7 +3,7 @@ package s5_ordinaryArray;
 /**
  * 189. 轮转数组
  */
-public class Hot15_rotate {
+public class Hot189_rotate {
 
     /**
      * 方法1：辅助数组，时间复杂度 O(n), 空间复杂度 O(n)

@@ -6,13 +6,12 @@ import java.util.Map;
 /**
  * 560. 和为K的子数组
  */
-public class Hot10_subarraySum {
+public class Hot560_subarraySum {
 
     /**
      * 前缀和 + 逆向查账
-     * @param nums
-     * @param k
-     * @return
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
      */
     public static int subarraySum(int[] nums, int k) {
         if (nums == null || nums.length == 0) return 0;

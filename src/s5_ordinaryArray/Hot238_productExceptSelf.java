@@ -11,7 +11,7 @@ package s5_ordinaryArray;
  * 非常巧妙！！！
  *
  */
-public class Hot16_productExceptSelf {
+public class Hot238_productExceptSelf {
 
     /**
      * 前缀积解法
@@ -87,7 +87,7 @@ public class Hot16_productExceptSelf {
     }
 
     public static void main(String[] args) {
-        Hot16_productExceptSelf hot16 = new Hot16_productExceptSelf();
+        Hot238_productExceptSelf hot16 = new Hot238_productExceptSelf();
         int[] nums = {1,2,3,4};
 //        int[] res = hot16.productExceptSelf_1(nums);
         int[] res = hot16.productExceptSelf_2(nums);

@@ -13,7 +13,7 @@ import java.util.*;
  *   ["bat"]
  * ]
  */
-public class Hot2_groupAnagrams {
+public class Hot49_groupAnagrams {
 
     /**
      * 时间复杂度：O(nklogk)
@@ -32,7 +32,7 @@ public class Hot2_groupAnagrams {
         return new ArrayList<>(map.values());
     }
     public static void main(String[] args) {
-        Hot2_groupAnagrams hot2 = new Hot2_groupAnagrams();
+        Hot49_groupAnagrams hot2 = new Hot49_groupAnagrams();
         List<List<String>> lists = hot2.groupAnagrams(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"});
         System.out.println(lists);
     }

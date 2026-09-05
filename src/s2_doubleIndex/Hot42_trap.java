@@ -4,7 +4,7 @@ package s2_doubleIndex;
  * 7.接雨水
  *
  */
-public class Hot7_trap {
+public class Hot42_trap {
 
     /**
      * 方法1：双指针解法

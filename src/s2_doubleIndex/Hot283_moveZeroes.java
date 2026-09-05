@@ -10,7 +10,7 @@ package s2_doubleIndex;
  * 慢指针：s，一步一步向后走
  * 快指针：r，只找不为0的，和s指向的元素交换
  */
-public class Hot4_moveZeroes {
+public class Hot283_moveZeroes {
 
     /**
      * 时间复杂度：O(n)
@@ -40,7 +40,7 @@ public class Hot4_moveZeroes {
     }
 
     public static void main(String[] args) {
-        Hot4_moveZeroes move0 = new Hot4_moveZeroes();
+        Hot283_moveZeroes move0 = new Hot283_moveZeroes();
 //        int[] nums = {0,1,0,3,12};
         int[] nums = {1};
         move0.moveZeroes(nums);

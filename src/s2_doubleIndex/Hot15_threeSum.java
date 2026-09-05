@@ -34,7 +34,7 @@ import java.util.*;
  * 3 <= nums.length <= 3000
  * -105 <= nums[i] <= 105
  */
-public class Hot6_threeSum {
+public class Hot15_threeSum {
 
     /**
      * 方法1：HashSet解法
@@ -107,11 +107,11 @@ public class Hot6_threeSum {
 
 
     public static void main(String[] args) {
-        Hot6_threeSum hot6_threeSum = new Hot6_threeSum();
+        Hot15_threeSum hot15_threeSum = new Hot15_threeSum();
         int[] nums = {-1,0,1,2,-1,-4};
 //        int[] nums = {0, 0, 0};
-        System.out.println(hot6_threeSum.threeSum_1(nums));
-        System.out.println(hot6_threeSum.threeSum_2(nums));
+        System.out.println(hot15_threeSum.threeSum_1(nums));
+        System.out.println(hot15_threeSum.threeSum_2(nums));
     }
 
 }

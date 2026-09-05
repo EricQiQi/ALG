@@ -2,12 +2,11 @@ package s4_substring;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 
 /**
  * 滑动窗口的最大值
  */
-public class Hot11_maxSlidingWindow {
+public class Hot239_maxSlidingWindow {
 
     /**
      * DP动态规划，非常好
