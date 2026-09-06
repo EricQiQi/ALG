@@ -4,16 +4,14 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * 滑动窗口的最大值
+ * 239. 滑动窗口的最大值
  */
 public class Hot239_maxSlidingWindow {
 
     /**
      * DP动态规划，非常好
-     *
-     * @param nums
-     * @param k
-     * @return
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
      */
     public static int[] maxSlidingWindow_1(int[] nums, int k) {
         if (nums == null || nums.length == 0 || k <= 0) return new int[0];
@@ -53,10 +51,8 @@ public class Hot239_maxSlidingWindow {
 
     /**
      * 单调队列解法
-     *
-     * @param nums
-     * @param k
-     * @return
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
      */
     public static int[] maxSlidingWindow_2(int[] nums, int k) {
         if (nums == null || nums.length == 0 || k <= 0) return new int[0];
