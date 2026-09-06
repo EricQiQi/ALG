@@ -9,7 +9,7 @@ import java.util.Deque;
 public class Hot239_maxSlidingWindow {
 
     /**
-     * DP动态规划，非常好
+     * 方法1：DP动态规划，非常好
      * 时间复杂度：O(n)
      * 空间复杂度：O(n)
      */
@@ -50,7 +50,7 @@ public class Hot239_maxSlidingWindow {
     }
 
     /**
-     * 单调队列解法
+     * 方法2：单调队列解法
      * 时间复杂度：O(n)
      * 空间复杂度：O(n)
      */
@@ -71,10 +71,10 @@ public class Hot239_maxSlidingWindow {
             }
 
             // 2. 新人安全入队尾
-            deque.addLast(right);
+            deque.offerLast(right);
 
-            // 3. 【老大退役】：如果队头大哥的下标已经过期（滑出窗口左边界），清理门户
-            if (deque.peekFirst() < right - k + 1) {
+            // 3. 【老大退役】：如果队头大哥的下标已经过期（滑出窗口左边界），清除过期元素，用while不是if，更严谨一些
+            while (deque.peekFirst() < right - k + 1) {
                 deque.pollFirst();
             }
 
