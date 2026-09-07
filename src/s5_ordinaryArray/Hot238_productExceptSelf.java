@@ -14,11 +14,9 @@ package s5_ordinaryArray;
 public class Hot238_productExceptSelf {
 
     /**
-     * 前缀积解法
+     * 方法1：前缀积解法
      * 时间复杂度：O(n)
      * 空间复杂度：O(n)，题目免责一个输出数组，但是还用了另外两个数组，所以是 O(n)
-     * @param nums
-     * @return
      */
     public int[] productExceptSelf_1(int[] nums) {
         int[] res = new int[nums.length];
@@ -44,13 +42,11 @@ public class Hot238_productExceptSelf {
 
 
     /**
-     * 双指针解法
+     * 方法2：双指针解法
      * 原理：双指针同步遍历，一个从左往右，一个从右往左，同步更新结果数组。
      *
      * 时间复杂度：O(n)
      * 空间复杂度：O(1)，题目免责一个输出数组，所以是 O(1)
-     * @param nums
-     * @return
      */
     public int[] productExceptSelf_2(int[] nums) {
         int n = nums.length;

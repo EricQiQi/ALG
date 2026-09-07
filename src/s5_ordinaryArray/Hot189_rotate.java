@@ -6,10 +6,9 @@ package s5_ordinaryArray;
 public class Hot189_rotate {
 
     /**
-     * 方法1：辅助数组，时间复杂度 O(n), 空间复杂度 O(n)
-     *
-     * @param nums
-     * @param k
+     * 方法1：辅助数组
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(n)
      */
     public static void rotate_1(int[] nums, int k) {
         int n = nums.length;
@@ -22,10 +21,9 @@ public class Hot189_rotate {
     }
 
     /**
-     * 方法2：循环交换，时间复杂度 O(n), 空间复杂度 O(1)
-     *
-     * @param nums
-     * @param k
+     * 方法2：循环交换
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(1)
      */
     public static void rotate_2(int[] nums, int k) {
         int n = nums.length;
@@ -51,10 +49,9 @@ public class Hot189_rotate {
     }
 
     /**
-     * 方法3：环状替换（原地跳跃法），时间复杂度 O(n), 空间复杂度 O(1)
-     *
-     * @param nums
-     * @param k
+     * 方法3：环状替换（原地跳跃法）
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(1)
      */
     public static void rotate_3(int[] nums, int k) {
         int n = nums.length;

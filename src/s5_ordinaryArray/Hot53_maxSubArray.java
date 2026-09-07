@@ -1,7 +1,7 @@
 package s5_ordinaryArray;
 
 /**
- * 53. 最大子序和
+ * 53. 最大子数组和
  *
  * ！！！和 Hot10-和为k的子数组 题目区别：本题目和是未知的
  * ！！！和 Hot11-滑动窗口的最大值 题目区别：本题目中窗口是未知的
@@ -10,8 +10,8 @@ public class Hot53_maxSubArray {
 
     /**
      * 贪心算法
-     * @param nums
-     * @return
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
      */
     public static int maxSubArray_1(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
@@ -21,7 +21,7 @@ public class Hot53_maxSubArray {
 
         int preSum = 0;
         for (int i = 0; i < nums.length; i++) {
-            // 如果preSum < 0，说明preSum对当前元素nums[i]的贡献是负的，所以应该舍弃，从0开始重新计算
+            // preSum < 0 表示对结果无增益，把当前元素的前缀和【该元素左边的和】置为0
             if (preSum < 0){
                 preSum = 0;
             }
@@ -34,8 +34,8 @@ public class Hot53_maxSubArray {
 
     /**
      * 动态规划
-     * @param nums
-     * @return
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
      */
     public static int maxSubArray_2(int[] nums) {
         // 初始化：最大和与当前子序和都设为数组第一个元素
@@ -55,6 +55,60 @@ public class Hot53_maxSubArray {
         return maxAns;
     }
 
+    /**
+     * 分治法
+     * 时间复杂度：O(n log n)  —— 每层合并需 O(n) 扫描跨中点子段，共 log n 层
+     * 空间复杂度：O(log n)   —— 递归调用栈深度
+     */
+    public static int maxSubArray_3(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        return divide(nums, 0, nums.length - 1);
+    }
+    
+    /**
+     * 求 [left, right] 区间内的最大子数组和
+     * 最大子数组只有三种位置：完全在左半、完全在右半、跨越中点
+     */
+    private static int divide(int[] nums, int left, int right) {
+        // 终止条件：区间只剩一个元素，最大子数组就是它自己
+        if (left == right) return nums[left];
+    
+        int mid = left + (right - left) / 2;
+    
+        // 分：递归求左半、右半的最大子数组和
+        int leftMax = divide(nums, left, mid);
+        int rightMax = divide(nums, mid + 1, right);
+    
+        // 治：求跨越中点的最大子数组和
+        int crossMax = merge(nums, left, mid, right);
+    
+        // 三者取最大
+        return Math.max(Math.max(leftMax, rightMax), crossMax);
+    }
+
+    public static int merge(int[] nums, int left, int mid, int right){
+        // 治：求跨越中点的最大子数组和
+        int sum = 0;
+
+        //   从中点向左扩展，记录左半边的最大后缀和
+        int leftCross = Integer.MIN_VALUE;
+        for (int i = mid; i >= left; i--) {
+            sum += nums[i];
+            leftCross = Math.max(leftCross, sum);
+        }
+
+        //   从中点+1向右扩展，记录右半边的最大前缀和
+        int rightCross = Integer.MIN_VALUE;
+        sum = 0;
+        for (int i = mid + 1; i <= right; i++) {
+            sum += nums[i];
+            rightCross = Math.max(rightCross, sum);
+        }
+        int crossMax = leftCross + rightCross;
+        return crossMax;
+    }
+
+
     public static void main(String[] args) {
         int[] nums = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
         int[] nums1 = { -2, -1, -3};
@@ -68,5 +122,11 @@ public class Hot53_maxSubArray {
         System.out.println(maxSubArray_2(nums));
         System.out.println(maxSubArray_2(nums1));
         System.out.println(maxSubArray_2(nums2));
+
+        System.out.println("-----");
+
+        System.out.println(maxSubArray_3(nums));
+        System.out.println(maxSubArray_3(nums1));
+        System.out.println(maxSubArray_3(nums2));
     }
 }
