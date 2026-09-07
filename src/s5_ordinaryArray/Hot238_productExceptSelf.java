@@ -1,7 +1,7 @@
 package s5_ordinaryArray;
 
 /**
- * 16. 除自身以外数组的乘积
+ * 238. 除自身以外数组的乘积
  * 给你一个长度为 n 的数组 nums，其中 nums[i] 不为 0。nums 中的每个元素都保证在 1 到 n 之间（包含 1 和 n）。
  * 请你返回一个长度为 n 的数组 answer 作为答案，满足 answer[i] 是 nums 中除了 nums[i] 以外其他所有元素的乘积。
  * 1 <= nums.length <= 10^5

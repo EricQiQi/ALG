@@ -4,15 +4,15 @@
 
 | 题号 | 题目 | 方法 | 一句话总结 | 代码 |
 | :---: | :--- | :--- | :--- | :--- |
-| 1 | 两数之和 | HashMap | 边遍历边查 map 里有没有 `target - nums[i]`，没有就把当前值和下标存进去 | [代码](../src/s1_hash/Hot1_twoSum.java) |
+| 1 | [两数之和](Hot1-两数之和.md) | HashMap | 边遍历边查 map 里有没有 `target - nums[i]`，没有就把当前值和下标存进去 | [代码](../src/s1_hash/Hot1_twoSum.java) |
 | 49 | [字母异位词分组](Hot49-字母异位词分组.md) | HashMap + 排序 | 把每个字符串的**字符**排序后作为 key，相同 key 的字符串归为一组 | [代码](../src/s1_hash/Hot49_groupAnagrams.java) |
-| 128 | 最长连续序列 | HashSet + 起点判定 | 全部放入 Set，只从"前一个数不存在"的位置开始向后延伸数长度，保证 O(n) | [代码](../src/s1_hash/Hot128_longestConsecutive.java) |
+| 128 | [最长连续序列](Hot128-最长连续序列.md) | HashSet + 起点判定 | 全部放入 Set，只从"前一个数不存在"的位置开始向后延伸数长度，保证 O(n) | [代码](../src/s1_hash/Hot128_longestConsecutive.java) |
 
 ## s2_doubleIndex（双指针）
 
 | 题号 | 题目 | 方法 | 一句话总结 | 代码 |
 | :---: | :--- | :--- | :--- | :--- |
-| 283 | 移动零 | 快慢指针 | 快指针找非零元素往慢指针位置填，遍历完后慢指针之后全部补零 | [代码](../src/s2_doubleIndex/Hot283_moveZeroes.java) |
+| 283 | [移动零](Hot283-移动零.md) | 快慢指针 | 快指针找非零元素往慢指针位置填，遍历完后慢指针之后全部补零 | [代码](../src/s2_doubleIndex/Hot283_moveZeroes.java) |
 | 11 | [盛最多水的容器](Hot11-盛最多水的容器.md) | 双指针（谁短移谁） | 两端的指针向中间收缩，面积由短板决定，所以移动较短的那一侧 | [代码](../src/s2_doubleIndex/Hot11_maxArea.java) |
 | 15 | [三数之和](Hot15-三数之和.md) | 排序 + 双指针 / HashSet | 排序后固定一个数，双指针在剩余区间找两数之和，注意去重要和**前一个**元素比 | [代码](../src/s2_doubleIndex/Hot15_threeSum.java) |
 | 42 | [接雨水](Hot42-接雨水.md) | 双指针 / DP | 双指针从两端向中间收，哪边矮就算哪边的积水量，因为另一边一定有更高的板兜底 | [代码](../src/s2_doubleIndex/Hot42_trap.java) |
@@ -39,7 +39,7 @@
 | 53 | [最大子数组和](Hot53-最大子数组和.md) | 贪心 / DP（Kadane）/ 分治 | 累加当前元素后判断 preSum 是否变负，负了就清零丢弃，全程跟踪最大值 | [代码](../src/s5_ordinaryArray/Hot53_maxSubArray.java) |
 | 56 | [合并区间](Hot56-合并区间.md) | 排序 + 线性合并 | 按左端点排序后逐个遍历，能重叠就扩展右端点（取 max），不能重叠就新开一个区间 | [代码](../src/s5_ordinaryArray/Hot56_merge.java) |
 | 189 | [轮转数组](Hot189-轮转数组.md) | 辅助数组 / 三次翻转 / 环状替换 | 先整体翻转，再分别翻转前 k 个和剩余部分，注意 k 必须先 `k %= n` | [代码](../src/s5_ordinaryArray/Hot189_rotate.java) |
-| 238 | 除自身以外数组的乘积 | 前缀积（双指针同步累乘） | 左右指针从两端同步向中间走，用 `*=` 累乘把左积和右积分别灌进结果数组 | [代码](../src/s5_ordinaryArray/Hot238_productExceptSelf.java) |
+| 238 | [除自身以外数组的乘积](Hot238-除自身以外数组的乘积.md) | 前缀积（双指针同步累乘） | 左右指针从两端同步向中间走，用 `*=` 累乘把左积和右积分别灌进结果数组 | [代码](../src/s5_ordinaryArray/Hot238_productExceptSelf.java) |
 | 41 | [缺失的第一个正数](Hot41-缺失的第一个正数.md) | 原地哈希（正负号标记） | 把负数替换为 n+1 后，用下标当 key、正负号当标记，第一个正数的下标+1 就是答案 | [代码](../src/s5_ordinaryArray/Hot41_firstMissingPositive.java) |
 
 ## s6_matrix（矩阵）
@@ -55,15 +55,15 @@
 
 | 题号 | 题目 | 方法 | 一句话总结 | 代码 |
 | :---: | :--- | :--- | :--- | :--- |
-| 2 | 两数相加 | 模拟进位 | 两个链表同时遍历，逐位相加并 carry 进位，短的走完继续走长的，最后 carry>0 补一个节点 | [代码](../src/s7_linkTable/Hot2_addTwoNumbers.java) |
-| 21 | 合并两个有序链表 | 双指针 | dummy 节点起手，两个指针比大小往结果链上接，剩余部分直接拼上去 | [代码](../src/s7_linkTable/Hot21_mergeTwoLists.java) |
+| 2 | [两数相加](Hot2-两数相加.md) | 模拟进位 | 两个链表同时遍历，逐位相加并 carry 进位，短的走完继续走长的，最后 carry>0 补一个节点 | [代码](../src/s7_linkTable/Hot2_addTwoNumbers.java) |
+| 21 | [合并两个有序链表](Hot21-合并两个有序链表.md) | 双指针 | dummy 节点起手，两个指针比大小往结果链上接，剩余部分直接拼上去 | [代码](../src/s7_linkTable/Hot21_mergeTwoLists.java) |
 | 206 | [反转链表](Hot206-反转链表.md) | 迭代 / 递归 | 三个指针 prev/curr/next 逐个翻转指向，或者递归到末尾再逐层回头指 | [代码](../src/s7_linkTable/Hot206_reverseList.java) |
 | 24 | [两两交换链表中的节点](Hot24-两两交换链表中的节点.md) | 递归 / 迭代 | 每次取两个节点交换指向，递归处理后续部分，dummy 节点简化头节点交换 | [代码](../src/s7_linkTable/Hot24_swapPairs.java) |
 | 25 | [K 个一组翻转链表](Hot25-K个一组翻转链表.md) | 分组翻转 | 先数长度看够不够 k 个，够就翻转这 k 个，不够就保持原样，递归/循环拼接 | [代码](../src/s7_linkTable/Hot25_reverseKGroup.java) |
-| 19 | 删除链表的倒数第 N 个结点 | 快慢指针 | fast 先走 n 步拉开距离，然后 fast/slow 同速走，fast 到尾时 slow 正好在待删节点前一个 | [代码](../src/s7_linkTable/Hot19_removeNthFromEnd.java) |
+| 19 | [删除链表的倒数第 N 个结点](Hot19-删除链表的倒数第N个结点.md) | 快慢指针 | fast 先走 n 步拉开距离，然后 fast/slow 同速走，fast 到尾时 slow 正好在待删节点前一个 | [代码](../src/s7_linkTable/Hot19_removeNthFromEnd.java) |
 | 138 | [复制带随机指针的链表](Hot138-复制带随机指针的链表.md) | 三步走（拼接→拆分→连随机） | 每个节点后面插一个克隆节点，设好 random，再从交错链表中拆出两条独立链表 | [代码](../src/s7_linkTable/Hot138_copyRandomList.java) |
-| 141 | 环形链表 | 快慢指针 | 快指针每次走两步、慢指针走一步，有环必相遇 | [代码](../src/s7_linkTable/Hot141_hasCycle.java) |
-| 142 | 环形链表 II | 快慢指针 + 入口检测 | 快慢相遇后，一个新指针从 head 出发和慢指针同速走，再次相遇就是入环点 | [代码](../src/s7_linkTable/Hot142_detectCycle.java) |
+| 141 | [环形链表](Hot141-环形链表.md) | 快慢指针 | 快指针每次走两步、慢指针走一步，有环必相遇 | [代码](../src/s7_linkTable/Hot141_hasCycle.java) |
+| 142 | [环形链表 II](Hot142-环形链表II.md) | 快慢指针 + 入口检测 | 快慢相遇后，一个新指针从 head 出发和慢指针同速走，再次相遇就是入环点 | [代码](../src/s7_linkTable/Hot142_detectCycle.java) |
 | 160 | [相交链表](Hot160-相交链表.md) | 双指针拼接 | a 走完走 b、b 走完走 a，等长后同步到达的就是交点，不相交则同时到 null | [代码](../src/s7_linkTable/Hot160_getIntersectionNode.java) |
 | 234 | [回文链表](Hot234-回文链表.md) | 找中点 + 反转后半段 | 快慢指针找中点，反转后半段链表，再和前半段逐个比较 | [代码](../src/s7_linkTable/Hot234_isPalindrome.java) |
 | 23 | [合并 K 个升序链表](Hot23-合并K个升序链表.md) | 分治 / 优先队列 | 分治两两合并（归并思想），或用最小堆每次取 k 个链表头中最小的 | [代码1](../src/s7_linkTable/Hot23_mergeKLists_1.java) [代码2](../src/s7_linkTable/Hot23_mergeKLists_2.java) [代码3](../src/s7_linkTable/Hot23_mergeKLists_3.java) |
@@ -83,7 +83,7 @@
 | 108 | [有序数组转平衡二叉搜索树](Hot108-有序数组转二叉搜索树.md) | 分治（取中间值当根） | 每次取数组中间元素当根，左半递归建左子树、右半递归建右子树，天然平衡 | [代码](../src/s8_tree/Hot108_sortedArrayToBST.java) |
 | 114 | [二叉树展开为链表](Hot114-二叉树展开为链表.md) | 前序遍历 / 原地拼接 | 找到每个节点左子树的最右节点，把右子树接过去，再把左子树整体搬到右边 | [代码](../src/s8_tree/Hot114_flatten.java) |
 | 124 | [二叉树中的最大路径和](Hot124-二叉树中的最大路径和.md) | 后序遍历 + 最大贡献值 | 每个节点当拐点：左贡献+根+右贡献更新答案；贡献值只能选一边往上走，负贡献取 0 | [代码](../src/s8_tree/Hot124_maxPathSum.java) |
-| 199 | 二叉树的右视图 | BFS / DFS（根→右→左） | BFS 每层取最后一个；DFS 先走右子树，depth > res.size() 时记录 | [代码](../src/s8_tree/Hot199_rightSideView.java) |
+| 199 | [二叉树的右视图](Hot199-二叉树的右视图.md) | BFS / DFS（根→右→左） | BFS 每层取最后一个；DFS 先走右子树，depth > res.size() 时记录 | [代码](../src/s8_tree/Hot199_rightSideView.java) |
 | 226 | [翻转二叉树](Hot226-翻转二叉树.md) | 递归 / BFS | 递归交换每个节点的左右子树，三行代码 | [代码](../src/s8_tree/Hot226_invertTree.java) |
 | 230 | [二叉搜索树中第 K 小的元素](Hot230-二叉搜索树中第K小的元素.md) | 中序遍历 | BST 中序遍历就是递增序列，数到第 k 个就是答案 | [代码](../src/s8_tree/Hot230_kthSmallest.java) |
 | 236 | [二叉树的最近公共祖先](Hot236-二叉树的最近公共祖先.md) | 后序递归 | 左右各找一遍，两侧都有就是当前节点；只有一侧有就传上去，遇到 p/q 直接返回 | [代码](../src/s8_tree/Hot236_lowestCommonAncestor.java) |
