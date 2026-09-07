@@ -15,7 +15,7 @@ public class MergeSort {
         if (left >= right) return;
 
         // 二分：将区间分成两半
-        int mid = (left + right) / 2;
+        int mid = left + (right-left) / 2;
         // 递归排序左半部分
         mergeSort(arr, left, mid);
         // 递归排序右半部分
@@ -34,7 +34,7 @@ public class MergeSort {
         // i: 左区间起点，j: 右区间起点，k: temp 的索引
         int i = left, j = mid + 1, k = 0;
         
-        // 两区间逐个比较，小的先放入 temp
+        // 两区间逐个比较，小的先放入 temp，容易遗漏等号
         while (i <= mid && j <= right) {
             if (arr[i] <= arr[j]) {
                 temp[k++] = arr[i++];
