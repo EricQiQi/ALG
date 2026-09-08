@@ -7,6 +7,12 @@ package s7_linkTable;
  * 你可以假设除了数字 0 之外，这两个数都不会以 0 开头。
  */
 public class Hot2_addTwoNumbers {
+
+    /**
+     * 两数相加
+     * 时间复杂度：O(max(m,n))
+     * 空间复杂度：O(max(m,n))
+     */
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode preHead = new ListNode();
         ListNode head = preHead;
