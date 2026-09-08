@@ -33,37 +33,40 @@ k=3, 链表：1 → 2 → 3 → 4 → 5
 
 ```java
 public ListNode reverseKGroup(ListNode head, int k) {
-    // ① 检查剩余节点是否够 k 个
-    ListNode check = head;
+    // ① 先数剩余节点够不够 k 个，同时 temp 停在第 k+1 个节点
+    ListNode temp = head;
     int count = 0;
-    while (check != null && count < k) {
-        check = check.next;
+    while (temp != null && count < k) {
+        temp = temp.next;
         count++;
     }
     if (count < k) return head;  // 不够 k 个，保持原样
 
-    // ② 够 k 个，翻转前 k 个节点
-    ListNode[] result = reverseList(head, k);
-    // result[0] = 翻转后的新头，result[1] = 下一组的头
+    // ② 够 k 个，翻转前 k 个节点，返回翻转后的新头
+    ListNode newHead = reverseList(head, k);
 
-    // ③ 递归处理下一组，拼接
-    head.next = reverseKGroup(result[1], k);
-    return result[0];
+    // ③ temp 就是下一组的头，递归翻转后接到当前组的尾部(head)
+    head.next = reverseKGroup(temp, k);
+    return newHead;
 }
 
-// 翻转 k 个节点，返回 [新头, 下一组头]
-ListNode[] reverseList(ListNode head, int k) {
+// 翻转前 k 个节点，返回翻转后的新头
+ListNode reverseList(ListNode head, int k) {
     ListNode prev = null, curr = head;
-    for (int i = 0; i < k; i++) {
+    int count = 0;
+    while (curr != null && count < k) {
         ListNode temp = curr.next;
         curr.next = prev;
         prev = curr;
         curr = temp;
+        count++;
     }
     head.next = curr;  // 翻转后 head 变成尾部，接上剩余部分
-    return new ListNode[]{prev, curr};
+    return prev;
 }
 ```
+
+> 关键点：第①步在数节点时，`temp` 已经走到了第 k+1 个节点，正好是下一组的头。所以 `reverseList` 只需返回翻转后的新头即可，无需再用数组回传下一组的位置。
 
 ### 复杂度
 
@@ -80,16 +83,15 @@ ListNode[] reverseList(ListNode head, int k) {
 k=2, 链表：1 → 2 → 3 → 4 → 5
 
 reverseKGroup(1→2→3→4→5, 2)：
-  检查：count=2 ≥ k ✓
-  翻转前2个：reverseList(1→2, 2)
-    → [新头=2, 下一组=3]
-    链表变成：2→1, 3→4→5
-  head(1).next = reverseKGroup(3→4→5, 2)
-    → 检查 count=2 ≥ k ✓
-    → 翻转：reverseList(3→4, 2) → [4, 5]
-    → head(3).next = reverseKGroup(5, 2)
-      → 检查 count=1 < k → 返回 5
-    → head(3).next = 5 → 4→3→5
+  ① 数够 k 个：temp 从 1 走到 3，count=2 ≥ k ✓（temp 停在下一组头 3）
+  ② 翻转前2个：reverseList(1→2, 2) → 新头=2
+     链表变成：2→1→(3→4→5)
+  ③ head(1).next = reverseKGroup(3→4→5, 2)
+     → ① temp 走到 5，count=2 ≥ k ✓
+     → ② reverseList(3→4, 2) → 新头=4，得 4→3→(5)
+     → ③ head(3).next = reverseKGroup(5, 2)
+          → ① count=1 < k → 返回 5（保持原样）
+     → head(3).next = 5，得 4→3→5
   head(1).next = 4→3→5
   返回 2→1→4→3→5
 ```
@@ -111,10 +113,10 @@ reverseKGroup(1→2→3→4→5, 2)：
 
 ## 易错点
 
-1. **先检查再翻转**：必须先数够 k 个才翻转，不够就原样返回。不能边翻边数
+1. **先数再翻**：必须先数够 k 个才翻转，不够就原样返回。不能边翻边数
 2. **翻转后 head 变成尾部**：`head.next = curr`（curr 是第 k+1 个节点），这步不能漏
-3. **返回值数组**：`reverseList` 返回 `[新头, 下一组头]`，用数组一次返回两个值
-4. **递归拼接顺序**：`head.next = reverseKGroup(result[1], k)` — 翻转后 head 是尾部，它的 next 要接递归结果
+3. **复用 temp 指针**：第①步数数时 temp 已停在第 k+1 个节点，直接作为下一组头，无需额外返回
+4. **递归拼接顺序**：`head.next = reverseKGroup(temp, k)` — 翻转后 head 是尾部，它的 next 要接递归结果
 
 ---
 
