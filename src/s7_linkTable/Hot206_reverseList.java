@@ -34,6 +34,7 @@ public class Hot206_reverseList {
      */
     public ListNode reverseList_2(ListNode head) {
         if (head == null || head.next == null) return head;
+        // newHead是反转列表的头
         ListNode newHead = reverseList_2(head.next);
         head.next.next = head;
         head.next = null;

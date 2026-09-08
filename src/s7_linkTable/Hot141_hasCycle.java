@@ -3,10 +3,14 @@ package s7_linkTable;
 /**
  * 141. 环形链表
  * 给定 head 节点，返回链表中第一个入环节点。如果链表中没有环，则返回 null。
- *
  */
 public class Hot141_hasCycle {
 
+    /**
+     * 快慢指针
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     */
     public boolean hasCycle(ListNode head) {
         if(head == null) return false;
 
