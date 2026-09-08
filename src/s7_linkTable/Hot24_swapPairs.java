@@ -5,30 +5,32 @@ package s7_linkTable;
  */
 public class Hot24_swapPairs {
     /**
-     * 迭代法
-     * @param head
-     * @return
+     * 方法1：迭代法
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
      */
     public ListNode swapPairs_1(ListNode head) {
         ListNode dummyNode = new ListNode(0);
         dummyNode.next = head;
 
-        ListNode temp = dummyNode;
-        while(temp.next != null && temp.next.next != null){
-            ListNode node1 = temp.next;
-            ListNode node2 = temp.next.next;
-            temp.next = node2;
+        ListNode curr = dummyNode;
+        while(curr.next != null && curr.next.next != null){
+            ListNode node1 = curr.next;
+            ListNode node2 = curr.next.next;
+
+            curr.next = node2;
             node1.next = node2.next;
             node2.next = node1;
-            temp = node1;
+            curr = node1;
         }
+
         return dummyNode.next;
     }
 
     /**
-     * 递归法
-     * @param head
-     * @return
+     * 方法2：递归法
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
      */
     public ListNode swapPairs(ListNode head) {
         // ① 递归终止条件
