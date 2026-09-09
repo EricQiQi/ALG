@@ -6,41 +6,43 @@ import java.util.Random;
 public class QuickSort {
 
     public static void quickSort(int[] arr) {
-        if (arr == null || arr.length == 0) return;
-        quickSort(arr, 0, arr.length - 1);
+        if(arr == null || arr.length == 0) return;
+        quickSort(arr, 0, arr.length-1);
     }
 
-    public static void quickSort(int[] arr, int left, int right) {
-        if (left >= right) return;
+    public static void quickSort(int[] arr, int left, int right){
+        if(left >= right) return;
 
         int pivotIndex = partition(arr, left, right);
-        quickSort(arr, left, pivotIndex - 1);
-        quickSort(arr, pivotIndex + 1, right);
+        quickSort(arr, left, pivotIndex-1);
+        quickSort(arr, pivotIndex+1, right);
     }
 
-    public static int partition(int[] arr, int left, int right) {
-        int pivotIndex = left + new Random().nextInt(right - left);
-        swap(arr, pivotIndex, left);
+    public static int partition(int[] arr, int left, int right){
+        int pivotIndex = left + new Random().nextInt(right-left);
+        swap(arr, left, pivotIndex);
+
         int pivot = arr[left];
+        int i=left, j=right;
+        while(i < j){
+            while(i<j && arr[j] >= pivot){
+                j--;
+            }
+            while(i<j && arr[i] <= pivot) i++;
 
-        int i = left, j = right;
-
-        while (i < j) {
-            while (i < j && arr[j] >= pivot) j--;
-            while (i < j && arr[i] <= pivot) i++;
-            if (i < j) swap(arr, i, j);
+            if(i<j) swap(arr, i, j);
         }
-
-        swap(arr, i, left);
-
+        swap(arr, left ,i);
         return i;
     }
 
-    public static void swap(int[] arr, int i, int j) {
+    public static void swap(int[] arr, int i, int j){
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
+
+
 
 
     public static void main(String[] args) {
