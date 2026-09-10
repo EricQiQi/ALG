@@ -28,7 +28,7 @@ public class MergeSort {
      * 合并两个有序区间 [left, mid] 和 [mid+1, right]
      * 使用临时数组 temp 辅助合并
      */
-    public static int[] merge(int[] arr, int left, int mid, int right) {
+    public static void merge(int[] arr, int left, int mid, int right) {
         // 临时数组，存放合并结果
         int[] temp = new int[right - left + 1];
         // i: 左区间起点，j: 右区间起点，k: temp 的索引
@@ -55,7 +55,6 @@ public class MergeSort {
         for (i = left; i <= right; i++) {
             arr[i] = temp[i - left];
         }
-        return arr;
     }
 
 

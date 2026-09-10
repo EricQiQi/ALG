@@ -12,7 +12,7 @@ public class Hot23_mergeKLists_1 {
 
     /**
      * 方法1：顺序合并
-     * 时间复杂度：O(kn)
+     * 时间复杂度：O(k²n)
      * 空间复杂度：O(1)
      * @param lists
      * @return

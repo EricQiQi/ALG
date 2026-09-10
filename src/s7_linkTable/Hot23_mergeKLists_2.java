@@ -12,8 +12,6 @@ public class Hot23_mergeKLists_2 {
 
     /**
      * 方法2：分治合并
-     * 时间复杂度：O(kn)
-     * 空间复杂度：O(1)
      * @param lists
      * @return
      */
@@ -32,11 +30,13 @@ public class Hot23_mergeKLists_2 {
         if (left == right) {
             return lists[left];
         }
-    
         // 边界情况：空区间
         if (left > right) {
             return null;
         }
+
+        // 也可以写成，但是 merge方法被别人复用，如果忘记判断 lists 是否为空，则可能出现越界的情况
+//        if(left >= right) return lists[left];
     
         // 二分：将区间分成两半
         int mid = (left + right) / 2;

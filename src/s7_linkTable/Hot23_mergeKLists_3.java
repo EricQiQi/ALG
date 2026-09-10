@@ -26,8 +26,7 @@ public class Hot23_mergeKLists_3 {
         ListNode curr = dummy;
         
         // 最小堆：按节点值排序，堆顶始终是最小值节点
-        PriorityQueue<ListNode> pq = new PriorityQueue<>(
-                (a, b) -> (a.val - b.val));
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.val));
 
         // 初始化：将 k 个链表的头节点（非 null）加入堆中
         for (ListNode list : lists) {
