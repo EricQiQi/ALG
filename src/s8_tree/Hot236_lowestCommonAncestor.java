@@ -6,12 +6,9 @@ package s8_tree;
  */
 public class Hot236_lowestCommonAncestor {
     /**
-     * 236. 二叉树的最近公共祖先
-     *
-     * @param root
-     * @param p
-     * @param q
-     * @return
+     * 递归法：左、右、根
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
      */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         // 如果root为空或root为p或q中的任意一个，则返回root
