@@ -63,7 +63,7 @@ public class Hot226_invertTree {
         System.out.println("翻转前：" + solution.levelOrder(root));
 
         Hot226_invertTree hot226InvertTree = new Hot226_invertTree();
-        TreeNode invertedRoot = hot226InvertTree.invertTree(root);
+        TreeNode invertedRoot = hot226InvertTree.invertTree_2(root);
 
         System.out.println("翻转后：" + solution.levelOrder(root));
 
