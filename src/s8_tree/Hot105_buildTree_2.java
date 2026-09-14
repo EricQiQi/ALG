@@ -8,7 +8,6 @@ import java.util.Map;
 /**
  * 105. 从前序与中序遍历序列构造二叉树
  * 根据一棵树的前序遍历与中序遍历构造二叉树。
- *
  */
 public class Hot105_buildTree_2 {
 
@@ -21,14 +20,13 @@ public class Hot105_buildTree_2 {
      * 方法2：全局指针 + stop 值隐式划分子树边界
      * 时间复杂度：O(n)
      * 空间复杂度：O(n)
-     * <p>
+     *
      * 核心思想：
      * 前序遍历的第一个节点是根，在中序遍历中，根节点左边是左子树，右边是右子树。
      * 用 stop 值标记"当前子树在中序遍历中的右边界"，当 inorder[in] == stop 时，
      * 说明当前子树已全部构建完毕，返回 null。
-     * <p>
+     *
      * 以 preorder=[3,9,20,15,7], inorder=[9,3,15,20,7] 为例：
-     * <p>
      * dfs(stop=MAX) → 根=3
      * 左子树 dfs(stop=3)  → 根=9, 左=null(in[0]==9==stop), 右=null
      * in++  → 跳过中序中的 3
@@ -36,7 +34,7 @@ public class Hot105_buildTree_2 {
      * 左子树 dfs(stop=20) → 根=15, 左=null(in[2]==15==stop), 右=null
      * in++ → 跳过中序中的 20
      * 右子树 dfs(stop=MAX) → 根=7, 左=null(in[4]==7==stop), 右=null
-     * <p>
+     *
      * 3
      * / \
      * 9  20

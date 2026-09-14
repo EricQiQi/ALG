@@ -13,7 +13,6 @@ public class Hot114_flatten {
      * 方法1：前序遍历
      * 时间复杂度：O(n)
      * 空间复杂度：O(n)
-     * @param root
      */
     public static void flatten_1(TreeNode root) {
         List<TreeNode> res = new ArrayList<>();
@@ -39,7 +38,6 @@ public class Hot114_flatten {
      * 方法2：迭代-寻找前驱节点
      * 时间复杂度：O(n)
      * 空间复杂度：O(1)
-     * @param root
      */
     public static void flatten_2(TreeNode root) {
         TreeNode curr = root;

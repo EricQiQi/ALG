@@ -19,10 +19,6 @@ public class Hot437_pathSum {
      * <p>
      * 时间复杂度：O(n^2)
      * 空间复杂度：O(n)
-     *
-     * @param root
-     * @param targetSum
-     * @return
      */
     public int pathSum_1(TreeNode root, long targetSum) {
         if (root == null) return 0;
@@ -46,13 +42,8 @@ public class Hot437_pathSum {
 
     /**
      * 方法2：前缀和
-     * <p>
      * 时间复杂度：O(n)
      * 空间复杂度：O(n)
-     *
-     * @param root
-     * @param targetSum
-     * @return
      */
     public int pathSum_2(TreeNode root, long targetSum) {
         // 前缀和映射：key为前缀和，value为该前缀和出现的次数

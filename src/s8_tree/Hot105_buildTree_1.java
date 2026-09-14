@@ -16,9 +16,8 @@ public class Hot105_buildTree_1 {
 
     /**
      * 方法1：递归
-     * @param preorder
-     * @param inorder
-     * @return
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
      */
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         int n = preorder.length;
