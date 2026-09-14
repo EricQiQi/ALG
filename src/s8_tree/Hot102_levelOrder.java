@@ -1,6 +1,8 @@
 package s8_tree;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -14,7 +16,7 @@ import java.util.Queue;
 public class Hot102_levelOrder {
 
     /**
-     * 层序遍历：BFS（广度优先搜索）
+     * 方法1：层序遍历：BFS（广度优先搜索）
      * 核心：用队列逐层遍历，每轮用 size 锁定当前层的节点数
      *
      * @param root 根节点
@@ -42,6 +44,34 @@ public class Hot102_levelOrder {
         return res;
     }
 
+    /**
+     * 方法2：层序遍历：BFS，用 Deque（ArrayDeque）实现
+     * ArrayDeque 基于数组、无同步锁，比 LinkedList 更快，是官方推荐的队列实现
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     */
+    public List<List<Integer>> levelOrder_2(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+
+        Deque<TreeNode> queue = new ArrayDeque<>();
+        queue.offerLast(root);
+        while (!queue.isEmpty()) {
+            List<Integer> level = new ArrayList<>();
+            // 关键：提前锁定当前层的节点数，避免遍历时队列长度变化
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.pollFirst();
+                level.add(node.val);
+                // ArrayDeque 不允许存 null，入队前必须先判空
+                if (node.left != null) queue.offerLast(node.left);
+                if (node.right != null) queue.offerLast(node.right);
+            }
+            res.add(level);
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         //        3
         //       / \
@@ -57,5 +87,8 @@ public class Hot102_levelOrder {
         Hot102_levelOrder solution = new Hot102_levelOrder();
         List<List<Integer>> res = solution.levelOrder(root);
         System.out.println("层序遍历: " + res);  // [[3], [9, 20], [15, 7]]
+
+        List<List<Integer>> res2 = solution.levelOrder_2(root);
+        System.out.println("层序遍历(Deque): " + res2);  // [[3], [9, 20], [15, 7]]
     }
 }

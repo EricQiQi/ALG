@@ -1,5 +1,8 @@
 package s8_tree;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * 104. 二叉树的最大深度
  * 给定一个二叉树，找出其最大深度。
@@ -10,13 +13,42 @@ package s8_tree;
 public class Hot104_maxDepth {
 
     /**
-     * 递归
-     * @param root
-     * @return
+     * 方法1：递归，深度优先遍历
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(h)
      */
     public int maxDepth(TreeNode root){
         if (root == null) return 0;
         return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+    }
+
+
+    /**
+     * 方法2：迭代，广度优先遍历
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     */
+    public int maxDepth_2(TreeNode root){
+        if(root == null) return 0;
+        int maxDepth = 0;
+
+        Deque<TreeNode> dq = new ArrayDeque<>();
+        dq.offerLast(root);
+        while(!dq.isEmpty()){
+            int size = dq.size();
+            while(size > 0){
+                TreeNode node = dq.pollFirst();
+                if(node.left != null){
+                    dq.offerLast(node.left);
+                }
+                if(node.right != null){
+                    dq.offerLast(node.right);
+                }
+                size--;
+            }
+            maxDepth++;
+        }
+        return maxDepth;
     }
 
     public static void main(String[] args) {
@@ -32,5 +64,7 @@ public class Hot104_maxDepth {
         root.right.left = new TreeNode(15);
         root.right.right = new TreeNode(7);
         System.out.println("最大深度为： " + solution.maxDepth(root));
+
+        System.out.println("最大深度为： " + solution.maxDepth_2(root));
     }
 }

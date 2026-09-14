@@ -98,7 +98,7 @@ while (!stack.isEmpty() || curr != null) {
 | 中序 | 弹出时 add | 左子树处理完才记录 |
 | 后序 | 需要额外标记 | 见下方说明 |
 
-### 前序迭代
+### 前序迭代（根左右）
 
 ```java
 public List<Integer> preorderTraversal(TreeNode root) {
@@ -118,7 +118,7 @@ public List<Integer> preorderTraversal(TreeNode root) {
 }
 ```
 
-### 中序迭代
+### 中序迭代（左根右）
 
 ```java
 public List<Integer> inorderTraversal(TreeNode root) {
@@ -138,7 +138,7 @@ public List<Integer> inorderTraversal(TreeNode root) {
 }
 ```
 
-### 后序迭代（根右左 + 反转）
+### 后序迭代（正常是：左右根，迭代做法：根右左 + 反转）
 
 ```java
 public List<Integer> postorderTraversal(TreeNode root) {
