@@ -90,6 +90,12 @@
 | 236 | [二叉树的最近公共祖先](Hot236-二叉树的最近公共祖先.md) | 后序递归 | 左右各找一遍，两侧都有就是当前节点；只有一侧有就传上去，遇到 p/q 直接返回 | [代码](../src/s8_tree/Hot236_lowestCommonAncestor.java) |
 | 124 | [二叉树中的最大路径和](Hot124-二叉树中的最大路径和.md) | 后序遍历 + 最大贡献值 | 每个节点当拐点：左贡献+根+右贡献更新答案；贡献值只能选一边往上走，负贡献取 0 | [代码](../src/s8_tree/Hot124_maxPathSum.java) |
 
+## s9_graph（图）
+
+| 题号 | 题目 | 方法 | 一句话总结 | 代码 |
+| :---: | :--- | :--- | :--- | :--- |
+| 200 | [岛屿数量](Hot200-岛屿数量.md) | DFS / BFS 淹没 / 并查集 | 扫描遇 '1' 计数+1 后淹没整块（连通分量计数）；或并查集先各自成岛、相邻合并、每合一次减一 | [DFS](../src/s9_graph/Hot200_numIslands.java) [DFS+visited](../src/s9_graph/Hot200_numIslands_1_DFS_tempArr.java) [BFS](../src/s9_graph/Hot200_numsIslangs_2_BFS.java) [并查集](../src/s9_graph/Hot200_numIslands_3.java) |
+
 ## sort（排序）
 
 | 题目 | 方法 | 一句话总结 | 代码 |
