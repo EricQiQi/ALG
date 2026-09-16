@@ -92,9 +92,11 @@
 
 ## s9_graph（图）
 
-| 题号 | 题目 | 方法 | 一句话总结 | 代码 |
-| :---: | :--- | :--- | :--- | :--- |
-| 200 | [岛屿数量](Hot200-岛屿数量.md) | DFS / BFS 淹没 / 并查集 | 扫描遇 '1' 计数+1 后淹没整块（连通分量计数）；或并查集先各自成岛、相邻合并、每合一次减一 | [DFS](../src/s9_graph/Hot200_numIslands.java) [DFS+visited](../src/s9_graph/Hot200_numIslands_1_DFS_tempArr.java) [BFS](../src/s9_graph/Hot200_numsIslangs_2_BFS.java) [并查集](../src/s9_graph/Hot200_numIslands_3_rank.java) [并查集(无秩)](../src/s9_graph/Hot200_numIslands_3.java) |
+| 题号 | 题目 | 方法 | 一句话总结 | 代码                                                                                                                                                                                                                                                                                         |
+| :---: | :--- | :--- | :--- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 200 | [岛屿数量](Hot200-岛屿数量.md) | DFS / BFS 淹没 / 并查集 | 扫描遇 '1' 计数+1 后淹没整块（连通分量计数）；或并查集先各自成岛、相邻合并、每合一次减一 | [DFS](../src/s9_graph/Hot200_numIslands_1_DFS.java) [DFS+visited](../src/s9_graph/Hot200_numIslands_1_DFS_tempArr.java) [BFS](../src/s9_graph/Hot200_numIslands_2_BFS.java) [并查集](../src/s9_graph/Hot200_numIslands_3_rank.java) [并查集(无秩)](../src/s9_graph/Hot200_numIslands_3.java) |
+| 994 | [腐烂的橘子](Hot994-腐烂的橘子.md) | 多源 BFS | 所有腐烂橘子同时入队作为第 0 层，每分钟扩散一层，freshCount 扣减判停；求时间/最短层数用 BFS，不用 DFS（量不出最短）也不用并查集（没有距离概念） | [代码](../src/s9_graph/Hot994_orangesRotting.java)                                                                                                                                                                                                                                           |
+| 207 | [课程表](Hot207-课程表.md) | DFS 三色标记判环 | 先修关系建有向图，修完全课 = 无环；visited 三态（0 未访/1 在路上/2 完工），撞 1 是环、撞 2 白跑剪枝 | [代码](../src/s9_graph/Hot207_canFinish_BFS.java)                                                                                                                                                                                                                                            |
 
 ## sort（排序）
 

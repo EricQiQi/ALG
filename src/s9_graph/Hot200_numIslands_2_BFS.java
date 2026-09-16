@@ -6,7 +6,7 @@ import java.util.Queue;
 /**
  * 200. 岛屿数量（BFS）
  */
-public class Hot200_numsIslands_2_BFS {
+public class Hot200_numIslands_2_BFS {
 
     /**
      * 方法2：广度优先搜索 BFS
@@ -76,7 +76,7 @@ public class Hot200_numsIslands_2_BFS {
                 {'0', '0', '0', '1', '1'}
         };
 
-        int result_1 = new Hot200_numsIslands_2_BFS().numIslands(grid);
+        int result_1 = new Hot200_numIslands_2_BFS().numIslands(grid);
         System.out.println("岛屿数量: " + result_1); // 期望输出：3
     }
 }
