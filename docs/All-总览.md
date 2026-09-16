@@ -94,7 +94,7 @@
 
 | 题号 | 题目 | 方法 | 一句话总结 | 代码 |
 | :---: | :--- | :--- | :--- | :--- |
-| 200 | [岛屿数量](Hot200-岛屿数量.md) | DFS / BFS 淹没 / 并查集 | 扫描遇 '1' 计数+1 后淹没整块（连通分量计数）；或并查集先各自成岛、相邻合并、每合一次减一 | [DFS](../src/s9_graph/Hot200_numIslands.java) [DFS+visited](../src/s9_graph/Hot200_numIslands_1_DFS_tempArr.java) [BFS](../src/s9_graph/Hot200_numsIslangs_2_BFS.java) [并查集](../src/s9_graph/Hot200_numIslands_3.java) |
+| 200 | [岛屿数量](Hot200-岛屿数量.md) | DFS / BFS 淹没 / 并查集 | 扫描遇 '1' 计数+1 后淹没整块（连通分量计数）；或并查集先各自成岛、相邻合并、每合一次减一 | [DFS](../src/s9_graph/Hot200_numIslands.java) [DFS+visited](../src/s9_graph/Hot200_numIslands_1_DFS_tempArr.java) [BFS](../src/s9_graph/Hot200_numsIslangs_2_BFS.java) [并查集](../src/s9_graph/Hot200_numIslands_3_rank.java) [并查集(无秩)](../src/s9_graph/Hot200_numIslands_3.java) |
 
 ## sort（排序）
 
