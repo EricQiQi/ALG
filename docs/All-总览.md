@@ -99,6 +99,13 @@
 | 207 | [课程表](Hot207-课程表.md) | DFS 三色标记判环 | 先修关系建有向图，修完全课 = 无环；visited 三态（0 未访/1 在路上/2 完工），撞 1 是环、撞 2 白跑剪枝 | [代码](../src/s9_graph/Hot207_canFinish_BFS.java)
 | 208 | [实现 Trie (前缀树)](Hot208-实现Trie前缀树.md) | 多叉树逐字符钻 | 每节点 26 个孩子槽位 + isEnd 章，三大操作同一条主循环：insert 铺路盖章、search 看章、startsWith 不看章 | [代码](../src/s9_graph/Hot208_Trie.java) |                                                                                                                                                                                                                                            |
 
+## s10_backTracking（回溯）
+
+| 题号 | 题目 | 方法 | 一句话总结 | 代码 |
+| :---: | :--- | :--- | :--- | :--- |
+| 46 | [全排列](Hot46-全排列.md) | 交换法回溯 | 每层把候选池里的数 swap 到 first 位固定，递归后 swap 回去撤销；收割必须拷贝 | [代码](../src/s10_backTracking/Hot46_permute.java) |
+| 78 | [子集](Hot78-子集.md) | start 索引法回溯 | 只从 start 往后挑不回头，每个节点一进门就收割（含空集）；含重复元素需排序+跳同层重复 | [代码](../src/s10_backTracking/Hot78_permute.java) |
+
 ## sort（排序）
 
 | 题目 | 方法 | 一句话总结 | 代码 |
