@@ -10,14 +10,14 @@ import java.util.List;
  * 和全排列的区别：排列要交换法把每个数换到每个位置，子集只需"从 start 往后挑"，且每个节点（不只是叶子）都是合法答案。
  * 注意：本题输入不含重复元素；若含重复（Hot90 子集II）需先排序 + i>start && nums[i]==nums[i-1] 跳过去重。
  */
-public class Hot78_permute {
+public class Hot78_subsets {
 
     /** 收集所有子集（每个节点到达时都收割一次） */
     private List<List<Integer>> res = new ArrayList<>();
     /** 当前路径（当前正在构造的子集），递归前后同步增删（回溯） */
     private List<Integer> output = new ArrayList<>();
 
-    public List<List<Integer>> permute(int[] nums) {
+    public List<List<Integer>> subsets(int[] nums) {
         // 题目标准方法名为 subsets，从下标 0 开始选
         backTrack(nums, 0);
         return res;
@@ -47,8 +47,8 @@ public class Hot78_permute {
 
     public static void main(String[] args) {
         int[] nums = {1, 2, 3};
-        Hot78_permute hot78_permute = new Hot78_permute();
+        Hot78_subsets hot78_permute = new Hot78_subsets();
         // 输出 8 个子集（2^3 = 8）：[], [1], [1,2], [1,2,3], [1,3], [2], [2,3], [3]
-        System.out.println(hot78_permute.permute(nums));
+        System.out.println(hot78_permute.subsets(nums));
     }
 }

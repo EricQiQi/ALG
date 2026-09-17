@@ -1,6 +1,6 @@
 # LeetCode 78. 子集
 
-对应源码：[Hot78_permute.java](../src/s10_backTracking/Hot78_permute.java)
+对应源码：[Hot78_subsets.java](../src/s10_backTracking/Hot78_subsets.java)
 
 ## 题目描述
 

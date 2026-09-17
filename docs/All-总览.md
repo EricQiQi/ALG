@@ -101,10 +101,13 @@
 
 ## s10_backTracking（回溯）
 
-| 题号 | 题目 | 方法 | 一句话总结 | 代码 |
-| :---: | :--- | :--- | :--- | :--- |
-| 46 | [全排列](Hot46-全排列.md) | 交换法回溯 | 每层把候选池里的数 swap 到 first 位固定，递归后 swap 回去撤销；收割必须拷贝 | [代码](../src/s10_backTracking/Hot46_permute.java) |
-| 78 | [子集](Hot78-子集.md) | start 索引法回溯 | 只从 start 往后挑不回头，每个节点一进门就收割（含空集）；含重复元素需排序+跳同层重复 | [代码](../src/s10_backTracking/Hot78_permute.java) |
+| 题号 | 题目 | 方法 | 一句话总结 | 代码                                                          |
+| :---: | :--- | :--- | :--- |:--------------------------------------------------------------|
+| 46 | [全排列](Hot46-全排列.md) | 交换法回溯 | 每层把候选池里的数 swap 到 first 位固定，递归后 swap 回去撤销；收割必须拷贝 | [代码](../src/s10_backTracking/Hot46_permute.java)            |
+| 78 | [子集](Hot78-子集.md) | start 索引法回溯 | 只从 start 往后挑不回头，每个节点一进门就收割（含空集）；含重复元素需排序+跳同层重复 | [代码](../src/s10_backTracking/Hot78_subsets.java)                      |
+| 17 | [电话号码的字母组合](Hot17-电话号码的字母组合.md) | 逐位配字母回溯 | 每层选择池 = 当前数字对应的字母表，append → 递归下一位 → deleteCharAt；钻满收割，空串要先挡 | [代码](../src/s10_backTracking/Hot17_letterCombinations.java) |
+| 39 | [组合总和](Hot39-组合总和.md) | start 索引法 + 减法凑数 | target 一路减，减到 0 收割、减成负剪枝；递归传 `i`（不是 `i+1`）允许重复选同一个数 | [代码](../src/s10_backTracking/Hot39_combinationSum.java) |
+| 22 | [括号生成](Hot22-括号生成.md) | 双条件剪枝回溯 | 左括号看余量（left < n）、右括号看欠账（left > right），边生成边剪枝不用事后校验；长到 2n 收割 | [分支写法](../src/s10_backTracking/Hot22_generateParenthesis_1.java) [候选数组+continue](../src/s10_backTracking/Hot22_generateParenthesis_2.java) |
 
 ## sort（排序）
 
