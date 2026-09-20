@@ -111,11 +111,12 @@
 | 79 | [单词搜索](Hot79-单词搜索.md) | 网格 DFS + 回溯 | 每个格子当起点，逐字母向四方向钻，visited 标记防重复走；标记→递归→撤销三步齐全，走不通就擦标记退回换方向 | [代码](../src/s10_backTracking/Hot79_exist.java) |
 | 51 | [N 皇后](Hot51-N皇后.md) | 逐行放置回溯 | 一行放一个皇后，isValid 只查上方三向（同列+两斜）；放下→递归下一行→擦掉换列，钻满 n 行收割（记得拷贝棋盘） | [代码](../src/s10_backTracking/Hot51_solveNQueens.java) |
 
-## s10_backTracking（回溯）
+## s11_binarySearch（二分查找）
 
 | 题号 | 题目 | 方法 | 一句话总结 | 代码                                        |
 | :---: | :--- | :--- | :--- |:------------------------------------------|
 | 35 | [搜索插入位置](Hot35-搜索插入位置.md) | 二分查找（lower_bound） | 闭区间 `left<=right` 夹逼找第一个 ≥ target 的位置，命中返回 mid，否则返回 left 即插入点；mid 用 `left+(right-left)/2` 防溢出 | [代码](../src/s11_binarySearch/Hot35_searchInsert.java) |
+| 74 | [搜索二维矩阵](Hot74-搜索二维矩阵.md) | 二分（两次 / 一维拉平） | 矩阵拉平即全局升序数组；方法一先对第一列二分定行再行内二分，方法二把下标映射 `matrix[mid/cols][mid%cols]` 一次二分；定行返回 `up-1` | [代码](../src/s11_binarySearch/Hot74_searchMatrix.java) |
 
 
 ## sort（排序）

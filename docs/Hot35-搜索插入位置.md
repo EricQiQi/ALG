@@ -1,6 +1,6 @@
 # LeetCode 35. 搜索插入位置
 
-对应源码：[Hot35_searchInsert.java](../src/s10_backTracking/Hot35_searchInsert.java)
+对应源码：[Hot35_searchInsert.java](../src/s11_binarySearch/Hot35_searchInsert.java)
 
 ## 题目描述
 
@@ -89,4 +89,4 @@ public int searchInsert(int[] nums, int target) {
 
 ## 📌 备注
 
-该源文件当前放在 `s10_backTracking`（回溯）包下，但 LeetCode 35 属于**二分查找**题型，与 `src/search/BinarySearch.java` 同类。若后续按题型归档，可考虑移到 `search` 包（非功能性问题，不影响运行）。
+该题属于**二分查找**题型，源文件已归入 `s11_binarySearch` 包，与 `src/search/BinarySearch.java` 同类。它是二分「找插入点 / lower_bound」的最基础模板，Hot74（搜索二维矩阵）等题都在此基础上扩展。
