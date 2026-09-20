@@ -80,8 +80,8 @@
 | 101 | [对称二叉树](Hot101-对称二叉树.md) | 递归对比 | 把一棵树拆成"左"和"右"两棵虚拟树，递归判断 left.left==right.right && left.right==right.left | [代码](../src/s8_tree/Hot101_isSymmetric.java) |
 | 543 | [二叉树的直径](Hot543-二叉树的直径.md) | DFS（记录最大深度和） | 每个节点当拐点，直径 = 左深度 + 右深度，全局变量跟踪最大值 | [代码](../src/s8_tree/Hot543_diameterOfBinaryTree.java) |
 | 102 | [二叉树的层序遍历](Hot102-二叉树的层序遍历.md) | BFS（队列） | 队列每层记录 size，for 循环恰好处理完当前层再入队下一层 | [代码](../src/s8_tree/Hot102_levelOrder.java) |
-| 98 | [验证二叉搜索树](Hot98-验证二叉搜索树.md) | 递归带范围 / 中序遍历 | 每个节点带 (min, max) 范围下去检查，往左收紧 max、往右收紧 min；或中序遍历检查严格递增 | [代码](../src/s8_tree/Hot98_isValidBST.java) |
 | 108 | [有序数组转平衡二叉搜索树](Hot108-有序数组转二叉搜索树.md) | 分治（取中间值当根） | 每次取数组中间元素当根，左半递归建左子树、右半递归建右子树，天然平衡 | [代码](../src/s8_tree/Hot108_sortedArrayToBST.java) |
+| 98 | [验证二叉搜索树](Hot98-验证二叉搜索树.md) | 递归带范围 / 中序遍历 | 每个节点带 (min, max) 范围下去检查，往左收紧 max、往右收紧 min；或中序遍历检查严格递增 | [代码](../src/s8_tree/Hot98_isValidBST.java) |
 | 230 | [二叉搜索树中第 K 小的元素](Hot230-二叉搜索树中第K小的元素.md) | 中序遍历 | BST 中序遍历就是递增序列，数到第 k 个就是答案 | [代码](../src/s8_tree/Hot230_kthSmallest.java) |
 | 199 | [二叉树的右视图](Hot199-二叉树的右视图.md) | BFS / DFS（根→右→左） | BFS 每层取最后一个；DFS 先走右子树，depth > res.size() 时记录 | [代码](../src/s8_tree/Hot199_rightSideView.java) |
 | 114 | [二叉树展开为链表](Hot114-二叉树展开为链表.md) | 前序遍历 / 原地拼接 | 找到每个节点左子树的最右节点，把右子树接过去，再把左子树整体搬到右边 | [代码](../src/s8_tree/Hot114_flatten.java) |
@@ -109,6 +109,14 @@
 | 39 | [组合总和](Hot39-组合总和.md) | start 索引法 + 减法凑数 | target 一路减，减到 0 收割、减成负剪枝；递归传 `i`（不是 `i+1`）允许重复选同一个数 | [代码](../src/s10_backTracking/Hot39_combinationSum.java) |
 | 22 | [括号生成](Hot22-括号生成.md) | 双条件剪枝回溯 | 左括号看余量（left < n）、右括号看欠账（left > right），边生成边剪枝不用事后校验；长到 2n 收割 | [分支写法](../src/s10_backTracking/Hot22_generateParenthesis_1.java) [候选数组+continue](../src/s10_backTracking/Hot22_generateParenthesis_2.java) |
 | 79 | [单词搜索](Hot79-单词搜索.md) | 网格 DFS + 回溯 | 每个格子当起点，逐字母向四方向钻，visited 标记防重复走；标记→递归→撤销三步齐全，走不通就擦标记退回换方向 | [代码](../src/s10_backTracking/Hot79_exist.java) |
+| 51 | [N 皇后](Hot51-N皇后.md) | 逐行放置回溯 | 一行放一个皇后，isValid 只查上方三向（同列+两斜）；放下→递归下一行→擦掉换列，钻满 n 行收割（记得拷贝棋盘） | [代码](../src/s10_backTracking/Hot51_solveNQueens.java) |
+
+## s10_backTracking（回溯）
+
+| 题号 | 题目 | 方法 | 一句话总结 | 代码                                        |
+| :---: | :--- | :--- | :--- |:------------------------------------------|
+| 35 | [搜索插入位置](Hot35-搜索插入位置.md) | 二分查找（lower_bound） | 闭区间 `left<=right` 夹逼找第一个 ≥ target 的位置，命中返回 mid，否则返回 left 即插入点；mid 用 `left+(right-left)/2` 防溢出 | [代码](../src/s11_binarySearch/Hot35_searchInsert.java) |
+
 
 ## sort（排序）
 

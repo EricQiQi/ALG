@@ -1,6 +1,5 @@
 package test;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 public class BubbleSort {
     public static void bubble(int[] arr){
