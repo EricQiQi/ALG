@@ -117,6 +117,7 @@
 | :---: | :--- | :--- | :--- |:------------------------------------------|
 | 35 | [搜索插入位置](Hot35-搜索插入位置.md) | 二分查找（lower_bound） | 闭区间 `left<=right` 夹逼找第一个 ≥ target 的位置，命中返回 mid，否则返回 left 即插入点；mid 用 `left+(right-left)/2` 防溢出 | [代码](../src/s11_binarySearch/Hot35_searchInsert.java) |
 | 74 | [搜索二维矩阵](Hot74-搜索二维矩阵.md) | 二分（两次 / 一维拉平） | 矩阵拉平即全局升序数组；方法一先对第一列二分定行再行内二分，方法二把下标映射 `matrix[mid/cols][mid%cols]` 一次二分；定行返回 `up-1` | [代码](../src/s11_binarySearch/Hot74_searchMatrix.java) |
+| 34 | [在排序数组中查找元素的第一个和最后一个位置](Hot34-在排序数组中查找元素的第一个和最后一个位置.md) | 二分查找（找边界） | 两次二分找左右边界，命中不返回而是记录 mid 后继续收缩：找左边界 `right=mid-1`、找右边界 `left=mid+1`；从没命中过则保持 -1 | [代码](../src/s11_binarySearch/Hot34_searchRange.java) |
 | 33 | [搜索旋转排序数组](Hot33-搜索旋转排序数组.md) | 二分（判断哪半有序） | mid 切开必有一半有序，用 `nums[left]<=nums[mid]` 定有序半区，在有序半区两端夹 target 决定收缩方向；判断有序别忘 `<=` | [代码](../src/s11_binarySearch/Hot33_search.java) |
 | 153 | [寻找旋转排序数组中的最小值](Hot153-寻找旋转排序数组中的最小值.md) | 二分（找旋转点） | 方法一记有序半区左端点打擂台；方法二比右端点，`nums[mid]>nums[right]` 去右否则 `right=mid`，循环 `left<right` 防死循环 | [代码](../src/s11_binarySearch/Hot153_findMin.java) |
 
