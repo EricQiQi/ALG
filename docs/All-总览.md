@@ -120,6 +120,7 @@
 | 34 | [在排序数组中查找元素的第一个和最后一个位置](Hot34-在排序数组中查找元素的第一个和最后一个位置.md) | 二分查找（找边界） | 两次二分找左右边界，命中不返回而是记录 mid 后继续收缩：找左边界 `right=mid-1`、找右边界 `left=mid+1`；从没命中过则保持 -1 | [代码](../src/s11_binarySearch/Hot34_searchRange.java) |
 | 33 | [搜索旋转排序数组](Hot33-搜索旋转排序数组.md) | 二分（判断哪半有序） | mid 切开必有一半有序，用 `nums[left]<=nums[mid]` 定有序半区，在有序半区两端夹 target 决定收缩方向；判断有序别忘 `<=` | [代码](../src/s11_binarySearch/Hot33_search.java) |
 | 153 | [寻找旋转排序数组中的最小值](Hot153-寻找旋转排序数组中的最小值.md) | 二分（找旋转点） | 方法一记有序半区左端点打擂台；方法二比右端点，`nums[mid]>nums[right]` 去右否则 `right=mid`，循环 `left<right` 防死循环 | [代码](../src/s11_binarySearch/Hot153_findMin.java) |
+| 4 | [寻找两个正序数组的中位数](Hot4-寻找两个正序数组的中位数.md) | 二分（分割线） | 在短数组二分分割位 i、`j=totalLeft-i`，交界四数 `L1,L2|R1,R2` 越界用 MIN/MAX 兜底；合法判据交叉比 `L1<=R2&&L2<=R1`，奇返 max(L1,L2) 偶返 (max左+min右)/2 | [代码](../src/s11_binarySearch/Hot4_findMedianSortedArrays.java) |
 
 
 ## sort（排序）
