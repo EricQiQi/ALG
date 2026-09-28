@@ -123,6 +123,14 @@
 | 4 | [寻找两个正序数组的中位数](Hot4-寻找两个正序数组的中位数.md) | 二分（分割线） | 在短数组二分分割位 i、`j=totalLeft-i`，交界四数 `L1,L2|R1,R2` 越界用 MIN/MAX 兜底；合法判据交叉比 `L1<=R2&&L2<=R1`，奇返 max(L1,L2) 偶返 (max左+min右)/2 | [代码](../src/s11_binarySearch/Hot4_findMedianSortedArrays.java) |
 
 
+## s12_stack（栈）
+
+| 题号 | 题目 | 方法 | 一句话总结 | 代码 |
+| :---: | :--- | :--- | :--- | :--- |
+| 20 | [有效的括号](Hot20-有效的括号.md) | 栈（压期望右括号） | 遇左括号就压它对应的右括号，遇右括号只需和栈顶比一个字符；对不上立即 false，走完还要栈空才有效 | [代码](../src/s12_stack/Hot20_isValid.java) |
+| 155 | [最小栈](Hot155-最小栈.md) | 辅助栈 / 单栈存差值 | 方法一开一个等长辅助栈同步升降，栈顶恒为当前最小值；方法二只存 `value - min` 的差值（用 long 防溢出），弹到负差值时 `min -= diff` 回滚 | [辅助栈](../src/s12_stack/Hot155_MinStack_1.java) [差值栈](../src/s12_stack/Hot155_MinStack_2.java) |
+
+
 ## sort（排序）
 
 | 题目 | 方法 | 一句话总结 | 代码 |
