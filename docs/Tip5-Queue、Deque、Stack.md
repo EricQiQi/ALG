@@ -129,6 +129,29 @@ PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.
 
 > **口诀**：`a - b` 是**小顶堆**（升序），`b - a` 是**大顶堆**（降序）。自定义对象推荐 `Comparator.comparingInt(a -> a.字段)`，比手写 `(a,b)->...` 更清晰、也避免整型相减溢出。
 
+### 怎么判断是小顶堆还是大顶堆？
+
+关键：看比较器的**升/降序方向**。PriorityQueue 总把「比较结果最小」的元素放堆顶。
+
+以 `Comparator.comparingInt(a -> a.val)` 为例，它等价于 `(a, b) -> a.val - b.val`（按 val **升序**）：
+
+- `a.val < b.val` 时返回负数 → a 更小、优先级更高 → val 最小的在堆顶 → **小顶堆**
+
+| 写法 | 比较方向 | 堆类型 | 堆顶 |
+|------|---------|--------|------|
+| `Comparator.comparingInt(a -> a.val)` | 升序（a-b） | **小顶堆** | 最小 |
+| `Comparator.comparingInt(a -> -a.val)` | 降序（取负） | 大顶堆 | 最大 |
+| `(a, b) -> a.val - b.val` | 升序 | 小顶堆 | 最小 |
+| `(a, b) -> b.val - a.val` | 降序 | 大顶堆 | 最大 |
+
+想把小顶堆改成大顶堆，推荐用 `.reversed()`（无溢出风险）：
+
+```java
+new PriorityQueue<>(Comparator.comparingInt((ListNode a) -> a.val).reversed());
+```
+
+> 注：`.reversed()` 写法中 lambda 参数需显式标类型 `(ListNode a)`，否则编译器无法推导泛型。
+
 ### 注意事项
 
 | 事项 | 说明 |
