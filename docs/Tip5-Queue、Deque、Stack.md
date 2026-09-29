@@ -88,20 +88,74 @@ queue.pollFirst();   // 出队
 
 ---
 
-## 四、本项目中的实际用法
+## 四、PriorityQueue（优先队列）
+
+### 本质
+
+```
+普通 Queue：先进先出（FIFO）—— 谁先来谁先出
+PriorityQueue：按优先级出队 —— 谁最小（默认）谁先出
+
+底层是二叉堆（默认小顶堆），堆顶永远是当前最小元素
+```
+
+> **它不是 FIFO，而是「每次 poll 都取出当前优先级最高的」**。底层用数组实现的完全二叉堆，不保证遍历（`for`/迭代器）有序，只有不断 `poll` 才是有序的。
+
+### 方法速查表
+
+| 操作 | 抛异常版 | 返回特殊值版 | 时间复杂度 |
+|------|---------|-------------|-----------|
+| 入队 | `add(e)` | `offer(e)` → boolean | O(log n) |
+| 出队（取最小） | `remove()` | `poll()` → null | O(log n) |
+| 查看堆顶 | `element()` | `peek()` → null | O(1) |
+| 是否为空 | — | `isEmpty()` → boolean | O(1) |
+| 大小 | — | `size()` → int | O(1) |
+
+> 方法名和 Queue 完全一致（PriorityQueue 实现了 Queue 接口），区别只在「出队顺序由优先级决定」。
+
+### 三种常见创建方式
+
+```java
+// 1. 默认：小顶堆（堆顶最小），元素需可比较（Integer、String 等自带）
+PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+// 2. 大顶堆：堆顶最大
+PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+//   等价写法：new PriorityQueue<>((a, b) -> b - a);  ← a-b 小顶，b-a 大顶
+
+// 3. 自定义对象：用 Comparator 指定排序字段
+PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.val));
+```
+
+> **口诀**：`a - b` 是**小顶堆**（升序），`b - a` 是**大顶堆**（降序）。自定义对象推荐 `Comparator.comparingInt(a -> a.字段)`，比手写 `(a,b)->...` 更清晰、也避免整型相减溢出。
+
+### 注意事项
+
+| 事项 | 说明 |
+|------|------|
+| **不能存 null** | `add(null)` / `offer(null)` 会抛 `NullPointerException` |
+| **遍历无序** | `for-each`、`toString()` 输出的不是排好序的结果，要有序必须逐个 `poll` |
+| **装箱开销** | 存基本类型会自动装箱为 `Integer` 等，有额外内存/性能成本 |
+| **相等不保证顺序** | 优先级相同的元素，出队先后不保证稳定 |
+| **堆顶随 poll 更新** | `peek` 只看当前堆顶，`poll` 后堆会自动重新调整 |
+
+---
+
+## 五、本项目中的实际用法
 
 | 数据结构 | 题目 | 用途 |
 |---------|------|------|
 | `Queue<TreeNode>` | 102 层序遍历、101 对称二叉树 | BFS 逐层遍历 |
 | `Stack<TreeNode>` | 94 中序遍历、108 有序数组转BST | 迭代法模拟递归 |
 | `Deque<Integer>` | 11 滑动窗口最大值 | 单调队列 |
-| `PriorityQueue<ListNode>` | 23 合并K个有序链表 | 优先队列选最小 |
+| `PriorityQueue<ListNode>` | 23 合并K个有序链表（方法3） | 最小堆，每次 poll 出当前最小节点 |
 
 > 注：项目中 94、108 用了 `Stack`，实际可以替换为 `Deque` 更规范。
+> `Hot23_mergeKLists_3` 用 `PriorityQueue<ListNode>` + `Comparator.comparingInt(a -> a.val)` 建最小堆，是优先队列的典型用法。
 
 ---
 
-## 五、选型速记
+## 六、选型速记
 
 ```
 需要先进先出？
@@ -115,6 +169,9 @@ queue.pollFirst();   // 出队
 需要两端操作？（如单调队列、滑动窗口）
   → Deque<Integer> deque = new ArrayDeque<>();
 
-需要按优先级出队？
-  → PriorityQueue<ListNode> pq = new PriorityQueue<>();
+需要按优先级出队？（如 Top K、多路归并）
+  → 存 Integer/String：PriorityQueue<Integer> pq = new PriorityQueue<>();      小顶堆
+  → 存自定义对象：必须传比较器，否则 ListNode 等未实现 Comparable 会报错
+    PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.val));
+  → 要大顶堆：new PriorityQueue<>(Comparator.reverseOrder());
 ```
