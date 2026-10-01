@@ -13,13 +13,13 @@ public class Hot215_findKthLargest {
     /**
      * 方法1：排序
      * 双轴快速排序
-     *
+     * <p>
      * 时间复杂度：O(nlogn)
      * 空间复杂度：O(1)
      */
     public int findKthLargest_1(int[] nums, int k) {
         Arrays.sort(nums);
-        return nums[nums.length-k];
+        return nums[nums.length - k];
     }
 
     /**
@@ -29,7 +29,7 @@ public class Hot215_findKthLargest {
      */
     public int findKthLargest_2(int[] nums, int k) {
         QuickSort.quickSort(nums);
-        return nums[nums.length-k];
+        return nums[nums.length - k];
     }
 
     /**
@@ -39,9 +39,9 @@ public class Hot215_findKthLargest {
      */
     public int findKthLargest_3(int[] nums, int k) {
         PriorityQueue<Integer> heap = new PriorityQueue<>();
-        for(int num : nums){
+        for (int num : nums) {
             heap.offer(num);
-            if(heap.size() > k){
+            if (heap.size() > k) {
                 heap.poll();
             }
         }
@@ -55,32 +55,33 @@ public class Hot215_findKthLargest {
      */
     public int findKthLargest_4(int[] nums, int k) {
         int n = nums.length;
-        for(int i=n/2-1; i>=0; i--){
+        for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(nums, i, n);
         }
 
         System.out.println(Arrays.toString(nums));
 
-        for(int i=n-1; i>n-k; i--){
-            swap(nums, 0, i);
-            heapify(nums, 0, i);
+        for (int i = 0; i < k-1; i++) {
+            swap(nums, 0, n-1-i);
+            heapify(nums, 0, n-1-i);
         }
         return nums[0];
     }
 
-    private void heapify(int[] arr, int i, int heapSize){
-        int largest = i;
-        int left = 2 * i + 1;
-        int right = 2 * i + 2;
-        if(left < heapSize && arr[left] > arr[largest]) largest = left;
-        if(right < heapSize && arr[right] > arr[largest]) largest = right;
-        if(largest != i){
+    private void heapify(int[] arr, int i, int heapSize) {
+        while(true){
+            int largest = i;
+            int left = 2 * i + 1;
+            int right = 2 * i + 2;
+            if(left < heapSize && arr[left] > arr[largest]) largest = left;
+            if(right < heapSize && arr[right] > arr[largest]) largest = right;
+            if(largest == i) break;
             swap(arr, i, largest);
-            heapify(arr, largest, heapSize);
+            i = largest;
         }
     }
 
-    private void swap(int[] arr, int i, int j){
+    private void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
@@ -88,7 +89,7 @@ public class Hot215_findKthLargest {
 
     public static void main(String[] args) {
         Hot215_findKthLargest obj = new Hot215_findKthLargest();
-        int[] nums = {3,2,1,5,6,4};
+        int[] nums = {3, 2, 1, 5, 6, 4};
         int k = 3;
         System.out.println(obj.findKthLargest_1(nums, k));
         System.out.println(obj.findKthLargest_2(nums, k));
