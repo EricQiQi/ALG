@@ -139,7 +139,7 @@
 | 题号 | 题目 | 方法 | 一句话总结 | 代码 |
 | :---: | :--- | :--- | :--- | :--- |
 | 215 | [数组中的第K个最大元素](Hot215-数组中的第K个最大元素.md) | 排序 / 小顶堆 / 大顶堆下沉 | 全排序取 `nums[n-k]`；或维护容量 k 的小顶堆，堆顶即第 k 大（Top K 首选 O(n log k)） | [代码](../src/s13_dump/Hot215_findKthLargest.java) |
-| 347 | [前K个高频元素](Hot347-前K个高频元素.md) | HashMap + 小顶堆 | 先 HashMap 数频率，再用容量 k 的小顶堆按频率挑 Top K（存 `{元素,频率}` 二元组），和 215 同一模板 | [代码](../src/s13_dump/Hot347_topKFrequent.java) |
+| 347 | [前K个高频元素](Hot347-前K个高频元素.md) | HashMap + 小顶堆 / 桶排序 | 先 HashMap 数频率再挑 Top K；小顶堆按频率淘汰 O(n log k)，或桶排序用下标当频率 O(n)（满足进阶） | [堆](../src/s13_dump/Hot347_topKFrequent.java) |
 
 
 ## sort（排序）
