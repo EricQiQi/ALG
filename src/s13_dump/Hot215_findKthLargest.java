@@ -28,7 +28,8 @@ public class Hot215_findKthLargest {
      * 空间复杂度：O(1)
      */
     public int findKthLargest_2(int[] nums, int k) {
-        QuickSort.quickSort(nums);
+        QuickSort qs = new QuickSort();
+        qs.quickSort(nums);
         return nums[nums.length - k];
     }
 
@@ -38,6 +39,7 @@ public class Hot215_findKthLargest {
      * 空间复杂度：O(k)
      */
     public int findKthLargest_3(int[] nums, int k) {
+        // 默认是小顶堆
         PriorityQueue<Integer> heap = new PriorityQueue<>();
         for (int num : nums) {
             heap.offer(num);
