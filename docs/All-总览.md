@@ -122,7 +122,6 @@
 | 153 | [寻找旋转排序数组中的最小值](Hot153-寻找旋转排序数组中的最小值.md) | 二分（找旋转点） | 方法一记有序半区左端点打擂台；方法二比右端点，`nums[mid]>nums[right]` 去右否则 `right=mid`，循环 `left<right` 防死循环 | [代码](../src/s11_binarySearch/Hot153_findMin.java) |
 | 4 | [寻找两个正序数组的中位数](Hot4-寻找两个正序数组的中位数.md) | 二分（分割线） | 在短数组二分分割位 i、`j=totalLeft-i`，交界四数 `L1,L2|R1,R2` 越界用 MIN/MAX 兜底；合法判据交叉比 `L1<=R2&&L2<=R1`，奇返 max(L1,L2) 偶返 (max左+min右)/2 | [代码](../src/s11_binarySearch/Hot4_findMedianSortedArrays.java) |
 
-
 ## s12_stack（栈）
 
 | 题号 | 题目 | 方法 | 一句话总结 | 代码 |
@@ -133,7 +132,6 @@
 | 739 | [每日温度](Hot739-每日温度.md) | 单调栈（递减，存下标） | 栈里存「还在等更高温度的日子」，新来一天把栈顶所有比它矮的一次性削平结算，自己再入栈；存下标才能算天数差，剩下的靠 res 默认 0 兜底 | [代码](../src/s12_stack/Hot739_dailyTemperatures.java) |
 | 84 | [柱状图中最大的矩形](Hot84-柱状图中最大的矩形.md) | 单调栈（递增，存下标）+ 哨兵 | 把每根柱子当矩形高，**出栈时**结算：右边界是当前 `i`、左边界是弹出后的新栈顶，宽 = 右-左-1；首尾各垫一个 0 免掉判空和收尾 | [代码](../src/s12_stack/Hot84_largestRectangleArea.java) |
 
-
 ## s13_dump（堆 / Top K）
 
 | 题号 | 题目 | 方法 | 一句话总结 | 代码 |
@@ -141,7 +139,6 @@
 | 215 | [数组中的第K个最大元素](Hot215-数组中的第K个最大元素.md) | 排序 / 小顶堆 / 大顶堆下沉 | 全排序取 `nums[n-k]`；或维护容量 k 的小顶堆，堆顶即第 k 大（Top K 首选 O(n log k)） | [代码](../src/s13_dump/Hot215_findKthLargest.java) |
 | 347 | [前K个高频元素](Hot347-前K个高频元素.md) | HashMap + 小顶堆 / 桶排序 | 先 HashMap 数频率再挑 Top K；小顶堆按频率淘汰 O(n log k)，或桶排序用下标当频率 O(n)（满足进阶） | [堆](../src/s13_dump/Hot347_topKFrequent.java) |
 | 295 | [数据流的中位数](Hot295-数据流的中位数.md) | 对顶双堆 | 左大顶堆放较小一半、右小顶堆放较大一半，左堆可多 1 个；插入 O(log n)，中位数只看两堆顶（偶数除以 2.0） | [代码](../src/s13_dump/Hot295_MedianFinder.java) |
-
 
 ## s14_greedy（贪心）
 
@@ -163,10 +160,6 @@
 | 322 | [零钱兑换](Hot322-零钱兑换.md) | 动态规划（完全背包） | dp[j]=凑出金额 j 的最少硬币数，外层硬币内层金额正序取 min；哨兵要与初始化一致（推荐 amount+1），凑不出返回 -1 | [代码](../src/s15_dp/Hot322_coinChange.java) |
 | 139 | [单词拆分](Hot139-单词拆分.md) | 动态规划（完全背包·可行性） | dp[i]=前 i 个字符能否拆分，外层背包 i、内层枚举分割点 j，dp[j] 且 s[j..i-1] 在字典即为真；字典转 Set 提速 | [代码](../src/s15_dp/Hot139_wordBreak.java) |
 | 300 | [最长上升子序列](Hot300-最长上升子序列.md) | 动态规划（以 i 结尾） | dp[i]=以 nums[i] 结尾的 LIS 长度，枚举更小前驱 j 能接则 dp[j]+1 取 max；初始化全 1，答案取 max(dp) 而非末位 | [代码](../src/s15_dp/Hot300_lengthOfLIS.java) |
-
-
-
-
 
 ## sort（排序）
 
