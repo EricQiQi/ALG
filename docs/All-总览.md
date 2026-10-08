@@ -149,6 +149,7 @@
 | :---: | :--- | :--- | :--- | :--- |
 | 121 | [买卖股票的最佳时机](Hot121-买卖股票的最佳时机.md) | 一次遍历（贪心/DP） | 遍历时维护历史最低买入价 low，每天用 `price - low` 打擂台记最大利润；先更 low 再算钱，全程下跌返回 0 | [代码](../src/s14_greedy/Hot121_maxProfit.java) |
 | 55 | [跳跃游戏](Hot55-跳跃游戏.md) | 贪心（维护最远可达下标） | 遍历每个位置维护能到达的最远下标 maxStep，`i > maxStep` 即够不着返回 false，maxStep 覆盖终点（≥ n-1）返回 true | [代码](../src/s14_greedy/Hot55_canJump.java) |
+| 45 | [跳跃游戏 II](Hot45-跳跃游戏II.md) | 贪心（分层扩张 / 双边界） | 每一跳覆盖一层，maxPosition 持续扩张下一层最远下标，走到本层右边界 `i == end` 才 count++ 并推进 end=maxPosition | [代码](../src/s14_greedy/Hot45_jump.java) |
 
 
 ## sort（排序）
