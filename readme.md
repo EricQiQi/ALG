@@ -14,6 +14,15 @@ ALG
 │   ├── s5_ordinaryArray/ # 普通数组
 │   ├── s6_matrix/        # 矩阵
 │   ├── s7_linkTable/     # 链表
+│   ├── s8_tree/          # 二叉树
+│   ├── s9_graph/         # 图
+│   ├── s10_backTracking/ # 回溯
+│   ├── s11_binarySearch/ # 二分查找
+│   ├── s12_stack/        # 栈
+│   ├── s13_dump/         # 堆 / Top K
+│   ├── s14_greedy/       # 贪心
+│   ├── s15_dp/           # 动态规划
+│   ├── search/           # 查找
 │   ├── sort/             # 排序算法
 │   └── test/             # 测试代码
 └── docs/                 # 题目总结笔记（Markdown）
@@ -23,7 +32,7 @@ ALG
 
 LeetCode Hot100 + 剑指offer题目 + 其他经典题目
 
-- 哈希表 → 双指针 → 滑动窗口 → 子串 → 普通数组 → 矩阵 → 链表 → 排序
+- 哈希表 → 双指针 → 滑动窗口 → 子串 → 普通数组 → 矩阵 → 链表 → 二叉树 → 图 → 回溯 → 二分查找 → 栈 → 堆 → 贪心 → 动态规划 → 排序
 - 源码在 [src](src)，题解笔记在 [docs](docs)，一句话速查见 [总览](docs/All-总览.md)
 
 ## 笔记文档
