@@ -161,6 +161,7 @@
 | 198 | [打家劫舍](Hot198-打家劫舍.md) | 动态规划（选/不选） | 每间房二选一：偷接 dp[i-2]、不偷沿用 dp[i-1]，dp[i]=max(dp[i-1], dp[i-2]+nums[i])；边界 dp[0]、dp[1] 先填，可滚动变量优化空间 | [代码](../src/s15_dp/Hot198_rob.java) |
 | 279 | [完全平方数](Hot279-完全平方数.md) | 动态规划（完全背包） | dp[i]=凑出 i 的最少平方数个数，先 dp[i]=i 做上界，内层枚举不超过 i 的每个平方数 j*j，取 dp[i-j*j]+1 的最小值 | [代码](../src/s15_dp/Hot279_numSquares.java) |
 | 322 | [零钱兑换](Hot322-零钱兑换.md) | 动态规划（完全背包） | dp[j]=凑出金额 j 的最少硬币数，外层硬币内层金额正序取 min；哨兵要与初始化一致（推荐 amount+1），凑不出返回 -1 | [代码](../src/s15_dp/Hot322_coinChange.java) |
+| 139 | [单词拆分](Hot139-单词拆分.md) | 动态规划（完全背包·可行性） | dp[i]=前 i 个字符能否拆分，外层背包 i、内层枚举分割点 j，dp[j] 且 s[j..i-1] 在字典即为真；字典转 Set 提速 | [代码](../src/s15_dp/Hot139_wordBreak.java) |
 
 
 
@@ -183,3 +184,4 @@
 | [Queue、Deque、Stack](Tip5-Queue、Deque、Stack.md) | 线性容器 | 三者本质与方法速查；Deque 是超集，推荐用 ArrayDeque 代替老旧的 Stack |
 | [取中间值](Tip3-取中间值.md) | mid 写法 | `left + (right-left)/2` 防溢出首选；左中 vs 右中、二分防死循环、快排随机 pivot |
 | [Arrays.sort 原理详解](Tip1-Arrays.sort原理详解.md) | 排序源码 / 语法 | 基本类型双轴快排、对象 TimSort、小数组插入排序；附区间排序 Comparator 防溢出写法 |
+| [背包问题分类](Tip6-背包问题分类.md) | 动态规划 / 背包 | 按可重复性分 01(倒序)/完全(正序)/多重/分组，按求解目标分 max/or/min/sum；方案数再看顺序：外层物品=组合、外层背包=排列 |
