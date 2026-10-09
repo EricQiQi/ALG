@@ -161,6 +161,7 @@
 | 139 | [单词拆分](Hot139-单词拆分.md) | 动态规划（完全背包·可行性） | dp[i]=前 i 个字符能否拆分，外层背包 i、内层枚举分割点 j，dp[j] 且 s[j..i-1] 在字典即为真；字典转 Set 提速 | [代码](../src/s15_dp/Hot139_wordBreak.java) |
 | 300 | [最长上升子序列](Hot300-最长上升子序列.md) | 动态规划 / 贪心+二分 | DP：dp[i]=以 nums[i] 结尾的 LIS，枚举更小前驱接 dp[j]+1 取 max，答案取 max(dp)；贪心：tails 存长度 k+1 的最小末尾，二分 lower_bound 替换或追加，size 即长度 O(nlogn) | [代码](../src/s15_dp/Hot300_lengthOfLIS.java) |
 | 152 | [乘积最大子数组](Hot152-乘积最大子数组.md) | 动态规划（双状态滚动变量） | 以 i 结尾同时维护 maxDp/minDp，负数会让最小乘积反转为最大，转移在「断开重开/接最大/接最小」三者取极值；tempMax/tempMin 先算防污染 | [代码](../src/s15_dp/Hot152_maxProduct.java) |
+| 416 | [分割等和子集](Hot416-分割等和子集.md) | 动态规划（0/1背包·可行性） | 等和子集转化为凑出 sum/2，dp[i]=能否恰好凑出 i，转移取或；内层容量倒序保证每件物品只用一次，dp[0]=true 是递推起点 | [代码](../src/s15_dp/Hot416_canPartition.java) |
 
 ## sort（排序）
 
