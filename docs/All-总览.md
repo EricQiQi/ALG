@@ -162,7 +162,7 @@
 | 300 | [最长上升子序列](Hot300-最长上升子序列.md) | 动态规划 / 贪心+二分 | DP：dp[i]=以 nums[i] 结尾的 LIS，枚举更小前驱接 dp[j]+1 取 max，答案取 max(dp)；贪心：tails 存长度 k+1 的最小末尾，二分 lower_bound 替换或追加，size 即长度 O(nlogn) | [代码](../src/s15_dp/Hot300_lengthOfLIS.java) |
 | 152 | [乘积最大子数组](Hot152-乘积最大子数组.md) | 动态规划（双状态滚动变量） | 以 i 结尾同时维护 maxDp/minDp，负数会让最小乘积反转为最大，转移在「断开重开/接最大/接最小」三者取极值；tempMax/tempMin 先算防污染 | [代码](../src/s15_dp/Hot152_maxProduct.java) |
 | 416 | [分割等和子集](Hot416-分割等和子集.md) | 动态规划（0/1背包·可行性） | 等和子集转化为凑出 sum/2，dp[i]=能否恰好凑出 i，转移取或；内层容量倒序保证每件物品只用一次，dp[0]=true 是递推起点 | [代码](../src/s15_dp/Hot416_canPartition.java) |
-| 32 | [最长有效括号](Hot32-最长有效括号.md) | 栈（存下标）+ 哨兵 | 栈底常驻哨兵（最后一个未匹配右括号，初始 -1）当隔板，遇 ')' 弹栈后栈非空则 i-栈顶 结算长度，弹空则压入当前 i 换新哨兵 | [代码](../src/s15_dp/Hot32_longestValidParentheses.java) |
+| 32 | [最长有效括号](Hot32-最长有效括号.md) | 栈+哨兵 / 动态规划 / 双向扫描 | 栈：哨兵当隔板，弹栈后 i-栈顶 结算，弹空则换新哨兵；DP：dp[i]=以 i 结尾长度，"...()" 接 dp[i-2]、"...))" 接 dp[i-1]+2+dp[j-1]；扫描：计数相等结算、失衡归零，左右两向缺一不可 O(1) | [代码](../src/s15_dp/Hot32_longestValidParentheses.java) |
 
 ## sort（排序）
 
