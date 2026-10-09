@@ -160,6 +160,7 @@
 | 322 | [零钱兑换](Hot322-零钱兑换.md) | 动态规划（完全背包） | dp[j]=凑出金额 j 的最少硬币数，外层硬币内层金额正序取 min；哨兵要与初始化一致（推荐 amount+1），凑不出返回 -1 | [代码](../src/s15_dp/Hot322_coinChange.java) |
 | 139 | [单词拆分](Hot139-单词拆分.md) | 动态规划（完全背包·可行性） | dp[i]=前 i 个字符能否拆分，外层背包 i、内层枚举分割点 j，dp[j] 且 s[j..i-1] 在字典即为真；字典转 Set 提速 | [代码](../src/s15_dp/Hot139_wordBreak.java) |
 | 300 | [最长上升子序列](Hot300-最长上升子序列.md) | 动态规划 / 贪心+二分 | DP：dp[i]=以 nums[i] 结尾的 LIS，枚举更小前驱接 dp[j]+1 取 max，答案取 max(dp)；贪心：tails 存长度 k+1 的最小末尾，二分 lower_bound 替换或追加，size 即长度 O(nlogn) | [代码](../src/s15_dp/Hot300_lengthOfLIS.java) |
+| 152 | [乘积最大子数组](Hot152-乘积最大子数组.md) | 动态规划（双状态滚动变量） | 以 i 结尾同时维护 maxDp/minDp，负数会让最小乘积反转为最大，转移在「断开重开/接最大/接最小」三者取极值；tempMax/tempMin 先算防污染 | [代码](../src/s15_dp/Hot152_maxProduct.java) |
 
 ## sort（排序）
 
