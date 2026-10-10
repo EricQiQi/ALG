@@ -107,6 +107,17 @@ public class Hot5_longestPalindrome {
         return s.substring(start, start + maxLen);
     }
 
+    /**
+     * 方法3：Manacher 算法
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     */
+    public String longestPalindrome_3(String s) {
+        // 难 ... O(n)
+
+        return s;
+    }
+
     public static void main(String[] args) {
         Hot5_longestPalindrome sol = new Hot5_longestPalindrome();
         System.out.println(sol.longestPalindrome_1("babad"));   // "bab" 或 "aba"
