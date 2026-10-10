@@ -171,6 +171,7 @@
 | 62 | [不同路径](Hot62-不同路径.md) | 多维动态规划（二维 DP 网格） | dp[i][j]=从起点到该格的路径数，只能向下/向右故 dp[i][j]=dp[i-1][j]+dp[i][j-1]；首行首列全 1，从上到下从左到右铺满网格 | [代码](../src/s16_multiDP/Hot62_uniquePaths.java) |
 | 64 | [最小路径和](Hot64-最小路径和.md) | 多维动态规划（二维 DP 网格 / 一维滚动数组） | 与 62 同源，dp[i][j]=grid[i][j]+min(上,左)；首行首列无选择只能沿边累加；一维滚动把空间从 O(mn) 降到 O(n) | [代码](../src/s16_multiDP/Hot64_minPathSum.java) |
 | 5 | [最长回文子串](Hot5-最长回文子串.md) | 中心扩展法 / 动态规划（区间 DP） | 都利用回文对称性：扩展法枚举 2n-1 个中心往外扩 O(1) 空间，DP 用 dp[i][j]=两端相等&&里层回文 按长度从小到大填表 O(n²) 空间 | [代码](../src/s16_multiDP/Hot5_longestPalindrome.java) |
+| 1143 | [最长公共子序列](Hot1143-最长公共子序列.md) | 多维动态规划（双串二维 DP 表） | dp[i][j]=两前缀的 LCS 长度，字符相等看左上+1、不等取 max(上,左)；多开一行一列当空前缀哨兵免初始化 | [代码](../src/s16_multiDP/Hot1143_longestCommonSubsequence.java) |
 
 ## sort（排序）
 
