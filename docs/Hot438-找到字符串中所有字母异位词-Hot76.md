@@ -16,21 +16,28 @@
 3. **“账单差额”思维**：初始化时，账本里记下缺哪些字符（正数）。右探子每进一个字符，账单减 1（缺额减少）；左探子每踢出一个字符，账单加 1（缺额还回去）。
 
 ### 💻 Java 核心框架代码
+
+下面以**力扣 76.最小覆盖子串**为例，把框架一次性落地成完整可运行的解法（求异位词 438 只需把「记录答案」那段换成 `if (right - left + 1 == t.length()) res.add(left);`）：
+
 ```java
 public class BetterSlidingWindow {
-    public void slidingWindow(String s, String t) {
-        if (s == null || t == null || s.length() < t.length()) return;
+    public String minWindow(String s, String t) {
+        if (s == null || t == null || s.length() < t.length()) return "";
 
         // 1. 唯一账本：只记录“我还欠目标串 t 多少个字符”
         // 欠的为正数，不欠或者多出来的为负数或 0
         int[] count = new int[128];
         for (char c : t.toCharArray()) {
-            count[c]++; 
+            count[c]++;
         }
 
         // 2. 核心大账目：还差多少个字符，才能把 t 里的“龙珠”全部收集齐
-        int remain = t.length(); 
+        int remain = t.length();
         int left = 0;
+
+        // 记录最优答案：最小窗口的长度 + 起始下标
+        int minLen = Integer.MAX_VALUE;
+        int start = 0;
 
         // 3. 右探子一路狂奔，扩张窗口
         for (int right = 0; right < s.length(); right++) {
@@ -44,23 +51,29 @@ public class BetterSlidingWindow {
 
             // 4. 当 remain == 0 时，说明此时窗口内已经“集齐了所有龙珠”，开始收缩
             while (remain == 0) {
-                
+
                 // ==========================================
                 // 【 💡 在这里记录或更新你的最优答案 】
-                // 例如：if (right - left + 1 < minLen) { ... }
+                // 求最短：谁的窗口更短就记下谁
                 // ==========================================
+                if (right - left + 1 < minLen) {
+                    minLen = right - left + 1;
+                    start = left;
+                }
 
                 char leftChar = s.charAt(left);
                 count[leftChar]++; // 准备把左边的字符踢出窗口，账单还回去
-                
+
                 // 如果把这个字符踢走后，账单直接变正数了，说明他是不可或缺的功臣！
                 if (count[leftChar] > 0) {
                     remain++; // 糟糕，又缺龙珠了，迫使 while 循环断开，让右探子继续去找
                 }
-                
+
                 left++; // 左探子右移，正式收缩窗口
             }
         }
+        // 一个覆盖子串都没找到时返回空串
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
     }
 }
 ```

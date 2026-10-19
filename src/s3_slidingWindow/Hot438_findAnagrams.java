@@ -13,9 +13,8 @@ public class Hot438_findAnagrams {
     /**
      * 推荐使用！！！！！！
      * 全能轻量级数组框架
-     * @param s
-     * @param p
-     * @return
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)，因为 count 数组的大小是固定的 128
      */
     public static List<Integer> findAnagrams_2(String s, String p) {
         if (s == null || p == null || s.length() < p.length()) return new ArrayList<>();
