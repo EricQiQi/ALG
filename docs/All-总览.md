@@ -36,7 +36,7 @@
 
 | 题号 | 题目 | 方法 | 一句话总结 | 代码 |
 | :---: | :--- | :--- | :--- | :--- |
-| 53 | [最大子数组和](Hot53-最大子数组和.md) | 贪心 / DP（Kadane）/ 分治 | 累加当前元素后判断 preSum 是否变负，负了就清零丢弃，全程跟踪最大值 | [代码](../src/s5_ordinaryArray/Hot53_maxSubArray.java) |
+| 53 | [最大子数组和](Hot53-最大子数组和.md) | 贪心 / 分治 | 累加当前元素后判断 preSum 是否变负，负了就清零丢弃，全程跟踪最大值 | [代码](../src/s5_ordinaryArray/Hot53_maxSubArray.java) |
 | 56 | [合并区间](Hot56-合并区间.md) | 排序 + 线性合并 | 按左端点排序后逐个遍历，能重叠就扩展右端点（取 max），不能重叠就新开一个区间 | [代码](../src/s5_ordinaryArray/Hot56_merge.java) |
 | 189 | [轮转数组](Hot189-轮转数组.md) | 辅助数组 / 三次翻转 / 环状替换 | 先整体翻转，再分别翻转前 k 个和剩余部分，注意 k 必须先 `k %= n` | [代码](../src/s5_ordinaryArray/Hot189_rotate.java) |
 | 238 | [除自身以外数组的乘积](Hot238-除自身以外数组的乘积.md) | 前缀积（双指针同步累乘） | 左右指针从两端同步向中间走，用 `*=` 累乘把左积和右积分别灌进结果数组 | [代码](../src/s5_ordinaryArray/Hot238_productExceptSelf.java) |

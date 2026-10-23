@@ -33,34 +33,11 @@ public class Hot53_maxSubArray {
 
 
     /**
-     * 动态规划
-     * 时间复杂度：O(n)
-     * 空间复杂度：O(1)
-     */
-    public static int maxSubArray_2(int[] nums) {
-        // 初始化：最大和与当前子序和都设为数组第一个元素
-        int maxAns = nums[0];
-        int currentSum = nums[0];
-
-        // 从第二个元素开始遍历
-        for (int i = 1; i < nums.length; i++) {
-            // 如果 currentSum 是负数，则舍弃，直接从 nums[i] 开始
-            // 如果 currentSum 是正数，则加上 nums[i]
-            currentSum = Math.max(nums[i], currentSum + nums[i]);
-
-            // 实时更新全局最大值
-            maxAns = Math.max(maxAns, currentSum);
-        }
-
-        return maxAns;
-    }
-
-    /**
      * 分治法
      * 时间复杂度：O(n log n)  —— 每层合并需 O(n) 扫描跨中点子段，共 log n 层
      * 空间复杂度：O(log n)   —— 递归调用栈深度
      */
-    public static int maxSubArray_3(int[] nums) {
+    public static int maxSubArray_2(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         return divide(nums, 0, nums.length - 1);
     }
@@ -122,11 +99,5 @@ public class Hot53_maxSubArray {
         System.out.println(maxSubArray_2(nums));
         System.out.println(maxSubArray_2(nums1));
         System.out.println(maxSubArray_2(nums2));
-
-        System.out.println("-----");
-
-        System.out.println(maxSubArray_3(nums));
-        System.out.println(maxSubArray_3(nums1));
-        System.out.println(maxSubArray_3(nums2));
     }
 }
