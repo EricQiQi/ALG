@@ -54,12 +54,21 @@ public class Hot2_addTwoNumbers {
 
     public static void main(String[] args) {
         Hot2_addTwoNumbers hot2 = new Hot2_addTwoNumbers();
-        ListNode l1 = new ListNode(2);
-        l1.next = new ListNode(4);
-        l1.next.next = new ListNode(3);
-        ListNode l2 = new ListNode(5);
-        l2.next = new ListNode(6);
-        l2.next.next = new ListNode(4);
+        // l1 =
+        //[9,9,9,9,9,9,9]
+        // l2 =
+        //[9,9,9,9]
+        ListNode l1 = new ListNode(9);
+        l1.next = new ListNode(9);
+        l1.next.next = new ListNode(9);
+        l1.next.next.next = new ListNode(9);
+        l1.next.next.next.next = new ListNode(9);
+        l1.next.next.next.next.next = new ListNode(9);
+        l1.next.next.next.next.next.next = new ListNode(9);
+        ListNode l2 = new ListNode(9);
+        l2.next = new ListNode(9);
+        l2.next.next = new ListNode(9);
+        l2.next.next.next = new ListNode(9);
         ListNode result = hot2.addTwoNumbers(l1, l2);
         while (result != null) {
             System.out.print(result.val + " ");
