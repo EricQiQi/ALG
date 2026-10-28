@@ -42,6 +42,8 @@
 
 ## 代码实现 (Java)
 
+### 写法一：三段循环（结构最直白）
+
 ```java
 public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
     ListNode dummy = new ListNode();  // 哑节点，简化头部处理
@@ -81,7 +83,39 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 }
 ```
 
-> 三段循环可合并成一段 `while (l1 != null || l2 != null || pre != 0)`，用 `int x = l1 != null ? l1.val : 0` 补零，代码更短。本实现拆成三段，逻辑更清晰。
+### 写法二：合并成一段循环（更短）
+
+```java
+public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    ListNode dummy = new ListNode();
+    ListNode curr = dummy;
+    int carry = 0;
+
+    // 三个条件任意一个成立就继续：l1 没走完 / l2 没走完 / 还有进位没写出去
+    while (l1 != null || l2 != null || carry != 0) {
+        int x = l1 != null ? l1.val : 0;   // 短链走完就当作 0
+        int y = l2 != null ? l2.val : 0;
+
+        int sum = x + y + carry;
+        carry = sum / 10;
+        curr.next = new ListNode(sum % 10);
+        curr = curr.next;
+
+        if (l1 != null) l1 = l1.next;      // 必须先判空，否则 NPE
+        if (l2 != null) l2 = l2.next;
+    }
+
+    return dummy.next;
+}
+```
+
+合并后只用记住三个点：
+
+1. **`carry != 0` 塞进循环条件**——最高位的进位在循环里就写出去了，末尾的 `if (pre > 0)` 可以整个删掉。
+2. **`x` / `y` 用三元表达式补零**——「两链都非空」「l1 剩余」「l2 剩余」三种情况被压成同一段代码。
+3. **推进指针前必须判空**——写成 `l1 = l1.next` 而不加 `if (l1 != null)`，短链走完那一步直接空指针，这是合并写法最容易踩的坑。
+
+> 两种写法的取舍：写法二行数少一半，但靠三元补零和 `||` 短路来「兜」边界，读的人要多想一层；写法一把三种情况摊开，看一遍就知道在干什么。刷题追求短选写法二，面试讲思路选写法一。
 
 ---
 
