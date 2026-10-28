@@ -14,8 +14,8 @@ public class Hot2_addTwoNumbers {
      * 空间复杂度：O(max(m,n))
      */
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode preHead = new ListNode();
-        ListNode head = preHead;
+        ListNode dummy = new ListNode();
+        ListNode curr = dummy;
 
         int pre = 0;
         ListNode temp1 = l1;
@@ -23,8 +23,8 @@ public class Hot2_addTwoNumbers {
         while(temp1 != null && temp2 != null){
             int sum = temp1.val + temp2.val + pre;
             pre = sum / 10;
-            head.next = new ListNode(sum%10);
-            head = head.next;
+            curr.next = new ListNode(sum%10);
+            curr = curr.next;
 
             temp1 = temp1.next;
             temp2 = temp2.next;
@@ -33,23 +33,23 @@ public class Hot2_addTwoNumbers {
         while(temp1 != null){
             int sum = temp1.val + pre;
             pre = sum / 10;
-            head.next = new ListNode(sum%10);
-            head = head.next;
+            curr.next = new ListNode(sum%10);
+            curr = curr.next;
             temp1 = temp1.next;
         }
         while(temp2 != null){
             int sum = temp2.val + pre;
             pre = sum / 10;
-            head.next = new ListNode(sum%10);
-            head = head.next;
+            curr.next = new ListNode(sum%10);
+            curr = curr.next;
             temp2 = temp2.next;
         }
 
         if(pre > 0){
-            head.next = new ListNode(pre % 10);
+            curr.next = new ListNode(pre % 10);
         }
 
-        return preHead.next;
+        return dummy.next;
     }
 
     public static void main(String[] args) {

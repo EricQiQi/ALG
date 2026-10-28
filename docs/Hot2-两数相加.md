@@ -44,16 +44,16 @@
 
 ```java
 public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-    ListNode preHead = new ListNode();  // 哑节点，简化头部处理
-    ListNode head = preHead;
+    ListNode dummy = new ListNode();  // 哑节点，简化头部处理
+    ListNode curr = dummy;
     int pre = 0;                        // 进位
 
     // 1. 两链都非空：一起走
     while (l1 != null && l2 != null) {
         int sum = l1.val + l2.val + pre;
         pre = sum / 10;
-        head.next = new ListNode(sum % 10);
-        head = head.next;
+        curr.next = new ListNode(sum % 10);
+        curr = curr.next;
         l1 = l1.next;
         l2 = l2.next;
     }
@@ -61,23 +61,23 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
     while (l1 != null) {
         int sum = l1.val + pre;
         pre = sum / 10;
-        head.next = new ListNode(sum % 10);
-        head = head.next;
+        curr.next = new ListNode(sum % 10);
+        curr = curr.next;
         l1 = l1.next;
     }
     // 3. l2 有剩余
     while (l2 != null) {
         int sum = l2.val + pre;
         pre = sum / 10;
-        head.next = new ListNode(sum % 10);
-        head = head.next;
+        curr.next = new ListNode(sum % 10);
+        curr = curr.next;
         l2 = l2.next;
     }
     // 4. 最高位还有进位，补一个节点
     if (pre > 0) {
-        head.next = new ListNode(pre % 10);
+        curr.next = new ListNode(pre % 10);
     }
-    return preHead.next;
+    return dummy.next;
 }
 ```
 
@@ -93,8 +93,8 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 **2. 短的走完，长的要继续（且带着 carry）**
 两链长度可能不同，剩余部分仍需逐位加进位，不能直接拼上去。
 
-**3. 用哑节点 `preHead` 起手**
-避免对"第一个节点"做特殊判断，最后返回 `preHead.next`。
+**3. 用哑节点 `dummy` 起手**
+避免对"第一个节点"做特殊判断，最后返回 `dummy.next`。
 
 ---
 
