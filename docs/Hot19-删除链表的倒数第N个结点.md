@@ -12,12 +12,8 @@
 
 ## 核心思想
 
-难点在于链表**不能随机访问**，"倒数第 n 个"没法直接定位。有两种思路：
+难点在于链表**不能随机访问**，"倒数第 n 个"没法直接定位，只能靠两个指针拉开固定间距来找。
 
-### 方法一：两次遍历（先算长度）
-先遍历一遍得到长度 `len`，倒数第 n 个 = 正数第 `len - n + 1` 个。要删除它，需走到它的**前一个**节点（正数第 `len - n` 个），改指针跨过它。
-
-### 方法二：快慢指针（一次遍历，推荐）
 让 `fast` 先走 n 步，与 `slow` 拉开 n 个节点的间距；然后两者**同速前进**，当 `fast` 到达末尾时，`slow` 正好停在**待删节点的前一个**。
 
 ```
@@ -34,28 +30,9 @@ slow.next = slow.next.next  → 跨过 4
 
 ## 代码实现 (Java)
 
-### 方法一：先算长度
+### 快慢指针（一次遍历）
 
-```java
-public ListNode removeNthFromEnd_1(ListNode head, int n) {
-    ListNode temp = head;
-    int len = 0;
-    while (temp != null) { len++; temp = temp.next; }
-
-    if (len == n) return head.next;   // 删的是头节点，特判
-
-    temp = head;                      // 关键：统计长度后 temp 已到尾部，必须重置回头
-    int index = 0;
-    while (index < len - n - 1) {     // 走到待删节点的前一个
-        temp = temp.next;
-        index++;
-    }
-    temp.next = temp.next.next;
-    return head;
-}
-```
-
-### 方法二：快慢指针（一次遍历）
+源码中对应 `Hot19_removeNthFromEnd` 的 `removeNthFromEnd_2`。
 
 ```java
 public ListNode removeNthFromEnd_2(ListNode head, int n) {
@@ -77,29 +54,13 @@ public ListNode removeNthFromEnd_2(ListNode head, int n) {
 
 ## ❗关键易错点
 
-**1. 方法一：统计长度后指针已到尾部，必须 `temp = head` 重置**
-第一趟 while 结束时 `temp` 已经是 `null`，若不重置直接用它定位，会 NPE。这是最容易漏的一步。
+**1. 删头节点要特判**
+`fast` 先走完 n 步后如果 `fast == null`，说明 n 恰好等于链表长度，要删的就是头节点，直接返回 `head.next`。
 
-**2. 删头节点要特判**
-当 `len == n`（方法一）或 `fast == null`（方法二）时，要删的就是头节点，直接返回 `head.next`。
-
-**3. 要停在待删节点的"前一个"**
-删除靠的是 `前一个.next = 待删.next`，所以定位目标是**前驱**，不是待删节点本身。方法一的循环条件 `len - n - 1`、方法二的 `fast.next != null`（而非 `fast != null`）都是为了让 slow 停在前驱。
+**2. 要停在待删节点的"前一个"**
+删除靠的是 `前一个.next = 待删.next`，所以定位目标是**前驱**，不是待删节点本身。循环条件写 `fast.next != null`（而非 `fast != null`）就是为了让 slow 正好停在前驱。
 
 > **一劳永逸的写法**：加一个哑节点 `dummy.next = head`，让 slow 从 dummy 出发，就不用对"删头节点"单独特判了。
-
----
-
-## 两种方法权衡
-
-| | 方法一 两次遍历 | 方法二 快慢指针 |
-| :--- | :--- | :--- |
-| **遍历次数** | 2 趟 | 1 趟 |
-| **时间复杂度** | $O(L)$ | $O(L)$ |
-| **代码复杂度** | 需重置指针 + 定位前驱 | 拉开间距后同步走 |
-| **适用** | 直观好懂 | 面试更优，只遍历一次 |
-
-两者时间复杂度都是 $O(L)$，但方法二只走一趟，是更被推崇的答案。
 
 ---
 

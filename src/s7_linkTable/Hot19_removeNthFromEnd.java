@@ -8,40 +8,7 @@ package s7_linkTable;
 public class Hot19_removeNthFromEnd {
 
     /**
-     * 方法1：先计算链表长度，再删除倒数第n个结点
-     * 时间复杂度 O(L)
-     * 空间复杂度 O(1)
-     * @param head
-     * @param n
-     * @return
-     */
-    public ListNode removeNthFromEnd_1(ListNode head, int n) {
-        ListNode temp = head;
-        int len = 0;
-        while(temp != null){
-            len++;
-            temp = temp.next;
-        }
-
-        // 要删的就是头节点，直接返回下一个
-        if (len == n) return head.next;
-
-        temp = head;
-        int index = 0;
-        while(index < len-n-1){
-            // 如有5个数，删除倒数第2个，即正数第4个元素，此时需要让temp指向正数第3个元素
-            // index = 1的时候，temp就指向第三个元素了
-            temp = temp.next;
-            index++;
-        }
-
-        temp.next = temp.next.next;
-
-        return head;
-    }
-
-    /**
-     * 方法2：双指针（快慢指针，一次遍历）
+     * 方法：双指针（快慢指针，一次遍历）
      * 原理：fast 先走 n 步，与 slow 拉开 n 个节点的距离；
      *       然后两个指针同速前进，fast 走到末尾时，slow 正好停在待删节点的前一个
      * 时间复杂度 O(L)
@@ -50,7 +17,7 @@ public class Hot19_removeNthFromEnd {
      * @param n
      * @return
      */
-    public ListNode removeNthFromEnd_2(ListNode head, int n) {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode fast = head;
         ListNode slow = head;
         // 1. 快指针先走 n 步，与慢指针拉开 n 个节点的距离
@@ -77,7 +44,7 @@ public class Hot19_removeNthFromEnd {
         head.next.next = new ListNode(3);
         head.next.next.next = new ListNode(4);
         head.next.next.next.next = new ListNode(5);
-        ListNode result = hot19.removeNthFromEnd_2(head, 2);
+        ListNode result = hot19.removeNthFromEnd(head, 2);
         while (result != null) {
             System.out.print(result.val + " ");
             result = result.next;
