@@ -107,7 +107,7 @@ swapPairs(1→2→3→4)：
 2. `head.next = swapPairs(newHead.next)` 要在 `newHead.next = head` 之前：因为 `newHead.next` 马上会被改成指向 A1，这时候递归的入口就丢了。
 3. `newHead.next = head` 放最后：把这一对的最后一根线接上，然后返回 `newHead` 给上一层用。
 
-> 这三问也是链表递归的通用套路，只是每题答案不同，参见 [递归相关的题目](Tip4-递归相关的题目.md) 里的「递归解题 Checklist」。
+> 这三问也是链表递归的通用套路，只是每题答案不同，参见 [递归](Tip7-递归题目三问拆解.md) 里的三问表与代码骨架。
 
 ### 代码
 
